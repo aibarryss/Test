@@ -1,14 +1,13 @@
 import { useMemo, useState } from 'react'
 import type { Diagnosis, UserProfile } from '../lib/types'
 import { COUNTRY_LABELS, DIAGNOSIS_QUESTIONS, FIELD_LABELS } from '../data'
-import { Badge, Button, Card, Chip, Icon, Notice, ProgressBar } from '../ui/primitives'
+import { Badge, Button, Card, Icon, Notice, ProgressBar } from '../ui/primitives'
 import { isDiagnosisComplete, runDiagnosis, type AnswerMap } from '../features/diagnosis/diagnosisEngine'
 import { t } from '../lib/i18n'
 
 export function DiagnosisScreen({
   profile,
   savedAnswers,
-  savedDiagnosis,
   onComplete,
   onSkip,
   onBack

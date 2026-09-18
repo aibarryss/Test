@@ -99,14 +99,31 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
     return restored
   })
 
+  // Persist each slice independently, so ticking a roadmap step does not
+  // re-serialize the whole state (5 writes -> 1).
   useEffect(() => {
     saveJson(KEYS.profile, state.profile)
+  }, [state.profile])
+
+  useEffect(() => {
     saveJson(KEYS.diagnosis, state.diagnosis)
+  }, [state.diagnosis])
+
+  useEffect(() => {
     saveJson('answers', state.answers)
+  }, [state.answers])
+
+  useEffect(() => {
     saveJson(KEYS.selected, state.selectedProgramIds)
+  }, [state.selectedProgramIds])
+
+  useEffect(() => {
     saveJson(KEYS.statuses, state.statuses)
+  }, [state.statuses])
+
+  useEffect(() => {
     saveJson(KEYS.aiEnabled, state.aiEnabled)
-  }, [state])
+  }, [state.aiEnabled])
 
   const recommendations = useMemo(() => {
     if (!state.profile) return []

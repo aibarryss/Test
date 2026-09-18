@@ -13,7 +13,6 @@ export function LandingScreen({
   hasProfile: boolean
 }) {
   const landing = t('landing')
-  const common = t('common')
   
   return (
     <div>

@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import type { CountryCode, ExamId, Field, UserProfile } from '../lib/types'
 import { COUNTRY_LABELS, FIELD_LABELS } from '../data'
-import { Badge, Button, Card, Chip, Field as FieldWrap, Icon, Notice } from '../ui/primitives'
+import { Badge, Button, Card, Chip, Field as FieldWrap, Notice } from '../ui/primitives'
 import { t } from '../lib/i18n'
 
 const COUNTRIES: CountryCode[] = ['KZ', 'DE', 'IT', 'NL', 'UK', 'US', 'CA', 'TR', 'KR', 'RU']

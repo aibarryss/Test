@@ -123,3 +123,6 @@ function json(body: unknown, status: number): Response {
     headers: { 'Content-Type': 'application/json', ...cors() }
   })
 }
+
+
+declare const process: { env: Record<string, string | undefined> }

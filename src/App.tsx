@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+﻿import { useEffect } from 'react'
 import { HashRouter, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { AppStateProvider, useApp } from './state/AppState'
 import { BottomNav, TopBar } from './ui/layout'
@@ -11,7 +11,6 @@ import { RoadmapScreen } from './screens/RoadmapScreen'
 import { SourcesScreen } from './screens/SourcesScreen'
 import { DEMO_ANSWERS, demoProfile } from './lib/demoProfile'
 import { runDiagnosis } from './features/diagnosis/diagnosisEngine'
-import { getLanguage } from './lib/i18n'
 
 function Shell() {
   const { state, dispatch, readiness, canGo } = useApp()

@@ -1,4 +1,4 @@
-import { getLanguage, setLanguage, type Language } from '../lib/i18n'
+import { getLanguage, setLanguage } from '../lib/i18n'
 
 export function LanguageSwitcher() {
   const current = getLanguage()

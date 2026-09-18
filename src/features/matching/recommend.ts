@@ -60,18 +60,12 @@ export function recommend(
     .slice(0, TOP_N)
     .map((x) => x.rec)
 
-  const notes = buildNotes(profile, uniMap, programs, removedByBudget.length, eligible.length)
+  const notes = buildNotes(removedByBudget.length, eligible.length)
 
   return { items: eligible, relaxed, notes, totalEvaluated: scored.length }
 }
 
-function buildNotes(
-  profile: UserProfile,
-  uniMap: Record<string, University>,
-  programs: Program[],
-  removedCount: number,
-  found: number
-): string[] {
+function buildNotes(removedCount: number, found: number): string[] {
   const notes: string[] = []
   if (removedCount > 0) {
     notes.push(

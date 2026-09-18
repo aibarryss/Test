@@ -4,6 +4,7 @@ import { computeNextAction, computeProgress } from '../src/features/progress/pro
 import { PROGRAM_BY_ID, PROGRAMS, ROADMAP_TEMPLATES, UNIVERSITY_BY_ID } from '../src/data'
 import { recommend } from '../src/features/matching/recommend'
 import { TEST_PROFILES } from '../src/lib/demoProfile'
+import type { CountryCode } from '../src/lib/types'
 
 const now = new Date('2026-09-16T00:00:00Z')
 
@@ -59,7 +60,7 @@ describe('roadmap engine', () => {
   it('adds a funding step when the shortlist costs more than the budget', () => {
     const profile = {
       ...TEST_PROFILES.A,
-      targetCountries: ['US'],
+      targetCountries: ['US'] as CountryCode[],
       budgetUsdPerYear: 5000,
       needsScholarship: true
     }

@@ -1,4 +1,4 @@
-import type {
+﻿import type {
   ExamId,
   Program,
   Recommendation,
@@ -52,7 +52,6 @@ export function buildRoadmap(input: BuildRoadmapInput): Roadmap {
 
   const tpl = (phase: RoadmapStep['phase'], trigger: string) =>
     templates.find((t) => t.phase === phase && t.trigger === trigger)
-  const tplByPhase = (phase: RoadmapStep['phase']) => templates.find((t) => t.phase === phase)
 
   // ---- exams ---------------------------------------------------------------
   let examGap: { exam: ExamId; min: number } | null = null

@@ -1,6 +1,5 @@
-import type {
+﻿import type {
   Confidence,
-  ExamId,
   Field,
   Fit,
   Program,
@@ -31,6 +30,19 @@ export const FACTOR_LABELS: Record<ScoreFactorKey, string> = {
   scholarship: 'Funding available'
 }
 
+/**
+ * Sub-weights inside the `academic` factor. The GPA and the exam block keep
+ * fixed shares, so adding another exam score never dilutes the GPA's influence.
+ */
+export const GPA_SUBWEIGHT = 0.4
+
+/**
+ * Adjacent disciplines that score 0.5 instead of 0. They exist because a
+ * student applying for CS is still meaningfully served by an engineering or
+ * design programme, whereas business or medicine are genuinely different paths.
+ * Keeping them here (instead of a hard filter) is what makes the shortlist
+ * re-order rather than empty out when the discipline changes.
+ */
 const RELATED_FIELDS: Record<Field, Field[]> = {
   cs: ['engineering', 'design'],
   engineering: ['cs', 'medicine'],
@@ -117,8 +129,19 @@ function fitFrom(score: number): Fit {
 }
 
 /**
- * Deterministic 7-factor weighted score. If a factor has no data, its weight is
- * redistributed across the known factors and the overall confidence drops.
+ * Deterministic 7-factor weighted score.
+ *
+ * Weights: budget 0.25, field 0.22, country 0.15, academic 0.15,
+ * language 0.10, deadline 0.08, scholarship 0.05.
+ *
+ * Rules:
+ * - A factor with no data is excluded and its weight is redistributed across the
+ *   remaining factors, while `availableWeight` drives the confidence badge.
+ * - The academic factor mixes GPA and exams with fixed sub-weights
+ *   ({@link GPA_SUBWEIGHT} vs the rest), so one extra exam never changes how much
+ *   the GPA counts.
+ * - `gated` is true when `current / required < 0.8` on an exam or the GPA; the
+ *   caller keeps those programs out of the main shortlist.
  */
 export function computeScore(
   program: Program,
@@ -132,11 +155,9 @@ export function computeScore(
   // ---- academic ------------------------------------------------------------
   const minGpa = program.requirements.minGpa
   const gpaProvided = profile.gpa > 0
-  const gpaFit = gpaProvided ? (minGpa ? clamp01(profile.gpa / minGpa) : 1) : 0.5
+  const gpaFitValue = gpaProvided ? (minGpa ? clamp01(profile.gpa / minGpa) : 1) : null
   const examFits: number[] = []
-  let examsRequired = 0
   for (const req of program.requirements.exams) {
-    examsRequired++
     const cur = profile.examScores[req.exam]
     const fit = examFit(cur, req.minScore)
     if (fit == null) {
@@ -148,11 +169,19 @@ export function computeScore(
       warnings.push(`${req.exam} ${req.minScore.toFixed(1)} required, you have ${cur!.toFixed(1)}`)
     }
   }
-  const academicParts: number[] = []
-  if (gpaProvided) academicParts.push(gpaFit)
-  academicParts.push(...examFits)
-  const academicKnown = academicParts.length > 0
-  const academicValue = academicKnown ? academicParts.reduce((a, b) => a + b, 0) / academicParts.length : 0.5
+  const examAverage = examFits.length > 0 ? examFits.reduce((a, b) => a + b, 0) / examFits.length : null
+  let academicValue = 0.5
+  let academicKnown = false
+  if (gpaFitValue != null && examAverage != null) {
+    academicValue = GPA_SUBWEIGHT * gpaFitValue + (1 - GPA_SUBWEIGHT) * examAverage
+    academicKnown = true
+  } else if (gpaFitValue != null) {
+    academicValue = gpaFitValue
+    academicKnown = true
+  } else if (examAverage != null) {
+    academicValue = examAverage
+    academicKnown = true
+  }
   if (minGpa && gpaProvided && profile.gpa < minGpa) {
     warnings.push(`GPA ${profile.gpa.toFixed(2)} is below the ${minGpa.toFixed(2)} typically expected`)
   }

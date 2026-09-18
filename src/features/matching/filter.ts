@@ -6,6 +6,14 @@ export interface FilterOutcome {
 }
 
 /**
+ * A program is dropped outright only when its net cost exceeds the budget by
+ * this factor *and* there is no scholarship path at all. Below that threshold,
+ * cost stays a weighted scoring factor (0.25) — this keeps the shortlist from
+ * emptying out and lets an expensive option still surface as a "stretch".
+ */
+export const BUDGET_BLOWOUT_MULTIPLIER = 3
+
+/**
  * Hard filters remove only what is clearly impossible: a program whose net cost
  * is more than 3x the budget with no scholarship path at all.
  *
@@ -27,7 +35,8 @@ export function hardFilter(
     if (!u) continue
 
     const budgetBlowout =
-      p.netTuitionUsdPerYear > profile.budgetUsdPerYear * 3 && !u.scholarshipAvailable
+      p.netTuitionUsdPerYear > profile.budgetUsdPerYear * BUDGET_BLOWOUT_MULTIPLIER &&
+      !u.scholarshipAvailable
     if (budgetBlowout) {
       removedByBudget.push(p)
       continue
