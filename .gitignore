@@ -156,7 +156,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
+.env.local
+.env.*.local
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -216,3 +217,14 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---- Node / Vite (Pathly MVP) ----
+node_modules/
+dist/
+*.local
+.vite/
+coverage/
+
+preview.log
+preview.err
+

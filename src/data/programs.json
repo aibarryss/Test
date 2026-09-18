@@ -1,0 +1,246 @@
+[
+  {
+    "id": "nu-cs",
+    "universityId": "nu",
+    "name": "BSc Computer Science",
+    "field": "cs",
+    "degree": "bachelor",
+    "durationYears": 4,
+    "netTuitionUsdPerYear": 0,
+    "languagesOfInstruction": ["en"],
+    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.0, "languageLevel": "B2" },
+    "deadlines": [
+      { "id": "d-nu-cs-1", "kind": "application", "date": "2027-01-20", "label": "Application deadline", "programId": "nu-cs", "sourceId": "src-nu", "isDemo": true },
+      { "id": "d-nu-cs-2", "kind": "documents", "date": "2027-02-10", "label": "Documents submission", "programId": "nu-cs", "sourceId": "src-nu", "isDemo": true }
+    ],
+    "sourceIds": ["src-nu"]
+  },
+  {
+    "id": "nu-econ",
+    "universityId": "nu",
+    "name": "BSc Economics",
+    "field": "business",
+    "degree": "bachelor",
+    "durationYears": 4,
+    "netTuitionUsdPerYear": 0,
+    "languagesOfInstruction": ["en"],
+    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.0, "languageLevel": "B2" },
+    "deadlines": [
+      { "id": "d-nu-econ-1", "kind": "application", "date": "2027-01-20", "label": "Application deadline", "programId": "nu-econ", "sourceId": "src-nu", "isDemo": true }
+    ],
+    "sourceIds": ["src-nu"]
+  },
+  {
+    "id": "kbtu-cs",
+    "universityId": "kbtu",
+    "name": "BSc Computer Science",
+    "field": "cs",
+    "degree": "bachelor",
+    "durationYears": 4,
+    "netTuitionUsdPerYear": 4200,
+    "languagesOfInstruction": ["en"],
+    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 5.5 }], "minGpa": 3.5, "languageLevel": "B1" },
+    "deadlines": [
+      { "id": "d-kbtu-cs-1", "kind": "application", "date": "2027-02-01", "label": "Application deadline", "programId": "kbtu-cs", "sourceId": "src-kbtu", "isDemo": true }
+    ],
+    "sourceIds": ["src-kbtu"]
+  },
+  {
+    "id": "kbtu-fin",
+    "universityId": "kbtu",
+    "name": "BSc Finance",
+    "field": "business",
+    "degree": "bachelor",
+    "durationYears": 4,
+    "netTuitionUsdPerYear": 4200,
+    "languagesOfInstruction": ["en"],
+    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 5.5 }], "minGpa": 3.5, "languageLevel": "B1" },
+    "deadlines": [
+      { "id": "d-kbtu-fin-1", "kind": "application", "date": "2027-02-01", "label": "Application deadline", "programId": "kbtu-fin", "sourceId": "src-kbtu", "isDemo": true }
+    ],
+    "sourceIds": ["src-kbtu"]
+  },
+  {
+    "id": "tum-cs",
+    "universityId": "tum",
+    "name": "BSc Informatics",
+    "field": "cs",
+    "degree": "bachelor",
+    "durationYears": 3,
+    "netTuitionUsdPerYear": 400,
+    "languagesOfInstruction": ["en", "de"],
+    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.0, "languageLevel": "C1" },
+    "deadlines": [
+      { "id": "d-tum-cs-1", "kind": "application", "date": "2027-01-15", "label": "Application window closes", "programId": "tum-cs", "sourceId": "src-tum", "isDemo": true },
+      { "id": "d-tum-cs-2", "kind": "documents", "date": "2027-03-01", "label": "Document review", "programId": "tum-cs", "sourceId": "src-tum", "isDemo": true }
+    ],
+    "sourceIds": ["src-tum"]
+  },
+  {
+    "id": "tum-mech",
+    "universityId": "tum",
+    "name": "BSc Mechanical Engineering",
+    "field": "engineering",
+    "degree": "bachelor",
+    "durationYears": 3,
+    "netTuitionUsdPerYear": 400,
+    "languagesOfInstruction": ["de"],
+    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.0, "languageLevel": "C1" },
+    "deadlines": [
+      { "id": "d-tum-mech-1", "kind": "application", "date": "2027-01-15", "label": "Application window closes", "programId": "tum-mech", "sourceId": "src-tum", "isDemo": true }
+    ],
+    "sourceIds": ["src-tum"]
+  },
+  {
+    "id": "polimi-cs",
+    "universityId": "polimi",
+    "name": "BSc Computer Engineering",
+    "field": "cs",
+    "degree": "bachelor",
+    "durationYears": 3,
+    "netTuitionUsdPerYear": 3800,
+    "languagesOfInstruction": ["en"],
+    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.0 }], "minGpa": 3.8, "languageLevel": "B2" },
+    "deadlines": [
+      { "id": "d-polimi-cs-1", "kind": "application", "date": "2027-02-15", "label": "Application deadline (non-EU)", "programId": "polimi-cs", "sourceId": "src-polimi", "isDemo": true }
+    ],
+    "sourceIds": ["src-polimi"]
+  },
+  {
+    "id": "polimi-design",
+    "universityId": "polimi",
+    "name": "BSc Design",
+    "field": "design",
+    "degree": "bachelor",
+    "durationYears": 3,
+    "netTuitionUsdPerYear": 3800,
+    "languagesOfInstruction": ["en", "it"],
+    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.0 }], "minGpa": 3.8, "languageLevel": "B2" },
+    "deadlines": [
+      { "id": "d-polimi-design-1", "kind": "application", "date": "2027-02-15", "label": "Application deadline (non-EU)", "programId": "polimi-design", "sourceId": "src-polimi", "isDemo": true }
+    ],
+    "sourceIds": ["src-polimi"]
+  },
+  {
+    "id": "asu-cs",
+    "universityId": "asu",
+    "name": "BSc Computer Science",
+    "field": "cs",
+    "degree": "bachelor",
+    "durationYears": 4,
+    "netTuitionUsdPerYear": 22000,
+    "languagesOfInstruction": ["en"],
+    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.0 }], "minGpa": 3.5, "languageLevel": "B2" },
+    "deadlines": [
+      { "id": "d-asu-cs-1", "kind": "application", "date": "2027-01-05", "label": "Priority application deadline", "programId": "asu-cs", "sourceId": "src-asu", "isDemo": true },
+      { "id": "d-asu-cs-2", "kind": "scholarship", "date": "2026-12-01", "label": "Scholarship consideration deadline", "programId": "asu-cs", "sourceId": "src-asu", "isDemo": true }
+    ],
+    "sourceIds": ["src-asu"]
+  },
+  {
+    "id": "asu-biz",
+    "universityId": "asu",
+    "name": "BSc Business Administration",
+    "field": "business",
+    "degree": "bachelor",
+    "durationYears": 4,
+    "netTuitionUsdPerYear": 24000,
+    "languagesOfInstruction": ["en"],
+    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.0 }], "minGpa": 3.5, "languageLevel": "B2" },
+    "deadlines": [
+      { "id": "d-asu-biz-1", "kind": "application", "date": "2027-01-05", "label": "Priority application deadline", "programId": "asu-biz", "sourceId": "src-asu", "isDemo": true }
+    ],
+    "sourceIds": ["src-asu"]
+  },
+  {
+    "id": "uoft-cs",
+    "universityId": "uoft",
+    "name": "BSc Computer Science",
+    "field": "cs",
+    "degree": "bachelor",
+    "durationYears": 4,
+    "netTuitionUsdPerYear": 45000,
+    "languagesOfInstruction": ["en"],
+    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.2, "languageLevel": "C1" },
+    "deadlines": [
+      { "id": "d-uoft-cs-1", "kind": "application", "date": "2027-01-15", "label": "Application deadline", "programId": "uoft-cs", "sourceId": "src-uoft", "isDemo": true }
+    ],
+    "sourceIds": ["src-uoft"]
+  },
+  {
+    "id": "uoft-life",
+    "universityId": "uoft",
+    "name": "BSc Life Sciences",
+    "field": "medicine",
+    "degree": "bachelor",
+    "durationYears": 4,
+    "netTuitionUsdPerYear": 47000,
+    "languagesOfInstruction": ["en"],
+    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.2, "languageLevel": "C1" },
+    "deadlines": [
+      { "id": "d-uoft-life-1", "kind": "application", "date": "2027-01-15", "label": "Application deadline", "programId": "uoft-life", "sourceId": "src-uoft", "isDemo": true }
+    ],
+    "sourceIds": ["src-uoft"]
+  },
+  {
+    "id": "manchester-cs",
+    "universityId": "manchester",
+    "name": "BSc Computer Science",
+    "field": "cs",
+    "degree": "bachelor",
+    "durationYears": 3,
+    "netTuitionUsdPerYear": 30000,
+    "languagesOfInstruction": ["en"],
+    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.0, "languageLevel": "B2" },
+    "deadlines": [
+      { "id": "d-man-cs-1", "kind": "application", "date": "2027-01-14", "label": "UCAS equal consideration deadline", "programId": "manchester-cs", "sourceId": "src-manchester", "isDemo": true }
+    ],
+    "sourceIds": ["src-manchester"]
+  },
+  {
+    "id": "manchester-mgmt",
+    "universityId": "manchester",
+    "name": "BSc Management",
+    "field": "business",
+    "degree": "bachelor",
+    "durationYears": 3,
+    "netTuitionUsdPerYear": 28000,
+    "languagesOfInstruction": ["en"],
+    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.0, "languageLevel": "B2" },
+    "deadlines": [
+      { "id": "d-man-mgmt-1", "kind": "application", "date": "2027-01-14", "label": "UCAS equal consideration deadline", "programId": "manchester-mgmt", "sourceId": "src-manchester", "isDemo": true }
+    ],
+    "sourceIds": ["src-manchester"]
+  },
+  {
+    "id": "tue-cs",
+    "universityId": "tue",
+    "name": "BSc Computer Science and Engineering",
+    "field": "cs",
+    "degree": "bachelor",
+    "durationYears": 3,
+    "netTuitionUsdPerYear": 16000,
+    "languagesOfInstruction": ["en"],
+    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.0, "languageLevel": "B2" },
+    "deadlines": [
+      { "id": "d-tue-cs-1", "kind": "application", "date": "2027-01-15", "label": "Non-EU application deadline", "programId": "tue-cs", "sourceId": "src-tue", "isDemo": true },
+      { "id": "d-tue-cs-2", "kind": "scholarship", "date": "2027-02-01", "label": "Holland Scholarship deadline", "programId": "tue-cs", "sourceId": "src-tue", "isDemo": true }
+    ],
+    "sourceIds": ["src-tue"]
+  },
+  {
+    "id": "tue-bme",
+    "universityId": "tue",
+    "name": "BSc Biomedical Engineering",
+    "field": "medicine",
+    "degree": "bachelor",
+    "durationYears": 3,
+    "netTuitionUsdPerYear": 16000,
+    "languagesOfInstruction": ["en"],
+    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.0, "languageLevel": "B2" },
+    "deadlines": [
+      { "id": "d-tue-bme-1", "kind": "application", "date": "2027-01-15", "label": "Non-EU application deadline", "programId": "tue-bme", "sourceId": "src-tue", "isDemo": true }
+    ],
+    "sourceIds": ["src-tue"]
+  }
+]

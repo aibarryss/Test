@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Кейс №2 «Персональный маршрут поступления» — архитектура и технический план</title>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#161a21; --panel2:#1c2129; --line:#272d38;
+    --text:#e8ecf2; --muted:#9aa4b2; --accent:#5eead4; --accent2:#60a5fa;
+    --warn:#fbbf24; --danger:#f87171; --ok:#34d399; --radius:14px;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.62;font-size:16px}
+  .wrap{max-width:1080px;margin:0 auto;padding:48px 22px 96px}
+  header.hero{border:1px solid var(--line);background:linear-gradient(160deg,#171c24,#11151b);border-radius:18px;padding:34px 30px;margin-bottom:34px}
+  .kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  h1{font-size:30px;line-height:1.25;margin:12px 0 10px}
+  .sub{color:var(--muted);font-size:15px;max-width:74ch}
+  .metarow{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .chip{border:1px solid var(--line);background:#131820;color:var(--muted);font-size:12.5px;padding:5px 11px;border-radius:999px}
+  .chip b{color:var(--text);font-weight:600}
+  h2{font-size:22px;margin:46px 0 14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  h3{font-size:17px;margin:28px 0 10px;color:#fff}
+  h4{font-size:14.5px;margin:20px 0 8px;color:var(--accent2);letter-spacing:.02em}
+  p{margin:10px 0}
+  ul,ol{margin:10px 0 10px 22px;padding:0}
+  li{margin:5px 0}
+  code{font-family:var(--mono);font-size:13px;background:#0b0e13;border:1px solid var(--line);border-radius:6px;padding:1px 6px;color:#a5b4fc}
+  pre{background:#0b0e13;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-family:var(--mono);font-size:13px;color:#cbd5e1}
+  pre code{background:none;border:0;padding:0;color:inherit}
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px}
+  .card h3{margin-top:0}
+  .card .role{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+  .panel{background:var(--panel2);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:16px 0}
+  .panel .pt{font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;display:block;overflow-x:auto;white-space:nowrap}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  th{background:#12161d;color:#cbd5e1;font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em}
+  tbody tr:nth-child(even){background:#141920}
+  .badge{display:inline-block;font-size:11.5px;padding:2px 9px;border-radius:999px;border:1px solid var(--line);background:#131820;color:var(--muted)}
+  .b-ok{color:var(--ok);border-color:#1f4d3d}
+  .b-warn{color:var(--warn);border-color:#4d3f1a}
+  .b-bad{color:var(--danger);border-color:#4d2626}
+  .b-ai{color:var(--accent2);border-color:#20406b}
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:7px}
+  .d-ok{background:var(--ok)} .d-warn{background:var(--warn)} .d-bad{background:var(--danger)} .d-ai{background:var(--accent2)}
+  .timeline{position:relative;margin:18px 0;padding-left:0}
+  .step{display:flex;gap:14px;padding:14px 0;border-bottom:1px dashed var(--line)}
+  .step:last-child{border-bottom:0}
+  .marker{flex:0 0 34px;height:34px;border-radius:10px;background:#0f2b2a;border:1px solid #1f4d46;color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+  .step-body{flex:1}
+  .step-title{font-weight:600;color:#fff;margin-bottom:3px}
+  .step-text{color:var(--muted);font-size:14px}
+  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
+  .metric{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .metric .v{font-size:24px;font-weight:700;color:var(--accent)}
+  .metric .l{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .compare{display:grid;gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin:16px 0}
+  .crow{display:grid;grid-template-columns:1fr 1fr}
+  .crow>*{padding:12px 14px;border-bottom:1px solid var(--line);font-size:14px}
+  .crow .h{background:#12161d;font-weight:600;color:#cbd5e1}
+  .muted{color:var(--muted)}
+  .tag{font-family:var(--mono);font-size:12.5px;color:#a5b4fc}
+  .kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:1px 7px;font-size:12.5px;color:var(--muted);background:#131820}
+  a{color:var(--accent2)}
+  footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+  @media (max-width:640px){h1{font-size:24px}.wrap{padding:28px 16px 64px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">LOCUS Startup Hackathon 2026 · Кейс №2</div>
+  <h1>Персональный маршрут поступления — архитектура и технический план</h1>
+  <p class="sub">Команда из двух школьников, 72 часа, разработка с активным использованием AI. Принцип: <b>стабильный простой MVP</b>, который полностью проходит проверочный сценарий жюри, важнее «production-like» архитектуры.</p>
+  <div class="metarow">
+    <span class="chip"><b>Стек:</b> React + Vite + TS</span>
+    <span class="chip"><b>Backend:</b> 1 serverless-эндпоинт</span>
+    <span class="chip"><b>Storage:</b> localStorage</span>
+    <span class="chip"><b>Deploy:</b> Vercel</span>
+    <span class="chip"><b>Гарантия:</b> путь работает без сети</span>
+  </div>
+</header>
+
+<h2>0. Базовые решения</h2>
+<div class="metrics">
+  <div class="metric"><div class="v">0</div><div class="l">обязательных backend-эндпоинтов в основном пути</div></div>
+  <div class="metric"><div class="v">1</div><div class="l">AI-вызов (объяснения), с fallback</div></div>
+  <div class="metric"><div class="v">7</div><div class="l">факторов в scoring</div></div>
+  <div class="metric"><div class="v">5</div><div class="l">тестовых профилей</div></div>
+</div>
+<p>Вся сложность продукта — в <b>чистых TypeScript-функциях в браузере</b>. Если AI недоступен, отваливается только текст-объяснение; профиль, диагностика, рекомендации, roadmap и прогресс продолжают работать.</p>
+
+<h2>1. Варианты архитектуры</h2>
+<div class="grid g3">
+  <section class="card">
+    <div class="role">Вариант A · выбран</div>
+    <h3>Offline-first SPA + AI-proxy</h3>
+    <p class="muted">React + Vite SPA, один serverless-эндпоинт <code>/api/explain</code>, JSON-данные в репозитории, <code>localStorage</code>, Vercel.</p>
+    <p><span class="badge b-ok">сложность: низкая</span></p>
+  </section>
+  <section class="card">
+    <div class="role">Вариант B</div>
+    <h3>Next.js fullstack</h3>
+    <p class="muted">App Router, Route Handlers, server-side AI, Vercel.</p>
+    <p><span class="badge b-warn">сложность: средняя</span> <span class="badge b-bad">RSC/hydration риски</span></p>
+  </section>
+  <section class="card">
+    <div class="role">Вариант C</div>
+    <h3>SPA + backend + БД</h3>
+    <p class="muted">React + Express + Postgres/Supabase.</p>
+    <p><span class="badge b-bad">сложность: высокая</span> <span class="badge b-bad">не нужен кейсу</span></p>
+  </section>
+</div>
+
+<table>
+  <thead><tr><th>Критерий</th><th>A · SPA + proxy</th><th>B · Next.js</th><th>C · backend + DB</th></tr></thead>
+  <tbody>
+    <tr><td>Время до первого экрана</td><td>1–2 ч</td><td>3–5 ч</td><td>8–12 ч</td></tr>
+    <tr><td>Работает без сети</td><td><span class="badge b-ok">да</span></td><td><span class="badge b-warn">частично</span></td><td><span class="badge b-bad">нет</span></td></tr>
+    <tr><td>Порог для школьника</td><td>низкий</td><td>средний</td><td>высокий</td></tr>
+    <tr><td>Движущихся частей</td><td>1</td><td>2</td><td>4</td></tr>
+    <tr><td>Риск провала демо</td><td><span class="badge b-ok">низкий</span></td><td><span class="badge b-warn">средний</span></td><td><span class="badge b-bad">высокий</span></td></tr>
+  </tbody>
+</table>
+
+<div class="panel">
+  <div class="pt"><span class="dot d-ai"></span>Выбор: Вариант A</div>
+  <p class="muted">Основной путь не зависит от сети и БД → максимальная надёжность демо. Минимум инфраструктуры, вся логика легко тестируется. Один эндпоинт закрывает требование «AI не единственный источник фактов». AI-assisted coding отлично генерирует React + чистый TS.</p>
+  <p><b>Trade-off:</b> нет «настоящего» backend и БД — но кейс их не требует: жюри оценивает связный пользовательский путь, а не инфраструктуру.</p>
+</div>
+
+<h2>2. Минимальный MVP</h2>
+<table>
+  <thead><tr><th>Категория</th><th>Содержание</th></tr></thead>
+  <tbody>
+    <tr><td><span class="badge b-ok">MUST HAVE</span></td><td>Landing → вход · профиль (страна, бюджет, направление, класс, экзамены, GPA) · диагностика · ≥3 программы со score и разбивкой · «почему подходит» · сравнение ≥2 · roadmap (экзамены/документы/дедлайны/академические/активности) · одно следующее действие · отметка прогресса · mobile-first · единая дизайн-система · заметная реакция на правку профиля · источники фактов</td></tr>
+    <tr><td><span class="badge b-ai">SHOULD HAVE</span></td><td>localStorage · loading/error/empty состояния · панель «идеального совпадения нет» с подсказками · экспорт roadmap через print · дисклеймер о демо-данных</td></tr>
+    <tr><td><span class="badge b-warn">NICE TO HAVE</span></td><td>Второй AI-вызов (переформулировка шагов) · major + minor · ослабленный режим · тёмная тема</td></tr>
+    <tr><td><span class="badge b-bad">НЕ ДЕЛАТЬ</span></td><td>Авторизация/OAuth · БД/ORM/миграции · микросервисы · Docker · AI-чат как интерфейс · каталог-список · парсинг на лету · админка · платежи · push · мультиязычность · SSR-оптимизации</td></tr>
+  </tbody>
+</table>
+
+<h2>3. Структура проекта</h2>
+<pre><code>Test/
+├─ index.html                 # точка входа Vite
+├─ vite.config.ts             # сборка + прокси /api в dev
+├─ tailwind.config.ts         # дизайн-токены → utility-классы
+├─ .env.example               # LLM_API_KEY (только сервер)
+├─ api/
+│  └─ explain.ts              # serverless: единственный AI-эндпоинт
+├─ src/
+│  ├─ main.tsx / App.tsx      # монтирование + layout/роутер
+│  ├─ styles/tokens.css       # цвета, отступы, радиусы, типографика
+│  ├─ ui/                     # дизайн-система: Button, Card, Badge,
+│  │                          # ProgressBar, ScoreBar, Skeleton, EmptyState,
+│  │                          # ErrorBanner, ScreenShell, ScreenShell
+│  ├─ screens/                # Landing, Profile, Diagnosis, Recommendations,
+│  │                          # Comparison, Roadmap, Sources
+│  ├─ features/
+│  │  ├─ profile/profileModel.ts
+│  │  ├─ diagnosis/diagnosisEngine.ts
+│  │  ├─ matching/{filter,scoring,recommend}.ts
+│  │  ├─ roadmap/roadmapEngine.ts
+│  │  └─ progress/progressStore.ts
+│  ├─ data/                   # universities/programs/sources/
+│  │                          # diagnosis-questions/roadmap-templates .json
+│  ├─ lib/                    # types, validation, storage, explain,
+│  │                          # explainFallback, format
+│  └─ state/                  # AppState.tsx, selectors.ts
+├─ tests/                     # fixtures + scoring/filter/roadmap/sensitivity
+└─ docs/                      # ARCHITECTURE, DATA_SOURCES, DEMO_SCRIPT, TEAM_TASKS</code></pre>
+
+<h4>Ключевые файлы</h4>
+<table>
+  <thead><tr><th>Файл</th><th>Зачем</th><th>Кто</th><th>Зависит от</th></tr></thead>
+  <tbody>
+    <tr><td><code>lib/types.ts</code></td><td>Единый контракт команды</td><td>A пишет / B читает</td><td>—</td></tr>
+    <tr><td><code>data/*.json</code></td><td>Факты о вузах, программах, дедлайнах</td><td>A</td><td>types</td></tr>
+    <tr><td><code>matching/scoring.ts</code></td><td>Ядро продукта: веса, breakdown</td><td>A</td><td>types, data</td></tr>
+    <tr><td><code>matching/recommend.ts</code></td><td>Оркестратор конвейера</td><td>A</td><td>filter, scoring, explain</td></tr>
+    <tr><td><code>roadmap/roadmapEngine.ts</code></td><td>Сборка маршрута из шаблонов и дедлайнов</td><td>A</td><td>types, data</td></tr>
+    <tr><td><code>api/explain.ts</code></td><td>AI-слой + схема + fallback</td><td>A</td><td>.env</td></tr>
+    <tr><td><code>ui/*.tsx</code></td><td>Дизайн-система</td><td>B</td><td>tokens.css</td></tr>
+    <tr><td><code>screens/*.tsx</code></td><td>7 экранов</td><td>B</td><td>ui, features, state</td></tr>
+    <tr><td><code>state/AppState.tsx</code></td><td>Глобальное состояние</td><td>B</td><td>storage, types</td></tr>
+  </tbody>
+</table>
+<p class="muted">Правило: <b>A не пишет JSX-вёрстку, B не пишет бизнес-логику.</b> Общие — только <code>types.ts</code> и <code>data/*.json</code>.</p>
+
+<h2>4. Data model</h2>
+<p>Основные структуры — <code>UserProfile</code>, <code>University</code>, <code>Program</code>, <code>Deadline</code>, <code>Source</code>, <code>Recommendation</code>, <code>ScoreFactor</code>, <code>RecommendationExplanation</code>, <code>Diagnosis</code>, <code>Roadmap</code>, <code>RoadmapStep</code>. Полные TS-интерфейсы — в <code>docs/ARCHITECTURE.md</code> (§4). Ключевые идеи:</p>
+<div class="grid g2">
+  <section class="card">
+    <h3>Обязательные поля</h3>
+    <p class="muted">Профиль: <code>grade</code>, <code>graduationYear</code>, <code>citizenship</code>, <code>targetCountries</code>, <code>budgetUsdPerYear</code>, <code>needsScholarship</code>, <code>field</code>, <code>gpa</code>. Программа: <code>universityId</code>, <code>field</code>, <code>netTuitionUsdPerYear</code>, <code>requirements</code>, <code>deadlines</code>, <code>sourceIds</code>.</p>
+  </section>
+  <section class="card">
+    <h3>Необязательные поля</h3>
+    <p class="muted"><code>examScores</code>, <code>englishLevel</code>, <code>rankingTier</code>, <code>livingCostUsdPerYear</code>, <code>minGpa</code>, <code>languageLevel</code>, <code>dependsOn</code> у шагов.</p>
+  </section>
+</div>
+<div class="panel">
+  <div class="pt"><span class="dot d-warn"></span>Источники данных</div>
+  <ul>
+    <li>Каждый факт ссылается на <code>sourceId</code> в <code>sources.json</code>.</li>
+    <li>Источник — официальная страница приёмной комиссии, сайт экзамена (IELTS / College Board / НЦТ), страница стипендии.</li>
+    <li>Неподтверждённый факт → <code>isDemo: true</code> + видимый бейдж <span class="kbd">демо-данные</span>.</li>
+    <li>Правило: <b>никаких выдуманных дедлайнов без бейджа</b>.</li>
+  </ul>
+</div>
+
+<h2>5. Recommendation engine</h2>
+<div class="timeline">
+  <div class="step"><div class="marker">1</div><div class="step-body"><div class="step-title">User Profile → normalize</div><div class="step-text">Достраиваем пропуски, помечаем отсутствующие поля.</div></div></div>
+  <div class="step"><div class="marker">2</div><div class="step-body"><div class="step-title">Hard filter</div><div class="step-text">Отсекаем заведомо невозможное (цена выше бюджета ×3 без стипендии, недоступный язык).</div></div></div>
+  <div class="step"><div class="marker">3</div><div class="step-body"><div class="step-title">Soft gate по экзамену</div><div class="step-text">Если <code>current/required &lt; 0.8</code> — программа уходит в «ослабленные», а не в топ.</div></div></div>
+  <div class="step"><div class="marker">4</div><div class="step-body"><div class="step-title">Scoring</div><div class="step-text">7 факторов, взвешенная сумма, breakdown по каждому фактору.</div></div></div>
+  <div class="step"><div class="marker">5</div><div class="step-body"><div class="step-title">Top candidates</div><div class="step-text">Top-5, порог <code>score ≥ 45</code>, детерминированный tie-break.</div></div></div>
+  <div class="step"><div class="marker">6</div><div class="step-body"><div class="step-title">AI explanation → final</div><div class="step-text">Тексты «почему подходит» (или fallback-шаблон), затем финальный список.</div></div></div>
+</div>
+
+<h4>Факторы и веса</h4>
+<table>
+  <thead><tr><th>Фактор</th><th>Вес</th><th>Что нормализуется</th></tr></thead>
+  <tbody>
+    <tr><td><code>budget</code></td><td><b>0.25</b></td><td>netTuition против бюджета</td></tr>
+    <tr><td><code>field</code></td><td><b>0.22</b></td><td>совпадение направления</td></tr>
+    <tr><td><code>country</code></td><td><b>0.15</b></td><td>входит в targetCountries</td></tr>
+    <tr><td><code>academic</code></td><td><b>0.15</b></td><td>среднее(GPA-fit, exam-fit)</td></tr>
+    <tr><td><code>language</code></td><td>0.10</td><td>владение языком обучения</td></tr>
+    <tr><td><code>deadline</code></td><td>0.08</td><td>реалистичность успеть</td></tr>
+    <tr><td><code>scholarship</code></td><td>0.05</td><td>доступность стипендии</td></tr>
+  </tbody>
+</table>
+<p class="muted">Бюджет + направление = 0.47 вместе — именно они дают заметную реакцию при правке профиля.</p>
+
+<div class="panel">
+  <div class="pt"><span class="dot d-ok"></span>Как гарантировать, что изменение профиля что-то меняет</div>
+  <ol>
+    <li>Все 4 «демо-параметра» (страна, бюджет, интерес, экзамен) имеют ненулевой вес.</li>
+    <li>Страна и интерес меняют <b>порядок</b>; бюджет и экзамен могут менять <b>состав</b> (hard filter и soft gate).</li>
+    <li>В UI показывается дельта: «после правки бюджета ASU поднялся с 5-го на 3-е место (+25)».</li>
+    <li>Tie-break детерминированный — без случайности.</li>
+    <li>Тест <code>sensitivity.test.ts</code> падает, если топ-3 не изменился.</li>
+  </ol>
+</div>
+
+<h4>Пример расчёта · профиль «Алия» (KZ, cs, бюджет $6 000, IELTS 6.0)</h4>
+<table>
+  <thead><tr><th>Программа</th><th>budget</th><th>field</th><th>country</th><th>academic</th><th>lang</th><th>deadline</th><th>schol.</th><th>Score</th></tr></thead>
+  <tbody>
+    <tr><td>Nazarbayev University — CS</td><td>1.00</td><td>1.00</td><td>1.00</td><td>1.00</td><td>1.00</td><td>0.90</td><td>1.00</td><td><b>98.6</b></td></tr>
+    <tr><td>KBTU — CS</td><td>1.00</td><td>1.00</td><td>1.00</td><td>1.00</td><td>1.00</td><td>0.95</td><td>0.50</td><td><b>97.1</b></td></tr>
+    <tr><td>TUM — Informatics (EN)</td><td>1.00</td><td>1.00</td><td>1.00</td><td>0.73</td><td>0.90</td><td>0.80</td><td>0.70</td><td><b>91.9</b></td></tr>
+    <tr><td>Politecnico di Milano — CS</td><td>1.00</td><td>1.00</td><td>0.00</td><td>1.00</td><td>0.90</td><td>0.85</td><td>0.60</td><td><b>80.8</b></td></tr>
+    <tr><td>Arizona State University — CS</td><td>0.00</td><td>1.00</td><td>0.00</td><td>1.00</td><td>1.00</td><td>0.90</td><td>0.50</td><td><b>56.7</b></td></tr>
+    <tr><td>University of Toronto — CS</td><td>0.00</td><td>1.00</td><td>0.00</td><td>0.73</td><td>1.00</td><td>0.80</td><td>0.40</td><td><b>51.4</b></td></tr>
+  </tbody>
+</table>
+<p class="muted">Проверка формулы для TUM: <code>0.25·1 + 0.22·1 + 0.15·1 + 0.15·0.73 + 0.10·0.90 + 0.08·0.80 + 0.05·0.70 = 0.919 → 91.9</code></p>
+
+<h4>Чувствительность на этом же профиле</h4>
+<table>
+  <thead><tr><th>Изменение</th><th>Эффект</th></tr></thead>
+  <tbody>
+    <tr><td>Страны → [US, CA]</td><td>ASU 56.7 → 71.7, UofT 51.4 → 66.4; топ-3 полностью переупорядочен</td></tr>
+    <tr><td>Бюджет $6k → $30k</td><td>ASU 56.7 → <b>81.7</b>, обгоняет PoliMi (80.8)</td></tr>
+    <tr><td>Страны [US,CA] + бюджет $30k</td><td>ASU → <b>96.7</b> и выходит на 2–3 место</td></tr>
+    <tr><td>IELTS 6.0 → 5.0</td><td>TUM (5.0/6.5 = 0.77 &lt; 0.8) уходит из топа в «ослабленные»</td></tr>
+    <tr><td>Направление cs → business</td><td>Наверх выходят бизнес-программы</td></tr>
+  </tbody>
+</table>
+
+<h2>6. AI layer</h2>
+<p>Принцип: <b>код владеет фактами и решениями, AI владеет формулировками.</b></p>
+<div class="compare">
+  <div class="crow"><div class="h">Решает код</div><div class="h">Решает LLM (опционально)</div></div>
+  <div class="crow"><div>Фильтрация, скоринг, топ-N, диагностика, roadmap, дедлайны, порядок шагов</div><div>«Почему подходит», «чего опасаться», «следующий шаг», переформулировка шагов</div></div>
+</div>
+
+<h4>POST /api/explain</h4>
+<ul>
+  <li><b>Input:</b> профиль (сокращённый) + рекомендации с <code>breakdown</code>, <code>score</code>, <code>warnings</code>.</li>
+  <li><b>Output:</b> strict JSON — <code>{ items: [{ programId, whyItFits, concerns[], nextStepHint }] }</code>.</li>
+  <li><b>Fallback:</b> <code>explainFallback.ts</code> собирает текст прямо из breakdown — всегда валиден.</li>
+  <li><b>Защита от галлюцинаций:</b> только структурированный JSON на входе; <code>programId</code> обязан быть в input; лимит длины строк; <code>temperature 0.2–0.4</code>, <code>timeout 8 s</code>, 1 ретрай; любая ошибка → тихий fallback.</li>
+</ul>
+<p><b>Жёсткое правило:</b> AI никогда не поставляет требования, дедлайны и стоимость. Это только код + JSON + <code>sourceIds</code>.</p>
+
+<h2>7. Пользовательский flow</h2>
+<pre><code>Landing → Profile → Diagnosis → Recommendations → Comparison → Roadmap → Next Action
+                     ↑________________ отметка прогресса ________________|</code></pre>
+<table>
+  <thead><tr><th>Экран</th><th>Цель</th><th>Loading</th><th>Error</th><th>Empty</th></tr></thead>
+  <tbody>
+    <tr><td><b>Landing</b></td><td>Завести в путь</td><td>—</td><td>—</td><td>Нет кнопки «Продолжить»</td></tr>
+    <tr><td><b>Profile</b></td><td>Собрать параметры</td><td>Инлайн-валидация</td><td>Подсветка + текст</td><td>Подсказка «6 полей»</td></tr>
+    <tr><td><b>Diagnosis</b></td><td>Уточнить пробелы</td><td>Скелетон вопросов</td><td>«Повторить»</td><td>«Пропустить»</td></tr>
+    <tr><td><b>Recommendations</b></td><td>3+ варианта с «почему»</td><td>Скелетон карточек</td><td>«AI недоступен — шаблонные объяснения»</td><td>Панель + ослабленные варианты</td></tr>
+    <tr><td><b>Comparison</b></td><td>Сравнить ≥2</td><td>Скелетон таблицы</td><td>—</td><td>«Выбери минимум 2»</td></tr>
+    <tr><td><b>Roadmap</b></td><td>План по шагам</td><td>Скелетон таймлайна</td><td>«Не сохранилось»</td><td>«Сначала рекомендации»</td></tr>
+    <tr><td><b>Next Action</b></td><td>Одно действие</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td><b>Sources</b></td><td>Честность фактов</td><td>—</td><td>—</td><td>«Данные демонстрационные»</td></tr>
+  </tbody>
+</table>
+<p class="muted">Прогресс: <code>done/total</code> + пересчёт «следующего действия» по правилу «первый невыполненный шаг с минимальным (priority, dueDate)».</p>
+
+<h2>8. API / service boundaries</h2>
+<p>Без backend ядро работает полностью. Backend нужен ровно для одного — спрятать ключ LLM.</p>
+<table>
+  <thead><tr><th>Метод</th><th>Endpoint</th><th>Зачем</th><th>Обязателен</th></tr></thead>
+  <tbody>
+    <tr><td>POST</td><td><code>/api/explain</code></td><td>AI-объяснения</td><td><span class="badge b-warn">опционально (fallback)</span></td></tr>
+    <tr><td>POST</td><td><code>/api/rewrite-steps</code></td><td>Переформулировка шагов</td><td><span class="badge">нет</span></td></tr>
+    <tr><td>GET</td><td><code>/api/health</code></td><td>Проверка живости AI</td><td><span class="badge">нет</span></td></tr>
+  </tbody>
+</table>
+
+<h2>9. Тестирование</h2>
+<table>
+  <thead><tr><th>Профиль</th><th>Описание</th><th>Ожидаемое поведение</th></tr></thead>
+  <tbody>
+    <tr><td><b>A</b></td><td>KZ, cs, $6k, IELTS 6.0, GPA 4.3</td><td>2 KZ + 1 зарубежная доступная; confidence high</td></tr>
+    <tr><td><b>B</b></td><td>US, business, $45k, SAT 1400, IELTS 7.0</td><td>Зарубежные частные выше; KZ ниже</td></tr>
+    <tr><td><b>C</b></td><td>UK, humanities, $30k, IELTS 6.5</td><td>Иной порядок и состав; в roadmap эссе/портфолио</td></tr>
+    <tr><td><b>D</b></td><td>нехватка данных</td><td>confidence low, диагноз требует заполнить, без падения</td></tr>
+    <tr><td><b>E</b></td><td>конфликт: US + $1k + стипендия + medicine</td><td>Relaxed state + подсказки, не пустой экран</td></tr>
+  </tbody>
+</table>
+<p class="muted">Плюс обязательные проверки: смена страны / бюджета / интереса / экзамена обязана менять рекомендации или roadmap; <code>scoring.test.ts</code> сверяет эталонный расчёт до 0.1; ручной mobile-чек-лист на 360/390/414 px.</p>
+
+<h2>10. Демо для жюри (2–3 минуты)</h2>
+<div class="timeline">
+  <div class="step"><div class="marker">15"</div><div class="step-body"><div class="step-title">Landing</div><div class="step-text">Одна фраза: «Мы собираем персональный маршрут поступления за 2 минуты».</div></div></div>
+  <div class="step"><div class="marker">45"</div><div class="step-body"><div class="step-title">Profile + Diagnosis</div><div class="step-text">Заполняем профиль Алия и быстро проходим диагностику.</div></div></div>
+  <div class="step"><div class="marker">1:15</div><div class="step-body"><div class="step-title">Recommendations</div><div class="step-text">3+ программы со score и разбивкой; открываем «почему подходит» (в углу — бейдж источника).</div></div></div>
+  <div class="step"><div class="marker">1:40</div><div class="step-body"><div class="step-title">Живое изменение ← ключевой момент</div><div class="step-text">Меняем страны на [US, CA] и бюджет на $30k → ASU подскакивает в топ. Жюри видит настоящую персонализацию.</div></div></div>
+  <div class="step"><div class="marker">2:10</div><div class="step-body"><div class="step-title">Comparison + Roadmap</div><div class="step-text">Сравниваем 2 программы; отмечаем шаг «done» → прогресс двигается, «следующее действие» переключается.</div></div></div>
+  <div class="step"><div class="marker">3:00</div><div class="step-body"><div class="step-title">Sources</div><div class="step-text">Показываем источники дедлайнов и честный бейдж «демо-данные».</div></div></div>
+</div>
+<p class="muted">Подстраховка: всё, кроме AI-объяснений, работает без интернета.</p>
+
+<h2>11. Технические риски</h2>
+<table>
+  <thead><tr><th>Risk</th><th>Prob</th><th>Impact</th><th>Prevention</th><th>Fallback</th></tr></thead>
+  <tbody>
+    <tr><td>AI API недоступен</td><td><span class="badge b-warn">M</span></td><td><span class="badge b-warn">M</span></td><td>Таймаут 8 с, 1 ретрай</td><td>Шаблонные объяснения</td></tr>
+    <tr><td>Rate limit 429</td><td><span class="badge b-warn">M</span></td><td><span class="badge b-ok">L</span></td><td>1 вызов на экран, кеш в памяти</td><td>Fallback-текст</td></tr>
+    <tr><td>Медленный ответ</td><td><span class="badge b-warn">M</span></td><td><span class="badge b-warn">M</span></td><td>Скелетон, не блокировать экран</td><td>Показать список сразу</td></tr>
+    <tr><td>Невалидный JSON от LLM</td><td><span class="badge b-bad">H</span></td><td><span class="badge b-warn">M</span></td><td>Валидация схемы, лимит длины</td><td>Отбросить → fallback</td></tr>
+    <tr><td>Нет университета под профиль</td><td><span class="badge b-warn">M</span></td><td><span class="badge b-bad">H</span></td><td>Soft-факторы, база ≥8 программ</td><td>Relaxed-режим</td></tr>
+    <tr><td>Нет дедлайна</td><td><span class="badge b-warn">M</span></td><td><span class="badge b-warn">M</span></td><td><code>deadlines</code> может быть пустым</td><td>Шаг «уточнить на сайте» + ссылка</td></tr>
+    <tr><td>Front/Back mismatch</td><td><span class="badge b-warn">M</span></td><td><span class="badge b-bad">H</span></td><td>Замороженный <code>types.ts</code></td><td>Работа без <code>/api</code></td></tr>
+    <tr><td>Mobile layout broken</td><td><span class="badge b-warn">M</span></td><td><span class="badge b-bad">H</span></td><td>Mobile-first, 360/390/414 px</td><td>Bottom-nav, single-column</td></tr>
+    <tr><td>Deployment failure</td><td><span class="badge b-ok">L</span></td><td><span class="badge b-bad">H</span></td><td>Деплой в Phase 8, не в последний час</td><td>GitHub Pages (без AI)</td></tr>
+  </tbody>
+</table>
+
+<h2>12. Разделение работы</h2>
+<div class="grid g2">
+  <section class="card">
+    <div class="role">Разработчик A</div>
+    <h3>Data &amp; Logic</h3>
+    <p class="muted">types.ts · data/*.json + sources.json · matching (filter, scoring, recommend) · roadmap · progress · api/explain + fallback · tests · DATA_SOURCES.md</p>
+  </section>
+  <section class="card">
+    <div class="role">Разработчик B</div>
+    <h3>UI &amp; Flow</h3>
+    <p class="muted">tokens.css · ui/* · screens/* (7 экранов) · App.tsx + роутинг · state/* · storage · mobile-first · DEMO_SCRIPT.md</p>
+  </section>
+</div>
+<p><b>Анти-простой:</b> если B блокирован — верстает на моках; если A блокирован — пишет тесты на готовые функции. Типы и мок-данные появляются в первый час.</p>
+
+<h2>13. Порядок разработки</h2>
+<table>
+  <thead><tr><th>Phase</th><th>Результат</th><th>Критерий «готово»</th></tr></thead>
+  <tbody>
+    <tr><td><b>0 — Architecture</b></td><td>Документ + <code>types.ts</code> + моки</td><td>Оба согласны с контрактом</td></tr>
+    <tr><td><b>1 — Skeleton</b></td><td>Запускаемый проект, 7 экранов-заглушек</td><td><code>npm run dev</code> открывает все экраны</td></tr>
+    <tr><td><b>2 — Data</b></td><td>≥8 программ, ≥6 вузов, источники</td><td>Валидация типов + <code>sourceIds</code></td></tr>
+    <tr><td><b>3 — Core logic</b></td><td>filter / scoring / roadmap / progress + тесты</td><td>Эталонный тест и sensitivity зелёные</td></tr>
+    <tr><td><b>4 — UI</b></td><td>7 экранов на реальных данных</td><td>Путь проходится на 360 px</td></tr>
+    <tr><td><b>5 — AI</b></td><td><code>/api/explain</code> + fallback</td><td>Работает при выключенном ключе</td></tr>
+    <tr><td><b>6 — Integration</b></td><td>AI в рекомендациях, состояния</td><td>Полный путь без ручных правок</td></tr>
+    <tr><td><b>7 — Testing</b></td><td>5 профилей + mobile-чек-лист</td><td><code>npm test</code> зелёный</td></tr>
+    <tr><td><b>8 — Deployment</b></td><td>Публичный URL</td><td>Путь проходит с телефона</td></tr>
+    <tr><td><b>9 — Demo</b></td><td>Сценарий + README/docs</td><td>Демо вслух дважды без запинок</td></tr>
+  </tbody>
+</table>
+
+<h2>14. Definition of Done</h2>
+<table>
+  <thead><tr><th>Функция</th><th>Критерий «готово»</th></tr></thead>
+  <tbody>
+    <tr><td>Профиль</td><td>Валидация полей; сохранение и восстановление после перезагрузки</td></tr>
+    <tr><td>Диагностика</td><td>5–8 вопросов; детерминированный результат</td></tr>
+    <tr><td>Рекомендации</td><td>≥3 программы со score и breakdown</td></tr>
+    <tr><td>«Почему подходит»</td><td>Причина + ограничение + бейдж источника (AI/fallback)</td></tr>
+    <tr><td>Сравнение</td><td>≥2 программы, все критерии из данных</td></tr>
+    <tr><td>Roadmap</td><td>Покрыты все 5 фаз</td></tr>
+    <tr><td>Следующее действие</td><td>Ровно одно, пересчитывается при отметке</td></tr>
+    <tr><td>Прогресс</td><td>Статус сохраняется, прогресс-бар обновляется сразу</td></tr>
+    <tr><td>Чувствительность</td><td>Смена параметра меняет результат (тест зелёный)</td></tr>
+    <tr><td>Источники</td><td><code>sourceId</code> или бейдж «демо-данные» у каждого факта</td></tr>
+    <tr><td>Mobile + Deploy</td><td>360 px без горизонтального скролла; публичный URL работает</td></tr>
+  </tbody>
+</table>
+
+<h2>15. Итоговая сводка</h2>
+<div class="grid g2">
+  <section class="card"><div class="role">A</div><h3>Architecture</h3><p class="muted">Offline-first React + Vite SPA, чистая TS-логика, 1 serverless-эндпоинт, localStorage, Vercel.</p></section>
+  <section class="card"><div class="role">B</div><h3>Stack</h3><p class="muted">React 18, TypeScript strict, Vite, Tailwind + дизайн-токены, react-router-dom, Context+useReducer, Vitest, Vercel Functions.</p></section>
+  <section class="card"><div class="role">C</div><h3>Project tree</h3><p class="muted">См. §3.</p></section>
+  <section class="card"><div class="role">D</div><h3>Data model</h3><p class="muted">11 структур: Profile, University, Program, Deadline, Source, Recommendation, ScoreFactor, Explanation, Diagnosis, Roadmap, RoadmapStep.</p></section>
+  <section class="card"><div class="role">E</div><h3>Scoring</h3><p class="muted">filter → gate → 7 факторов (0.25/0.22/0.15/0.15/0.10/0.08/0.05) → top-5 → объяснение.</p></section>
+  <section class="card"><div class="role">F</div><h3>AI responsibilities</h3><p class="muted">Только формулировки. Никогда — факты. Всегда есть fallback.</p></section>
+  <section class="card"><div class="role">G</div><h3>API</h3><p class="muted"><code>/api/explain</code> (+ 2 необязательных). Ядро работает без backend.</p></section>
+  <section class="card"><div class="role">H</div><h3>Team split</h3><p class="muted">A — Data &amp; Logic; B — UI &amp; Flow; контракт — <code>types.ts</code>.</p></section>
+  <section class="card"><div class="role">I</div><h3>Dev order</h3><p class="muted">Phase 0…9 последовательно.</p></section>
+  <section class="card"><div class="role">J</div><h3>Testing</h3><p class="muted">5 профилей + sensitivity (страна/бюджет/интерес/экзамен) + mobile-чек-лист.</p></section>
+  <section class="card"><div class="role">K</div><h3>Demo</h3><p class="muted">2–3 минуты с живой правкой профиля в середине.</p></section>
+  <section class="card"><div class="role">L</div><h3>Biggest risks</h3><p class="muted">JSON от LLM, отсутствие программ, mobile layout, деплой в последний час.</p></section>
+  <section class="card"><div class="role">M</div><h3>NOT to build</h3><p class="muted">Авторизация, БД, микросервисы, AI-чат, каталог, парсинг, админка, платежи, push.</p></section>
+</div>
+
+<footer>
+  Кейс №2 «Персональный маршрут поступления» · LOCUS Startup Hackathon 2026 · архитектурный документ, полнотекстовая версия — <code>docs/ARCHITECTURE.md</code>.
+</footer>
+
+</div>
+</body>
+</html>

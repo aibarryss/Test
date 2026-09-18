@@ -1,0 +1,58 @@
+[
+  {
+    "id": "q-routine",
+    "prompt": "How consistent are your study habits across a normal week?",
+    "helper": "Think about the last month, not an ideal week.",
+    "options": [
+      { "value": "high", "label": "Very consistent — I plan and follow through" },
+      { "value": "mid", "label": "Mostly consistent with some slips" },
+      { "value": "low", "label": "I study mostly before deadlines" }
+    ]
+  },
+  {
+    "id": "q-math",
+    "prompt": "How comfortable are you with advanced mathematics?",
+    "options": [
+      { "value": "strong", "label": "Strong — I enjoy it and score high" },
+      { "value": "ok", "label": "Okay — I manage with effort" },
+      { "value": "weak", "label": "It is my hardest subject" }
+    ]
+  },
+  {
+    "id": "q-english",
+    "prompt": "How confident are you speaking and writing in English?",
+    "options": [
+      { "value": "b2", "label": "Confident — I can study fully in English" },
+      { "value": "b1", "label": "I manage everyday topics" },
+      { "value": "a2", "label": "Still building basics" }
+    ]
+  },
+  {
+    "id": "q-exam-ready",
+    "prompt": "Have you already taken a standardised exam (IELTS / SAT / ENT)?",
+    "options": [
+      { "value": "yes", "label": "Yes, I have a score" },
+      { "value": "planned", "label": "Not yet, but I have a date planned" },
+      { "value": "no", "label": "Not yet and no plan" }
+    ]
+  },
+  {
+    "id": "q-project",
+    "prompt": "Do you have a project, portfolio or competition result?",
+    "helper": "Anything you could show on an application.",
+    "options": [
+      { "value": "yes", "label": "Yes, a strong one" },
+      { "value": "small", "label": "Something small" },
+      { "value": "no", "label": "Nothing yet" }
+    ]
+  },
+  {
+    "id": "q-mobility",
+    "prompt": "How ready are you to study abroad, away from home?",
+    "options": [
+      { "value": "ready", "label": "Very ready — that is my goal" },
+      { "value": "mixed", "label": "Open to it, but cautious" },
+      { "value": "home", "label": "I would prefer to stay in my country" }
+    ]
+  }
+]

@@ -1,0 +1,12 @@
+[
+  { "id": "src-nu", "title": "Nazarbayev University — Admissions", "url": "https://nu.edu.kz/admissions", "kind": "official", "note": "Numeric values in this MVP are demonstrative; verify on the official page before the final pitch.", "accessedAt": "2026-09-16" },
+  { "id": "src-kbtu", "title": "KBTU — Admissions", "url": "https://kbtu.edu.kz/en/admissions", "kind": "official", "note": "Numeric values are demonstrative.", "accessedAt": "2026-09-16" },
+  { "id": "src-tum", "title": "TUM — Application & Admission", "url": "https://www.tum.de/en/studies/application", "kind": "official", "note": "Numeric values are demonstrative.", "accessedAt": "2026-09-16" },
+  { "id": "src-polimi", "title": "Politecnico di Milano — Admissions", "url": "https://www.polimi.it/en/international-prospective-students", "kind": "official", "note": "Numeric values are demonstrative.", "accessedAt": "2026-09-16" },
+  { "id": "src-asu", "title": "Arizona State University — First-year admission", "url": "https://admission.asu.edu/international", "kind": "official", "note": "Numeric values are demonstrative.", "accessedAt": "2026-09-16" },
+  { "id": "src-uoft", "title": "University of Toronto — International admissions", "url": "https://future.utoronto.ca/apply/international-students", "kind": "official", "note": "Numeric values are demonstrative.", "accessedAt": "2026-09-16" },
+  { "id": "src-manchester", "title": "University of Manchester — International entry requirements", "url": "https://www.manchester.ac.uk/study/international", "kind": "official", "note": "Numeric values are demonstrative.", "accessedAt": "2026-09-16" },
+  { "id": "src-tue", "title": "TU Eindhoven — Bachelor admission", "url": "https://www.tue.nl/en/education/bachelor-college/admission-and-application", "kind": "official", "note": "Numeric values are demonstrative.", "accessedAt": "2026-09-16" },
+  { "id": "src-ielts", "title": "IELTS — Test scores and results", "url": "https://ielts.org/take-a-test/your-results", "kind": "official", "note": "Language requirement reference.", "accessedAt": "2026-09-16" },
+  { "id": "src-demo-model", "title": "Pathly internal demo dataset", "url": "https://example.org/pathly-demo", "kind": "demo", "note": "Used for costs and deadlines that are not yet verified against an official source." }
+]

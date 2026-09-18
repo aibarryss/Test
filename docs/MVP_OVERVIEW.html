@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pathly MVP — delivery overview</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --surface:#f8f9ff; --low:#eff4ff; --line:#e2e8f0; --text:#0d1c2e; --muted:#5b6478;
+    --primary:#3730a3; --emerald:#059669; --ochre:#d97706; --r:16px;
+    --font:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--surface);color:var(--text);font-family:var(--font);font-size:15px;line-height:1.6}
+  .wrap{max-width:1040px;margin:0 auto;padding:40px 20px 80px}
+  .hero{border:1px solid var(--line);background:#fff;border-radius:20px;padding:30px 28px;box-shadow:0 1px 3px rgba(15,23,42,.04),0 4px 12px -2px rgba(15,23,42,.03)}
+  .kicker{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--primary)}
+  h1{font-size:30px;line-height:1.2;letter-spacing:-.02em;margin:10px 0 8px}
+  h2{font-size:20px;margin:40px 0 12px;letter-spacing:-.01em}
+  h3{font-size:15px;margin:0 0 6px;font-weight:700}
+  p{margin:8px 0;color:var(--muted)}
+  .lead{max-width:70ch}
+  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:22px 0 0}
+  .metric{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .metric .v{font-size:24px;font-weight:800;color:var(--primary);letter-spacing:-.02em}
+  .metric .l{font-size:11.5px;color:var(--muted)}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:0 1px 3px rgba(15,23,42,.04)}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0;display:block;overflow-x:auto}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  th{background:var(--low);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .badge{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 9px;border-radius:999px;border:1px solid transparent}
+  .b-ai{background:#eef2ff;color:#3730a3;border-color:#c3c0ff}
+  .b-neutral{background:#f1f5f9;color:#475569}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;background:rgba(15,23,42,.05);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+  pre{background:#0b1220;color:#cbd5e1;border-radius:12px;padding:14px 16px;overflow:auto;font-size:12.5px}
+  pre code{background:none;border:0;color:inherit;padding:0}
+  ul{margin:8px 0 8px 20px;padding:0}
+  li{margin:4px 0;color:var(--muted)}
+  .step{display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line)}
+  .step:last-child{border-bottom:0}
+  .marker{flex:0 0 30px;height:30px;border-radius:9px;background:#eef2ff;border:1px solid #c3c0ff;color:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
+  footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <div class="kicker">LOCUS Startup Hackathon 2026 · Case #2 · Personal admission route</div>
+  <h1>Pathly MVP — delivery overview</h1>
+  <p class="lead">A working single-page application that takes a student from profile to a scored shortlist,
+  a side-by-side comparison, a phased admission roadmap and progress tracking. React + TypeScript + Vite,
+  a pure-function recommendation engine, and one optional AI endpoint with a deterministic fallback.</p>
+  <div class="metrics">
+    <div class="metric"><div class="v">7</div><div class="l">screens, full path working</div></div>
+    <div class="metric"><div class="v">23</div><div class="l">unit tests passing</div></div>
+    <div class="metric"><div class="v">8 / 16</div><div class="l">universities / programs in dataset</div></div>
+    <div class="metric"><div class="v">7</div><div class="l">weighted scoring factors</div></div>
+    <div class="metric"><div class="v">1</div><div class="l">backend endpoint (AI, optional)</div></div>
+  </div>
+</div>
+
+<h2>What was verified live</h2>
+<p>Every screen was driven in a real browser at mobile width (about 545 px), and the data survived a page reload:</p>
+<div class="card">
+  <div class="step"><div class="marker">1</div><div><h3>Landing</h3><p>Hero, four-step strip, "Try a demo dossier" seeds a full profile and diagnostic.</p></div></div>
+  <div class="step"><div class="marker">2</div><div><h3>Profile intake</h3><p>Eight inputs, inline validation, budget presets, destination chips, restored from localStorage.</p></div></div>
+  <div class="step"><div class="marker">3</div><div><h3>Diagnosis</h3><p>Six questions, progress meter, deterministic strengths / gaps / advisory pointers.</p></div></div>
+  <div class="step"><div class="marker">4</div><div><h3>Recommendations</h3><p>Five scored programs with factor breakdowns and warnings. Adding <b>US</b> and raising the budget to <b>$30k</b> moved Arizona State University to #1 with a <b>NEW ENTRY</b> tag and pushed the rest down one place.</p></div></div>
+  <div class="step"><div class="marker">5</div><div><h3>Comparison</h3><p>Two programs across 12 criteria, including estimated total cost per year and demo-data badges.</p></div></div>
+  <div class="step"><div class="marker">6</div><div><h3>Roadmap and progress</h3><p>14 steps across 5 phases; "Mark as done" moved progress 0% to 7% and switched the highlighted next action from the exam step to the next deadline.</p></div></div>
+  <div class="step"><div class="marker">7</div><div><h3>Data and sources</h3><p>Nine official source links, an explicit statement that numeric values are demonstrative, and methodology notes.</p></div></div>
+</div>
+
+<h2>Recommendation engine</h2>
+<p>The language model never invents a university. The pipeline is fixed:</p>
+<pre><code>Profile -> normalize -> hard filter -> soft exam gate -> 7-factor weighted score
+        -> top candidates -> AI explanation (or template) -> final recommendations</code></pre>
+<table>
+  <thead><tr><th>Factor</th><th>Weight</th><th>What it normalises</th></tr></thead>
+  <tbody>
+    <tr><td>Budget fit</td><td><b>0.25</b></td><td>net tuition against the stated budget</td></tr>
+    <tr><td>Subject match</td><td><b>0.22</b></td><td>program field against the profile field (related fields score 0.5)</td></tr>
+    <tr><td>Destination</td><td>0.15</td><td>country in the target list</td></tr>
+    <tr><td>Academic fit</td><td>0.15</td><td>GPA and exam scores against requirements</td></tr>
+    <tr><td>Language readiness</td><td>0.10</td><td>language of instruction versus exam evidence</td></tr>
+    <tr><td>Timeline feasibility</td><td>0.08</td><td>months left before the application deadline</td></tr>
+    <tr><td>Funding available</td><td>0.05</td><td>scholarship path when the budget is short</td></tr>
+  </tbody>
+</table>
+<p>Missing data lowers a <b>confidence</b> badge instead of inventing a value, and the missing factor's weight is
+redistributed across the known factors. A soft gate drops a program from the main list only when
+<code>current / required &lt; 0.8</code> on an exam or GPA, so a failed exam visibly changes the shortlist.</p>
+
+<h2>AI layer</h2>
+<table>
+  <thead><tr><th>Where</th><th>Input</th><th>Output</th><th>Fallback</th></tr></thead>
+  <tbody>
+    <tr><td><code>POST /api/explain</code></td><td>profile plus already-computed recommendations with their score breakdown</td><td>strict JSON: <code>{ items: [{ programId, whyItFits, concerns[], nextStepHint }] }</code></td><td>template text built from the breakdown, always available and labelled "template" in the UI</td></tr>
+  </tbody>
+</table>
+<p>Guardrails: the model may only rephrase facts from the input, every returned <code>programId</code> must exist in the request,
+strings are length-capped, temperature is 0.3, the call times out after five seconds, and any failure silently falls back.
+The header toggle turns AI on or off; the product is identical without it.</p>
+
+<h2>Run and deploy</h2>
+<pre><code>npm install
+npm run dev        # http://localhost:5173   (development)
+npm test           # 23 unit tests
+npm run build      # production build into dist/
+npm run preview    # serve the build on http://localhost:4173</code></pre>
+<table>
+  <thead><tr><th>Target</th><th>What to do</th><th>AI</th></tr></thead>
+  <tbody>
+    <tr><td>Vercel</td><td>import the repo, framework preset "Vite"; <code>api/explain.ts</code> deploys automatically</td><td><span class="badge b-ai">on if LLM_API_KEY is set</span></td></tr>
+    <tr><td>GitHub Pages / Netlify / nginx</td><td>serve <code>dist/</code>; HashRouter needs no rewrite rules</td><td><span class="badge b-neutral">template fallback</span></td></tr>
+  </tbody>
+</table>
+
+<h2>Data honesty</h2>
+<ul>
+  <li>Every program and deadline carries <code>sourceIds</code> pointing at official admissions pages.</li>
+  <li>Deadline dates are flagged <code>isDemo: true</code> and rendered with a <b>demo data</b> badge.</li>
+  <li>The Sources screen states plainly that numeric values are demonstrative and links out for verification.</li>
+</ul>
+
+<h2>Still open (not in this MVP)</h2>
+<ul>
+  <li>Replace demonstrative tuition and deadline values with verified figures and confirm the sources.</li>
+  <li>Grow the dataset beyond 8 universities and 16 programs, adding business and humanities programs in more countries.</li>
+  <li>Optional second AI call to rewrite roadmap step wording.</li>
+  <li>Print / PDF export already works through the browser print dialog.</li>
+</ul>
+
+<footer>Pathly · React 18 + TypeScript + Vite · design system from Google Stitch "Clarity &amp; Trajectory" · tested with Vitest (4 files, 23 tests).</footer>
+
+</div>
+</body>
+</html>
