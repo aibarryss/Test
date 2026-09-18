@@ -6,6 +6,7 @@ import { useApp } from '../state/AppState'
 import { explainRecommendations } from '../lib/explain'
 import { buildSuggestions } from '../features/matching/recommend'
 import { formatUsd } from '../lib/format'
+import { t } from '../lib/i18n'
 
 export function RecommendationsScreen({ onCompare, onRoadmap }: { onCompare: () => void; onRoadmap: () => void }) {
   const { state, dispatch, programMap, uniMap, recommendations, canGo } = useApp()
@@ -82,17 +83,17 @@ export function RecommendationsScreen({ onCompare, onRoadmap }: { onCompare: () 
   }, [recommendations, programMap])
 
   const relaxedNotes = relaxed.length > 0 ? relaxed.slice(0, 3).map((p) => p.name) : []
+  const rec_t = t('recommendations')
 
   return (
     <div>
       <div className="hero" style={{ paddingTop: 10, paddingBottom: 6 }}>
         <span className="eyebrow">
-          <span className="dot dot-indigo" /> Step 3 · Recommendations
+          <span className="dot dot-indigo" /> Step 3 · {rec_t.step}
         </span>
-        <h1 style={{ fontSize: 30 }}>Universities that fit your profile</h1>
+        <h1 style={{ fontSize: 30 }}>{rec_t.title}</h1>
         <p className="lead">
-          Every match is computed from your eight inputs, then explained factor by factor. Edit anything below
-          and the shortlist recomputes live.
+          {rec_t.subtitle}
         </p>
       </div>
 
@@ -100,19 +101,19 @@ export function RecommendationsScreen({ onCompare, onRoadmap }: { onCompare: () 
 
       <div className="spread" style={{ margin: '18px 0 8px' }}>
         <div className="section-title" style={{ margin: 0 }}>
-          {items.length} recommended {items.length === 1 ? 'program' : 'programs'}
+          {items.length} {rec_t.recommended} {items.length === 1 ? rec_t.program : rec_t.programs}
         </div>
         <div className="row" style={{ gap: 8 }}>
           {loading ? (
             <Badge tone="ai" dot="dot-indigo">
-              Asking the model…
+              {rec_t.askingModel}
             </Badge>
           ) : origin === 'ai' ? (
-            <Badge tone="ai">AI explanation</Badge>
+            <Badge tone="ai">{rec_t.aiExplanation}</Badge>
           ) : origin === 'mixed' ? (
-            <Badge tone="ai">AI + template</Badge>
+            <Badge tone="ai">{rec_t.aiTemplate}</Badge>
           ) : (
-            <Badge tone="neutral">Template explanation</Badge>
+            <Badge tone="neutral">{rec_t.templateExplanation}</Badge>
           )}
         </div>
       </div>
@@ -120,17 +121,17 @@ export function RecommendationsScreen({ onCompare, onRoadmap }: { onCompare: () 
       {items.length < 3 && (
         <div style={{ marginBottom: 12 }}>
           <Notice tone="warn" icon="warning">
-            Fewer than three strong matches. Relaxed options and concrete remedies are shown below.
+            {rec_t.fewerMatches}
           </Notice>
         </div>
       )}
 
       {items.length === 0 && !loading && (
         <EmptyState
-          title="No strong match yet"
-          text="Your current constraints are too tight. Try one of the remedies below, then re-run."
+          title={rec_t.noMatch}
+          text={rec_t.noMatchText}
         >
-          <Button onClick={() => dispatch({ type: 'reset' })}>Reset profile</Button>
+          <Button onClick={() => dispatch({ type: 'reset' })}>{rec_t.resetProfile}</Button>
         </EmptyState>
       )}
 

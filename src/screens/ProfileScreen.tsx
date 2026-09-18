@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import type { CountryCode, ExamId, Field, UserProfile } from '../lib/types'
 import { COUNTRY_LABELS, FIELD_LABELS } from '../data'
 import { Badge, Button, Card, Chip, Field as FieldWrap, Icon, Notice } from '../ui/primitives'
+import { t } from '../lib/i18n'
 
 const COUNTRIES: CountryCode[] = ['KZ', 'DE', 'IT', 'NL', 'UK', 'US', 'CA', 'TR', 'KR', 'RU']
 const FIELDS = Object.keys(FIELD_LABELS) as Field[]
@@ -67,29 +68,29 @@ export function ProfileScreen({
   }
 
   const err = (k: string) => (touched ? errors[k] : undefined)
+  const profile = t('profile')
 
   return (
     <div className="lane">
       <div className="hero" style={{ paddingTop: 10 }}>
         <span className="eyebrow">
-          <span className="dot dot-indigo" /> Step 1 · Profile intake
+          <span className="dot dot-indigo" /> Step 1 · {profile.step}
         </span>
-        <h1 style={{ fontSize: 30 }}>Tell us about your goals</h1>
+        <h1 style={{ fontSize: 30 }}>{profile.title}</h1>
         <p className="lead">
-          Eight inputs drive everything that follows. Change any of them later and the shortlist and roadmap
-          recompute immediately.
+          {profile.subtitle}
         </p>
       </div>
 
       <Card>
         <div className="section-title" style={{ marginTop: 0 }}>
-          About you
+          {profile.aboutYou}
         </div>
         <div className="grid g2">
-          <FieldWrap label="Name (optional)">
-            <input className="input" value={form.name ?? ''} onChange={(e) => patch({ name: e.target.value })} placeholder="e.g. Aliya" />
+          <FieldWrap label={profile.nameLabel}>
+            <input className="input" value={form.name ?? ''} onChange={(e) => patch({ name: e.target.value })} placeholder={profile.namePlaceholder} />
           </FieldWrap>
-          <FieldWrap label="Citizenship">
+          <FieldWrap label={profile.citizenshipLabel}>
             <select className="select" value={form.citizenship} onChange={(e) => patch({ citizenship: e.target.value as CountryCode })}>
               {COUNTRIES.map((c) => (
                 <option key={c} value={c}>
@@ -98,14 +99,14 @@ export function ProfileScreen({
               ))}
             </select>
           </FieldWrap>
-          <FieldWrap label="Grade" error={err('grade')}>
+          <FieldWrap label={profile.gradeLabel} error={err('grade')}>
             <select className="select" value={form.grade} onChange={(e) => patch({ grade: Number(e.target.value) as 9 | 10 | 11 })}>
-              <option value={9}>Grade 9</option>
-              <option value={10}>Grade 10</option>
-              <option value={11}>Grade 11</option>
+              <option value={9}>{profile.grade9}</option>
+              <option value={10}>{profile.grade10}</option>
+              <option value={11}>{profile.grade11}</option>
             </select>
           </FieldWrap>
-          <FieldWrap label="Graduation year" error={err('graduationYear')}>
+          <FieldWrap label={profile.graduationYearLabel} error={err('graduationYear')}>
             <input
               className="input"
               type="number"
@@ -117,9 +118,9 @@ export function ProfileScreen({
           </FieldWrap>
         </div>
 
-        <div className="section-title">Academic baseline</div>
+        <div className="section-title">{profile.academicBaseline}</div>
         <div className="grid g2">
-          <FieldWrap label="Target discipline" error={err('field')}>
+          <FieldWrap label={profile.disciplineLabel} error={err('field')}>
             <select className="select" value={form.field} onChange={(e) => patch({ field: e.target.value as Field })}>
               {FIELDS.map((f) => (
                 <option key={f} value={f}>
@@ -128,7 +129,7 @@ export function ProfileScreen({
               ))}
             </select>
           </FieldWrap>
-          <FieldWrap label="GPA (0–5 scale)" error={err('gpa')} helper="0.1 steps, e.g. 4.3">
+          <FieldWrap label={profile.gpaLabel} error={err('gpa')} helper={profile.gpaHelper}>
             <input
               className="input"
               type="number"
@@ -139,13 +140,13 @@ export function ProfileScreen({
               onChange={(e) => patch({ gpa: Math.round(Number(e.target.value) * 100) / 100 })}
             />
           </FieldWrap>
-          <FieldWrap label="English level (optional)">
+          <FieldWrap label={profile.englishLevelLabel}>
             <select
               className="select"
               value={form.englishLevel ?? ''}
               onChange={(e) => patch({ englishLevel: (e.target.value || undefined) as UserProfile['englishLevel'] })}
             >
-              <option value="">Not specified</option>
+              <option value="">{profile.notSpecified}</option>
               <option value="A2">A2</option>
               <option value="B1">B1</option>
               <option value="B2">B2</option>
@@ -154,7 +155,7 @@ export function ProfileScreen({
           </FieldWrap>
         </div>
 
-        <FieldWrap label="Standardised exam scores (optional, but they change eligibility)">
+        <FieldWrap label={profile.examScoresLabel}>
           <div className="grid g2">
             {EXAMS.map((ex) => (
               <div key={ex} className="row" style={{ gap: 8 }}>
@@ -163,7 +164,7 @@ export function ProfileScreen({
                   className="input"
                   type="number"
                   step="0.5"
-                  placeholder="score"
+                  placeholder={profile.scorePlaceholder}
                   value={form.examScores[ex] ?? ''}
                   onChange={(e) => setExam(ex, e.target.value)}
                 />
@@ -175,9 +176,9 @@ export function ProfileScreen({
 
       <Card>
         <div className="section-title" style={{ marginTop: 0 }}>
-          Where and how much
+          {profile.whereAndHow}
         </div>
-        <FieldWrap label="Target study destinations" error={err('targetCountries')}>
+        <FieldWrap label={profile.destinationsLabel} error={err('targetCountries')}>
           <div className="chip-row">
             {COUNTRIES.map((c) => (
               <Chip key={c} on={form.targetCountries.includes(c)} onClick={() => toggleCountry(c)}>
@@ -187,7 +188,7 @@ export function ProfileScreen({
           </div>
         </FieldWrap>
 
-        <FieldWrap label="Annual tuition budget (USD)" error={err('budgetUsdPerYear')} helper="Net tuition you can cover per year, before living costs.">
+        <FieldWrap label={profile.budgetLabel} error={err('budgetUsdPerYear')} helper={profile.budgetHelper}>
           <input
             className="input"
             type="number"
@@ -200,30 +201,30 @@ export function ProfileScreen({
         <div className="chip-row" style={{ marginTop: -6, marginBottom: 14 }}>
           {[0, 3000, 6000, 15000, 30000, 45000].map((v) => (
             <Chip key={v} on={form.budgetUsdPerYear === v} onClick={() => patch({ budgetUsdPerYear: v })}>
-              {v === 0 ? 'Grant only' : '$' + v.toLocaleString('en-US')}
+              {v === 0 ? profile.grantOnly : '$' + v.toLocaleString('en-US')}
             </Chip>
           ))}
         </div>
 
         <label className="toggle" style={{ marginBottom: 6 }}>
           <input type="checkbox" checked={form.needsScholarship} onChange={(e) => patch({ needsScholarship: e.target.checked })} />
-          I need a scholarship or a low-cost option
+          {profile.scholarshipToggle}
         </label>
       </Card>
 
       {touched && Object.keys(errors).length > 0 && (
         <div style={{ marginTop: 12 }}>
           <Notice tone="error" icon="error">
-            Please fix {Object.keys(errors).length} field{Object.keys(errors).length > 1 ? 's' : ''} before continuing.
+            {profile.errorMessage} {Object.keys(errors).length} {Object.keys(errors).length > 1 ? profile.errorFields : profile.errorField}
           </Notice>
         </div>
       )}
 
       <div className="btn-row" style={{ marginTop: 18 }}>
         <Button icon="arrow_forward" onClick={submit}>
-          Continue to diagnosis
+          {profile.continueButton}
         </Button>
-        <Badge tone="neutral">Data stays in your browser (localStorage)</Badge>
+        <Badge tone="neutral">{profile.dataStorageInfo}</Badge>
       </div>
     </div>
   )

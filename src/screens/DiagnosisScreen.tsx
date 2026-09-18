@@ -3,6 +3,7 @@ import type { Diagnosis, UserProfile } from '../lib/types'
 import { COUNTRY_LABELS, DIAGNOSIS_QUESTIONS, FIELD_LABELS } from '../data'
 import { Badge, Button, Card, Chip, Icon, Notice, ProgressBar } from '../ui/primitives'
 import { isDiagnosisComplete, runDiagnosis, type AnswerMap } from '../features/diagnosis/diagnosisEngine'
+import { t } from '../lib/i18n'
 
 export function DiagnosisScreen({
   profile,
@@ -39,17 +40,17 @@ export function DiagnosisScreen({
   }
 
   const answered = Object.keys(answers).length
+  const diagnosis_t = t('diagnosis')
 
   return (
     <div className="lane">
       <div className="hero" style={{ paddingTop: 10, paddingBottom: 8 }}>
         <span className="eyebrow">
-          <span className="dot dot-indigo" /> Step 2 · Diagnosis
+          <span className="dot dot-indigo" /> Step 2 · {diagnosis_t.step}
         </span>
-        <h1 style={{ fontSize: 28 }}>A short readiness diagnostic</h1>
+        <h1 style={{ fontSize: 28 }}>{diagnosis_t.title}</h1>
         <p className="lead">
-          Six questions, no wrong answers. They refine your shortlist and shape the academic and activity
-          phases of your roadmap.
+          {diagnosis_t.subtitle}
         </p>
       </div>
 
@@ -64,7 +65,7 @@ export function DiagnosisScreen({
 
       <Card>
         <div className="card-sub" style={{ marginBottom: 6 }}>
-          Question {index + 1} of {DIAGNOSIS_QUESTIONS.length}
+          {diagnosis_t.questionOf} {index + 1} {diagnosis_t.of} {DIAGNOSIS_QUESTIONS.length}
         </div>
         <h3 className="card-title" style={{ fontSize: 18, marginBottom: 4 }}>
           {q.prompt}
@@ -93,16 +94,16 @@ export function DiagnosisScreen({
 
         <div className="btn-row" style={{ marginTop: 16 }}>
           <Button variant="secondary" icon="arrow_back" onClick={() => (index === 0 ? onBack() : setIndex((i) => i - 1))} disabled={index === 0 && false}>
-            Back
+            {diagnosis_t.back}
           </Button>
           {index < DIAGNOSIS_QUESTIONS.length - 1 && (
             <Button variant="ghost" onClick={() => setIndex((i) => i + 1)} disabled={!answers[q.id]}>
-              Next question
+              {diagnosis_t.nextQuestion}
             </Button>
           )}
           <div style={{ flex: 1 }} />
           <Button variant="ghost" onClick={onSkip}>
-            Skip diagnosis
+            {diagnosis_t.skip}
           </Button>
         </div>
       </Card>
@@ -122,14 +123,15 @@ function DiagnosisResult({
   onBack: () => void
 }) {
   const { strengths, gaps, recommendedField, recommendedCountries } = diagnosis.derived
+  const diagnosis_t = t('diagnosis')
   return (
     <div className="lane">
       <div className="hero" style={{ paddingTop: 10, paddingBottom: 8 }}>
         <span className="eyebrow">
-          <span className="dot dot-emerald" /> Diagnosis complete
+          <span className="dot dot-emerald" /> {diagnosis_t.resultComplete}
         </span>
-        <h1 style={{ fontSize: 28 }}>Your admission profile</h1>
-        <p className="lead">Here is what the diagnostic reads from your answers, before any matching happens.</p>
+        <h1 style={{ fontSize: 28 }}>{diagnosis_t.resultTitle}</h1>
+        <p className="lead">{diagnosis_t.resultSubtitle}</p>
       </div>
 
       <div className="grid g2">
@@ -137,16 +139,16 @@ function DiagnosisResult({
           <div className="card-head">
             <div>
               <div className="label" style={{ marginBottom: 4 }}>
-                Strengths
+                {diagnosis_t.strengths}
               </div>
-              <div className="card-title">{strengths.length} signals</div>
+              <div className="card-title">{strengths.length} {diagnosis_t.signals}</div>
             </div>
             <Badge tone="fit-high" dot="dot-emerald">
-              Positive
+              {diagnosis_t.positive}
             </Badge>
           </div>
           {strengths.length === 0 ? (
-            <p className="card-sub">No strong signals yet — that is fine at this stage.</p>
+            <p className="card-sub">{diagnosis_t.noStrengths}</p>
           ) : (
             <ul style={{ margin: 0, paddingLeft: 18 }}>
               {strengths.map((s) => (
@@ -162,16 +164,16 @@ function DiagnosisResult({
           <div className="card-head">
             <div>
               <div className="label" style={{ marginBottom: 4 }}>
-                Gaps to close
+                {diagnosis_t.gaps}
               </div>
-              <div className="card-title">{gaps.length} signals</div>
+              <div className="card-title">{gaps.length} {diagnosis_t.signals}</div>
             </div>
             <Badge tone="fit-medium" dot="dot-ochre">
-              Attention
+              {diagnosis_t.attention}
             </Badge>
           </div>
           {gaps.length === 0 ? (
-            <p className="card-sub">Nothing critical flagged.</p>
+            <p className="card-sub">{diagnosis_t.noGaps}</p>
           ) : (
             <ul style={{ margin: 0, paddingLeft: 18 }}>
               {gaps.map((s) => (
