@@ -6,7 +6,7 @@ import { useApp } from '../state/AppState'
 import { explainRecommendations } from '../lib/explain'
 import { buildSuggestions } from '../features/matching/recommend'
 import { formatUsd } from '../lib/format'
-import { t } from '../lib/i18n'
+import { t, tr } from '../lib/i18n'
 
 export function RecommendationsScreen({ onCompare, onRoadmap }: { onCompare: () => void; onRoadmap: () => void }) {
   const { state, dispatch, programMap, uniMap, recommendations, canGo } = useApp()
@@ -170,11 +170,11 @@ export function RecommendationsScreen({ onCompare, onRoadmap }: { onCompare: () 
           <div className="card-head">
             <div>
               <div className="label" style={{ marginBottom: 4 }}>
-                How to unlock more options
+                {rec_t.unlockTitle}
               </div>
-              <div className="card-title">Deterministic remedies</div>
+              <div className="card-title">{rec_t.deterministicRemedies}</div>
             </div>
-            <Badge tone="neutral">derived from data</Badge>
+            <Badge tone="neutral">{rec_t.derivedFromData}</Badge>
           </div>
           <ul style={{ margin: 0, paddingLeft: 18 }}>
             {suggestions.map((s) => (
@@ -185,7 +185,7 @@ export function RecommendationsScreen({ onCompare, onRoadmap }: { onCompare: () 
           </ul>
           {relaxedNotes.length > 0 && (
             <p className="helper" style={{ marginTop: 10 }}>
-              Other programs in the dataset you have not unlocked yet: {relaxedNotes.join(', ')}.
+              {tr('recommendations.relaxedPrograms', { list: relaxedNotes.join(', ') })}
             </p>
           )}
         </Card>
@@ -218,6 +218,7 @@ function RecommendationCard({
   const uni = uniMap[rec.universityId]
   const [open, setOpen] = useState(false)
   const [showAll, setShowAll] = useState(false)
+  const rec_t = t('recommendations')
 
   if (!program || !uni) return null
   const topFactors = [...rec.breakdown].filter((f) => f.known).sort((a, b) => b.contribution - a.contribution)
@@ -231,29 +232,31 @@ function RecommendationCard({
           <div className="row" style={{ gap: 8, marginBottom: 4 }}>
             <Badge tone={fitTone(rec.fit)}>{fitLabel(rec.fit)}</Badge>
             <Badge tone="neutral">{rec.score}%</Badge>
-            {rec.confidence !== 'high' && <Badge tone="neutral">{rec.confidence} confidence</Badge>}
+            {rec.confidence !== 'high' && (
+              <Badge tone="neutral">{rec.confidence} {rec_t.confidence}</Badge>
+            )}
             {delta && (
               <Badge tone={delta.rank > 0 ? 'fit-high' : delta.rank < 0 ? 'fit-low' : 'neutral'}>
-                {delta.isNew ? 'new entry' : `${delta.rank > 0 ? '▲' : delta.rank < 0 ? '▼' : '='} ${Math.abs(delta.rank)} · ${delta.score > 0 ? '+' : ''}${delta.score} pts`}
+                {delta.isNew ? rec_t.newEntry : `${delta.rank > 0 ? '▲' : delta.rank < 0 ? '▼' : '='} ${Math.abs(delta.rank)} · ${delta.score > 0 ? '+' : ''}${delta.score} pts`}
               </Badge>
             )}
           </div>
           <div className="card-title">{uni.name}</div>
           <div className="card-sub">
-            {program.name} · {uni.city}, {COUNTRY_LABELS[uni.country]} · {program.durationYears} yrs · {formatUsd(program.netTuitionUsdPerYear)}/yr
+            {program.name} · {uni.city}, {COUNTRY_LABELS[uni.country]} · {program.durationYears} {rec_t.yearsShort} · {formatUsd(program.netTuitionUsdPerYear)}{rec_t.perYearShort}
           </div>
         </div>
         <div style={{ textAlign: 'right' }}>
           <div style={{ fontSize: 26, fontWeight: 800, color: 'var(--primary-container)', letterSpacing: '-0.03em' }}>{Math.round(rec.score)}%</div>
-          <div className="helper">fit score</div>
+          <div className="helper">{rec_t.fitScore}</div>
         </div>
       </div>
 
       {exp && (
         <div className="ai-memo" style={{ marginBottom: 12 }}>
           <div className="spread" style={{ marginBottom: 6 }}>
-            <strong style={{ fontSize: 13.5 }}>Why this fits</strong>
-            <Badge tone={exp.origin === 'ai' ? 'ai' : 'neutral'}>{exp.origin === 'ai' ? 'AI' : 'template'}</Badge>
+            <strong style={{ fontSize: 13.5 }}>{rec_t.whyFits}</strong>
+            <Badge tone={exp.origin === 'ai' ? 'ai' : 'neutral'}>{exp.origin === 'ai' ? 'AI' : rec_t.template}</Badge>
           </div>
           <p style={{ fontSize: 13.5 }}>{exp.whyItFits}</p>
           {exp.concerns.length > 0 && (
@@ -273,10 +276,10 @@ function RecommendationCard({
       <div>
         <div className="spread" style={{ marginBottom: 6 }}>
           <span className="label" style={{ margin: 0 }}>
-            Fit breakdown
+            {rec_t.fitBreakdown}
           </span>
           <button className="btn btn-ghost" style={{ padding: '2px 8px', minHeight: 0 }} onClick={() => setShowAll((v) => !v)}>
-            {showAll ? 'Top 3 only' : 'All factors'}
+            {showAll ? rec_t.top3Only : rec_t.allFactors}
           </button>
         </div>
         {factors.map((f) => (
@@ -352,6 +355,7 @@ function SensitivityPanel({
   profile: UserProfile
   dispatch: React.Dispatch<any>
 }) {
+  const rec_t = t('recommendations')
   const countries: CountryCode[] = ['KZ', 'DE', 'IT', 'NL', 'UK', 'US', 'CA']
   const fields: Field[] = ['cs', 'engineering', 'business', 'medicine', 'humanities', 'design']
 
@@ -371,13 +375,13 @@ function SensitivityPanel({
       <div className="spread" style={{ marginBottom: 8 }}>
         <div className="row" style={{ gap: 8 }}>
           <Icon name="tune" size={18} />
-          <strong>Live sensitivity</strong>
+          <strong>{rec_t.sensitivityTitle}</strong>
         </div>
-        <Badge tone="neutral">change a parameter → shortlist moves</Badge>
+        <Badge tone="neutral">{rec_t.sensitivityHint}</Badge>
       </div>
       <div className="grid g2">
         <div>
-          <div className="label">Destinations</div>
+          <div className="label">{rec_t.destinations}</div>
           <div className="chip-row">
             {countries.map((c) => (
               <Chip key={c} on={profile.targetCountries.includes(c)} onClick={() => toggleCountry(c)}>
@@ -387,17 +391,17 @@ function SensitivityPanel({
           </div>
         </div>
         <div>
-          <div className="label">Tuition budget</div>
+          <div className="label">{rec_t.tuitionBudget}</div>
           <div className="chip-row">
             {[0, 3000, 6000, 15000, 30000, 45000].map((v) => (
               <Chip key={v} on={profile.budgetUsdPerYear === v} onClick={() => patch({ budgetUsdPerYear: v })}>
-                {v === 0 ? 'Grant' : '$' + (v / 1000) + 'k'}
+                {v === 0 ? rec_t.grant : '$' + (v / 1000) + 'k'}
               </Chip>
             ))}
           </div>
         </div>
         <div>
-          <div className="label">Discipline</div>
+          <div className="label">{rec_t.discipline}</div>
           <div className="chip-row">
             {fields.map((f) => (
               <Chip key={f} on={profile.field === f} onClick={() => patch({ field: f })}>
@@ -434,23 +438,24 @@ function StickyBar({
   canCompare: boolean
   canRoadmap: boolean
 }) {
+  const rec_t = t('recommendations')
   return (
     <div className="card" style={{ marginTop: 16, position: 'sticky', bottom: 76, zIndex: 20 }}>
       <div className="spread">
         <div>
           <div style={{ fontWeight: 700 }}>
-            {count === 0 ? 'Select programs to compare' : `${count} selected`}
+            {count === 0 ? rec_t.stickySelectPrograms : tr('recommendations.stickySelected', { count })}
           </div>
           <div className="helper">
-            {count >= 2 ? 'Ready to compare side by side.' : 'Pick at least two programs.'}
+            {count >= 2 ? rec_t.readyToCompare : rec_t.pickAtLeastTwo}
           </div>
         </div>
         <div className="btn-row">
           <Button variant="secondary" icon="balance" onClick={onCompare} disabled={!canCompare}>
-            Compare {count >= 2 ? `(${count})` : ''}
+            {rec_t.compare} {count >= 2 ? `(${count})` : ''}
           </Button>
           <Button icon="route" onClick={onRoadmap} disabled={!canRoadmap}>
-            Roadmap
+            {rec_t.roadmap}
           </Button>
         </div>
       </div>

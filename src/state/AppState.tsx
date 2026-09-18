@@ -2,7 +2,7 @@ import React, { createContext, useCallback, useContext, useEffect, useMemo, useR
 import type { Diagnosis, Program, Recommendation, Roadmap, StepStatus, University, UserProfile } from '../lib/types'
 import { KEYS, loadJson, saveJson } from '../lib/storage'
 import type { AnswerMap } from '../features/diagnosis/diagnosisEngine'
-import { PROGRAM_BY_ID, PROGRAMS, ROADMAP_TEMPLATES, UNIVERSITIES, UNIVERSITY_BY_ID } from '../data'
+import { PROGRAM_BY_ID, PROGRAMS, UNIVERSITIES, UNIVERSITY_BY_ID, localizedTemplates } from '../data'
 import { recommend } from '../features/matching/recommend'
 import { buildRoadmap } from '../features/roadmap/roadmapEngine'
 import { computeNextAction, computeProgress, type StatusMap } from '../features/progress/progressStore'
@@ -137,7 +137,7 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
       recommendations,
       programMap: PROGRAM_BY_ID,
       uniMap: UNIVERSITY_BY_ID,
-      templates: ROADMAP_TEMPLATES
+      templates: localizedTemplates()
     })
   }, [state.profile, recommendations])
 

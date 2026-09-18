@@ -1,0 +1,960 @@
+﻿diff --git a/src/lib/i18n.ts b/src/lib/i18n.ts
+index 030af19..e2740cc 100644
+--- a/src/lib/i18n.ts
++++ b/src/lib/i18n.ts
+@@ -10,19 +10,32 @@ const translations = {
+       subtitle: '╨Т╨░╤И ╨┐╨╡╤А╤Б╨╛╨╜╨░╨╗╤М╨╜╤Л╨╣ ╨┐╤Г╤В╤М ╨║ ╨┐╨╛╤Б╤В╤Г╨┐╨╗╨╡╨╜╨╕╤О',
+       description: '╨Ч╨░╨┐╨╛╨╗╨╜╨╕╤В╨╡ ╨┐╤А╨╛╤Д╨╕╨╗╤М, ╨┐╤А╨╛╨╣╨┤╨╕╤В╨╡ ╨┤╨╕╨░╨│╨╜╨╛╤Б╤В╨╕╨║╤Г ╨╕ ╨┐╨╛╨╗╤Г╤З╨╕╤В╨╡ ╨╕╨╜╨┤╨╕╨▓╨╕╨┤╤Г╨░╨╗╤М╨╜╤Л╨╣ ╤Б╨┐╨╕╤Б╨╛╨║ ╤Г╨╜╨╕╨▓╨╡╤А╤Б╨╕╤В╨╡╤В╨╛╨▓ ╤Б ╨┐╨╛╤И╨░╨│╨╛╨▓╨╛╨╣ ╨┤╨╛╤А╨╛╨╢╨╜╨╛╨╣ ╨║╨░╤А╤В╨╛╨╣',
+       start: '╨Э╨░╤З╨░╤В╤М',
++      continue: '╨Я╤А╨╛╨┤╨╛╨╗╨╢╨╕╤В╤М',
+       demo: '╨Я╨╛╨┐╤А╨╛╨▒╨╛╨▓╨░╤В╤М ╨┤╨╡╨╝╨╛',
+       continueAsGuest: '╨Я╤А╨╛╨┤╨╛╨╗╨╢╨╕╤В╤М ╨║╨░╨║ ╨│╨╛╤Б╤В╤М'
+     },
+ 
+     // Navigation
+     nav: {
++      home: '╨У╨╗╨░╨▓╨╜╨░╤П',
+       profile: '╨Я╤А╨╛╤Д╨╕╨╗╤М',
+       diagnosis: '╨Ф╨╕╨░╨│╨╜╨╛╤Б╤В╨╕╨║╨░',
+       recommendations: '╨а╨╡╨║╨╛╨╝╨╡╨╜╨┤╨░╤Ж╨╕╨╕',
+       comparison: '╨б╤А╨░╨▓╨╜╨╡╨╜╨╕╨╡',
+       roadmap: '╨Ф╨╛╤А╨╛╨╢╨╜╨░╤П ╨║╨░╤А╤В╨░',
+       sources: '╨Ш╤Б╤В╨╛╤З╨╜╨╕╨║╨╕',
+-      dataAndSources: '╨Ф╨░╨╜╨╜╤Л╨╡ ╨╕ ╨╕╤Б╤В╨╛╤З╨╜╨╕╨║╨╕ ┬╖ ╨╝╨╡╤В╨╛╨┤╨╛╨╗╨╛╨│╨╕╤П'
++      dataAndSources: '╨Ф╨░╨╜╨╜╤Л╨╡ ╨╕ ╨╕╤Б╤В╨╛╤З╨╜╨╕╨║╨╕ ┬╖ ╨╝╨╡╤В╨╛╨┤╨╛╨╗╨╛╨│╨╕╤П',
++      diagnose: '╨Ф╨╕╨░╨│╨╜.',
++      matches: '╨Ь╨░╤В╤З╨╕'
++    },
++
++    topbar: {
++      homeTitle: '╨У╨╗╨░╨▓╨╜╨░╤П',
++      brandSub: '╨Ь╨░╤А╤И╤А╤Г╤В ╨┐╨╛╤Б╤В╤Г╨┐╨╗╨╡╨╜╨╕╤П',
++      readinessTitle: '╨Я╨╛╨╗╨╜╨╛╤В╨░ ╨┐╤А╨╛╤Д╨╕╨╗╤П ╨╕ ╨┐╤А╨╛╨│╤А╨╡╤Б╤Б ╨┤╨╛╤А╨╛╨╢╨╜╨╛╨╣ ╨║╨░╤А╤В╤Л',
++      readiness: '╨│╨╛╤В╨╛╨▓╨╜╨╛╤Б╤В╤М',
++      aiTitle: 'AI-╨╛╨▒╤К╤П╤Б╨╜╨╡╨╜╨╕╤П ╨╝╨╛╨╢╨╜╨╛ ╨▓╤Л╨║╨╗╤О╤З╨╕╤В╤М тАФ ╨┤╨╡╤В╨╡╤А╨╝╨╕╨╜╨╕╤А╨╛╨▓╨░╨╜╨╜╤Л╨╣ ╤И╨░╨▒╨╗╨╛╨╜ ╨▓╤Б╨╡╨│╨┤╨░ ╤А╨░╨▒╨╛╤В╨░╨╡╤В',
++      aiLabel: '╨Ш╨Ш'
+     },
+ 
+     // Profile Screen
+@@ -79,7 +92,21 @@ const translations = {
+       noStrengths: '╨Э╨╡╤В ╤П╨▓╨╜╤Л╤Е ╤Б╨╕╨╗╤М╨╜╤Л╤Е ╤Б╤В╨╛╤А╨╛╨╜ тАФ ╨╕ ╤Н╤В╨╛ ╨╜╨╛╤А╨╝╨░╨╗╤М╨╜╨╛ ╨╜╨░ ╨┤╨░╨╜╨╜╨╛╨╝ ╤Н╤В╨░╨┐╨╡.',
+       gaps: '╨Я╤А╨╛╨▒╨╡╨╗╤Л ╨┤╨╗╤П ╨╖╨░╨║╤А╤Л╤В╨╕╤П',
+       attention: '╨Т╨╜╨╕╨╝╨░╨╜╨╕╨╡',
+-      noGaps: '╨Э╨╕╤З╨╡╨│╨╛ ╨║╤А╨╕╤В╨╕╤З╨╡╤Б╨║╨╛╨│╨╛ ╨╜╨╡ ╨▓╤Л╤П╨▓╨╗╨╡╨╜╨╛.'
++      noGaps: '╨Э╨╕╤З╨╡╨│╨╛ ╨║╤А╨╕╤В╨╕╤З╨╡╤Б╨║╨╛╨│╨╛ ╨╜╨╡ ╨▓╤Л╤П╨▓╨╗╨╡╨╜╨╛.',
++      pointers: '╨Я╨╛╨┤╤Б╨║╨░╨╖╨║╨╕ ╨┐╨╛ ╨┤╨╕╨░╨│╨╜╨╛╤Б╤В╨╕╨║╨╡',
++      advisoryDiscipline: '╨а╨╡╨║╨╛╨╝╨╡╨╜╨┤╤Г╨╡╨╝╨░╤П ╤Б╨┐╨╡╤Ж╨╕╨░╨╗╤М╨╜╨╛╤Б╤В╤М',
++      advisoryDestinations: '╨а╨╡╨║╨╛╨╝╨╡╨╜╨┤╤Г╨╡╨╝╤Л╨╡ ╤Б╤В╤А╨░╨╜╤Л',
++      profileCompleteness: '╨Я╨╛╨╗╨╜╨╛╤В╨░ ╨┐╤А╨╛╤Д╨╕╨╗╤П',
++      open: '╨Ю╤В╨║╤А╤Л╤В╨╛',
++      profileChoiceStays: '╨Т╨░╤И ╤В╨╡╨║╤Г╤Й╨╕╨╣ ╨▓╤Л╨▒╨╛╤А ╨┐╤А╨╛╤Д╨╕╨╗╤П: {field}.',
++      advisoryHint: '╨н╤В╨╛ ╨▓╨╗╨╕╤П╨╡╤В ╤В╨╛╨╗╤М╨║╨╛ ╨╜╨░ ╨╛╤Ж╨╡╨╜╨║╤Г, ╨░ ╨╜╨╡ ╨╜╨░ ╨╢╨╡╤Б╤В╨║╤Г╤О ╤Д╨╕╨╗╤М╤В╤А╨░╤Ж╨╕╤О.',
++      complete: '╨Ч╨░╨┐╨╛╨╗╨╜╨╡╨╜╨╛',
++      gapsCount: '{count} ╨┐╤А╨╛╨▒╨╡╨╗╨╛╨▓',
++      allKeyFieldsFilled: '╨Т╤Б╨╡ ╨║╨╗╤О╤З╨╡╨▓╤Л╨╡ ╨┐╨╛╨╗╤П ╨╖╨░╨┐╨╛╨╗╨╜╨╡╨╜╤Л',
++      missingPrefix: '╨Э╨╡ ╨╖╨░╨┐╨╛╨╗╨╜╨╡╨╜╨╛:',
++      missingImpact: '╨а╨╡╨║╨╛╨╝╨╡╨╜╨┤╨░╤Ж╨╕╨╕ ╨▒╤Г╨┤╤Г╤В ╨┐╨╛╤Б╤В╤А╨╛╨╡╨╜╤Л, ╨╜╨╛ ╤Г╨▓╨╡╤А╨╡╨╜╨╜╨╛╤Б╤В╤М ╨┐╨╛ ╤Н╤В╨╕╨╝ ╤Д╨░╨║╤В╨╛╤А╨░╨╝ ╤Б╨╜╨╕╨╖╨╕╤В╤Б╤П.',
++      seeRecommendations: '╨Я╨╛╨║╨░╨╖╨░╤В╤М ╤А╨╡╨║╨╛╨╝╨╡╨╜╨┤╨░╤Ж╨╕╨╕',
++      editProfile: '╨Ш╨╖╨╝╨╡╨╜╨╕╤В╤М ╨┐╤А╨╛╤Д╨╕╨╗╤М'
+     },
+ 
+     // Recommendations Screen
+@@ -87,6 +114,9 @@ const translations = {
+       step: '╨а╨╡╨║╨╛╨╝╨╡╨╜╨┤╨░╤Ж╨╕╨╕',
+       title: '╨г╨╜╨╕╨▓╨╡╤А╤Б╨╕╤В╨╡╤В╤Л, ╨┐╨╛╨┤╤Е╨╛╨┤╤П╤Й╨╕╨╡ ╨▓╨░╤И╨╡╨╝╤Г ╨┐╤А╨╛╤Д╨╕╨╗╤О',
+       subtitle: '╨Ъ╨░╨╢╨┤╨╛╨╡ ╤Б╨╛╨▓╨┐╨░╨┤╨╡╨╜╨╕╨╡ ╨▓╤Л╤З╨╕╤Б╨╗╤П╨╡╤В╤Б╤П ╨╜╨░ ╨╛╤Б╨╜╨╛╨▓╨╡ ╨▓╨░╤И╨╕╤Е ╨▓╨╛╤Б╤М╨╝╨╕ ╨▓╤Е╨╛╨┤╨╜╤Л╤Е ╨┐╨░╤А╨░╨╝╨╡╤В╤А╨╛╨▓, ╨╖╨░╤В╨╡╨╝ ╨╛╨▒╤К╤П╤Б╨╜╤П╨╡╤В╤Б╤П ╨┐╨╛ ╤Д╨░╨║╤В╨╛╤А╨░╨╝. ╨Ш╨╖╨╝╨╡╨╜╨╕╤В╨╡ ╨╗╤О╨▒╨╛╨╣ ╨║╤А╨╕╤В╨╡╤А╨╕╨╣ ╨╜╨╕╨╢╨╡, ╨╕ ╤Б╨┐╨╕╤Б╨╛╨║ ╨┐╨╡╤А╨╡╤Б╤З╨╕╤В╨░╨╡╤В╤Б╤П ╨▓ ╤А╨╡╨░╨╗╤М╨╜╨╛╨╝ ╨▓╤А╨╡╨╝╨╡╨╜╨╕.',
++      strongFit: '╨б╨╕╨╗╤М╨╜╨╛╨╡ ╤Б╨╛╨▓╨┐╨░╨┤╨╡╨╜╨╕╨╡',
++      moderateFit: '╨г╨╝╨╡╤А╨╡╨╜╨╜╨╛╨╡ ╤Б╨╛╨▓╨┐╨░╨┤╨╡╨╜╨╕╨╡',
++      stretch: '╨Р╨╝╨▒╨╕╤Ж╨╕╨╛╨╖╨╜╤Л╨╣ ╨▓╨░╤А╨╕╨░╨╜╤В',
+       recommended: '╤А╨╡╨║╨╛╨╝╨╡╨╜╨┤╤Г╨╡╨╝╤Л╤Е',
+       program: '╨┐╤А╨╛╨│╤А╨░╨╝╨╝╨░',
+       programs: '╨┐╤А╨╛╨│╤А╨░╨╝╨╝',
+@@ -97,36 +127,118 @@ const translations = {
+       fewerMatches: '╨Ь╨╡╨╜╨╡╨╡ ╤В╤А╨╡╤Е ╤Б╨╕╨╗╤М╨╜╤Л╤Е ╤Б╨╛╨▓╨┐╨░╨┤╨╡╨╜╨╕╨╣. ╨Р╨╗╤М╤В╨╡╤А╨╜╨░╤В╨╕╨▓╨╜╤Л╨╡ ╨▓╨░╤А╨╕╨░╨╜╤В╤Л ╨╕ ╨║╨╛╨╜╨║╤А╨╡╤В╨╜╤Л╨╡ ╤А╨╡╤И╨╡╨╜╨╕╤П ╨┐╨╛╨║╨░╨╖╨░╨╜╤Л ╨╜╨╕╨╢╨╡.',
+       noMatch: '╨Э╨╡╤В ╨┐╨╛╨┤╤Е╨╛╨┤╤П╤Й╨╕╤Е ╨▓╨░╤А╨╕╨░╨╜╤В╨╛╨▓',
+       noMatchText: '╨Т╨░╤И╨╕ ╤В╨╡╨║╤Г╤Й╨╕╨╡ ╨║╤А╨╕╤В╨╡╤А╨╕╨╕ ╤Б╨╗╨╕╤И╨║╨╛╨╝ ╨╛╨│╤А╨░╨╜╨╕╤З╨╡╨╜╤Л. ╨Я╨╛╨┐╤А╨╛╨▒╤Г╨╣╤В╨╡ ╨╛╨┤╨╜╨╛ ╨╕╨╖ ╨┐╤А╨╡╨┤╨╗╨╛╨╢╨╡╨╜╨╕╨╣ ╨╜╨╕╨╢╨╡ ╨╕ ╨╖╨░╨┐╤Г╤Б╤В╨╕╤В╨╡ ╤Б╨╜╨╛╨▓╨░.',
+-      resetProfile: '╨б╨▒╤А╨╛╤Б╨╕╤В╤М ╨┐╤А╨╛╤Д╨╕╨╗╤М'
++      resetProfile: '╨б╨▒╤А╨╛╤Б╨╕╤В╤М ╨┐╤А╨╛╤Д╨╕╨╗╤М',
++      confidence: '╤Г╨▓╨╡╤А╨╡╨╜╨╜╨╛╤Б╤В╤М',
++      newEntry: '╨╜╨╛╨▓╨░╤П ╨┐╨╛╨╖╨╕╤Ж╨╕╤П',
++      yearsShort: '╨│.',
++      perYearShort: '/╨│╨╛╨┤',
++      fitScore: '╨╛╤Ж╨╡╨╜╨║╨░ ╤Б╨╛╨╛╤В╨▓╨╡╤В╤Б╤В╨▓╨╕╤П',
++      whyFits: '╨Я╨╛╤З╨╡╨╝╤Г ╨┐╨╛╨┤╤Е╨╛╨┤╨╕╤В',
++      template: '╤И╨░╨▒╨╗╨╛╨╜',
++      fitBreakdown: '╨а╨░╨╖╨▒╨╛╤А ╨╛╤Ж╨╡╨╜╨║╨╕',
++      top3Only: '╨в╨╛╨╗╤М╨║╨╛ ╤В╨╛╨┐-3',
++      allFactors: '╨Т╤Б╨╡ ╤Д╨░╨║╤В╨╛╤А╤Л',
++      inComparison: '╨Т ╤Б╤А╨░╨▓╨╜╨╡╨╜╨╕╨╕',
++      addToCompare: '╨Ф╨╛╨▒╨░╨▓╨╕╤В╤М ╨║ ╤Б╤А╨░╨▓╨╜╨╡╨╜╨╕╤О',
++      hideDetails: '╨б╨║╤А╤Л╤В╤М ╨┤╨╡╤В╨░╨╗╨╕',
++      details: '╨Ф╨╡╤В╨░╨╗╨╕',
++      requirements: '╨в╤А╨╡╨▒╨╛╨▓╨░╨╜╨╕╤П',
++      noExamRequirement: '╨в╤А╨╡╨▒╨╛╨▓╨░╨╜╨╕╤П ╨┐╨╛ ╤Н╨║╨╖╨░╨╝╨╡╨╜╨░╨╝ ╨╜╨╡ ╤Г╨║╨░╨╖╨░╨╜╤Л',
++      minGpaLanguage: '╨Ь╨╕╨╜. GPA: {gpa} ┬╖ ╨п╨╖╤Л╨║: {lang}',
++      teachingLanguage: '╨п╨╖╤Л╨║ ╨╛╨▒╤Г╤З╨╡╨╜╨╕╤П',
++      livingCostApprox: '╨Я╤А╨╛╨╢╨╕╨▓╨░╨╜╨╕╨╡ тЙИ {cost}/╨│╨╛╨┤',
++      deadlines: '╨Ф╨╡╨┤╨╗╨░╨╣╨╜╤Л',
++      noDeadlineRecorded: '╨Ф╨╡╨┤╨╗╨░╨╣╨╜ ╨╜╨╡ ╤Г╨║╨░╨╖╨░╨╜ тАФ ╤Г╤В╨╛╤З╨╜╨╕╤В╨╡ ╨╜╨░ ╨╛╤Д╨╕╤Ж╨╕╨░╨╗╤М╨╜╨╛╨╣ ╤Б╤В╤А╨░╨╜╨╕╤Ж╨╡.',
++      universitySite: '╨б╨░╨╣╤В ╤Г╨╜╨╕╨▓╨╡╤А╤Б╨╕╤В╨╡╤В╨░',
++      sourcesCount: '{count} ╨╕╤Б╤В╨╛╤З╨╜╨╕╨║(╨░)',
++      sensitivityTitle: '╨Ц╨╕╨▓╨░╤П ╤З╤Г╨▓╤Б╤В╨▓╨╕╤В╨╡╨╗╤М╨╜╨╛╤Б╤В╤М',
++      sensitivityHint: '╨╕╨╖╨╝╨╡╨╜╨╕╤В╨╡ ╨┐╨░╤А╨░╨╝╨╡╤В╤А тЖТ ╤Б╨┐╨╕╤Б╨╛╨║ ╨╕╨╖╨╝╨╡╨╜╨╕╤В╤Б╤П',
++      destinations: '╨б╤В╤А╨░╨╜╤Л',
++      tuitionBudget: '╨С╤О╨┤╨╢╨╡╤В ╨╜╨░ ╨╛╨▒╤Г╤З╨╡╨╜╨╕╨╡',
++      discipline: '╨б╨┐╨╡╤Ж╨╕╨░╨╗╤М╨╜╨╛╤Б╤В╤М',
++      grant: '╨У╤А╨░╨╜╤В',
++      unlockTitle: '╨Ъ╨░╨║ ╨╛╤В╨║╤А╤Л╤В╤М ╨▒╨╛╨╗╤М╤И╨╡ ╨▓╨░╤А╨╕╨░╨╜╤В╨╛╨▓',
++      deterministicRemedies: '╨Ф╨╡╤В╨╡╤А╨╝╨╕╨╜╨╕╤А╨╛╨▓╨░╨╜╨╜╤Л╨╡ ╨┤╨╡╨╣╤Б╤В╨▓╨╕╤П',
++      derivedFromData: '╨┐╨╛╨╗╤Г╤З╨╡╨╜╨╛ ╨╕╨╖ ╨┤╨░╨╜╨╜╤Л╤Е',
++      relaxedPrograms: '╨Ф╤А╤Г╨│╨╕╨╡ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╤Л ╨╕╨╖ ╨┤╨░╤В╨░╤Б╨╡╤В╨░, ╨┐╨╛╨║╨░ ╨╜╨╡ ╨╛╤В╨║╤А╤Л╤В╤Л╨╡: {list}.',
++      stickySelectPrograms: '╨Т╤Л╨▒╨╡╤А╨╕╤В╨╡ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╤Л ╨┤╨╗╤П ╤Б╤А╨░╨▓╨╜╨╡╨╜╨╕╤П',
++      stickySelected: '╨Т╤Л╨▒╤А╨░╨╜╨╛: {count}',
++      readyToCompare: '╨У╨╛╤В╨╛╨▓╨╛ ╨║ ╤Б╤А╨░╨▓╨╜╨╡╨╜╨╕╤О.',
++      pickAtLeastTwo: '╨Э╤Г╨╢╨╜╨╛ ╨▓╤Л╨▒╤А╨░╤В╤М ╨╝╨╕╨╜╨╕╨╝╤Г╨╝ ╨┤╨▓╨╡ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╤Л.',
++      compare: '╨б╤А╨░╨▓╨╜╨╕╤В╤М',
++      roadmap: '╨Ф╨╛╤А╨╛╨╢╨╜╨░╤П ╨║╨░╤А╤В╨░',
++      recommendationNotesRemoved: '{count} ╨┐╤А╨╛╨│╤А╨░╨╝╨╝ ╨╕╤Б╨║╨╗╤О╤З╨╡╨╜╨╛: ╤Б╤В╨╛╨╕╨╝╨╛╤Б╤В╤М ╤Б╨╕╨╗╤М╨╜╨╛ ╨▓╤Л╤И╨╡ ╨▒╤О╨┤╨╢╨╡╤В╨░ ╨╕ ╨╜╨╡╤В ╤Б╤В╨╕╨┐╨╡╨╜╨┤╨╕╨╕.',
++      recommendationNotesFound: '╨Э╨░╨╣╨┤╨╡╨╜╨╛ ╤В╨╛╨╗╤М╨║╨╛ {count} ╤Б╨╕╨╗╤М╨╜╤Л╤Е ╤Б╨╛╨▓╨┐╨░╨┤╨╡╨╜╨╕╨╣ тАФ ╨╜╨╕╨╢╨╡ ╨┐╨╛╨║╨░╨╖╨░╨╜╤Л ╤Б╨╝╤П╨│╤З╨╡╨╜╨╜╤Л╨╡ ╨▓╨░╤А╨╕╨░╨╜╤В╤Л.',
++      suggestionBudget: '╨г╨▓╨╡╨╗╨╕╤З╨╡╨╜╨╕╨╡ ╨▒╤О╨┤╨╢╨╡╤В╨░ ╨┐╤А╨╕╨╝╨╡╤А╨╜╨╛ ╨╜╨░ {gap}/╨│╨╛╨┤ ╨╛╤В╨║╤А╨╛╨╡╤В ╤Б╨░╨╝╤Л╨╣ ╨┤╨╛╤Б╤В╤Г╨┐╨╜╤Л╨╣ ╨╖╨░╨▒╨╗╨╛╨║╨╕╤А╨╛╨▓╨░╨╜╨╜╤Л╨╣ ╨▓╨░╤А╨╕╨░╨╜╤В.',
++      suggestionCountry: '╨Ф╨╛╨▒╨░╨▓╤М╤В╨╡ ╤Б╤В╤А╨░╨╜╤Г {country} тАФ ╨┐╨╛╤П╨▓╤П╤В╤Б╤П ╤Б╨╕╨╗╤М╨╜╤Л╨╡ ╨▓╨░╤А╨╕╨░╨╜╤В╤Л (╨╗╤Г╤З╤И╨╕╨╣ ╨╗╨╛╨║╨░╨╗╤М╨╜╤Л╨╣ ╨▒╨░╨╗╨╗ {score}%).',
++      suggestionExam: '╨г╨╗╤Г╤З╤И╨╡╨╜╨╕╨╡ ╤Н╨║╨╖╨░╨╝╨╡╨╜╨╜╤Л╤Е ╨▒╨░╨╗╨╗╨╛╨▓ ╨┐╨╛╨┤╨╜╨╕╨╝╨╡╤В ╨╜╨╡╤Б╨║╨╛╨╗╤М╨║╨╛ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝ тАФ ╨╜╨░╤З╨╜╨╕╤В╨╡ ╤Б {program}.'
+     },
+ 
+     // Comparison Screen
+     comparison: {
+-      title: '╨б╤А╨░╨▓╨╜╨╡╨╜╨╕╨╡',
++      step: '╨б╤А╨░╨▓╨╜╨╡╨╜╨╕╨╡',
++      title: '╨б╤А╨░╨▓╨╜╨╕╤В╨╡ ╨▓╨░╤А╨╕╨░╨╜╤В╤Л',
++      subtitle: '╨б╤А╨░╨▓╨╜╨╡╨╜╨╕╨╡ ╨┐╨╛ ╨║╤А╨╕╤В╨╡╤А╨╕╤П╨╝, ╨║╨╛╤В╨╛╤А╤Л╨╡ ╤А╨╡╨░╨╗╤М╨╜╨╛ ╨▓╨╗╨╕╤П╤О╤В ╨╜╨░ ╤А╨╡╤И╨╡╨╜╨╕╨╡: ╤Б╤В╨╛╨╕╨╝╨╛╤Б╤В╤М, ╤В╤А╨╡╨▒╨╛╨▓╨░╨╜╨╕╤П, ╤П╨╖╤Л╨║ ╨╕ ╨┤╨╡╨┤╨╗╨░╨╣╨╜╤Л.',
++      needTwoTitle: '╨Т╤Л╨▒╨╡╤А╨╕╤В╨╡ ╨╝╨╕╨╜╨╕╨╝╤Г╨╝ ╨┤╨▓╨╡ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╤Л',
++      needTwoText: '╨Т╨╡╤А╨╜╨╕╤В╨╡╤Б╤М ╨║ ╤А╨╡╨║╨╛╨╝╨╡╨╜╨┤╨░╤Ж╨╕╤П╨╝ ╨╕ ╨╛╤В╨╝╨╡╤В╤М╤В╨╡ 2тАУ3 ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╤Л ╨┤╨╗╤П ╤Б╤А╨░╨▓╨╜╨╡╨╜╨╕╤П.',
++      backToRecommendations: '╨Э╨░╨╖╨░╨┤ ╨║ ╤А╨╡╨║╨╛╨╝╨╡╨╜╨┤╨░╤Ж╨╕╤П╨╝',
++      criterion: '╨Ъ╤А╨╕╤В╨╡╤А╨╕╨╣',
++      remove: '╨г╨▒╤А╨░╤В╤М',
+       university: '╨г╨╜╨╕╨▓╨╡╤А╤Б╨╕╤В╨╡╤В',
+       program: '╨Я╤А╨╛╨│╤А╨░╨╝╨╝╨░',
+-      tuition: '╨б╤В╨╛╨╕╨╝╨╛╤Б╤В╤М ╨▓ ╨│╨╛╨┤',
+-      requirements: '╨в╤А╨╡╨▒╨╛╨▓╨░╨╜╨╕╤П',
+-      deadline: '╨Ф╨╡╨┤╨╗╨░╨╣╨╜',
+-      budget: '╨С╤О╨┤╨╢╨╡╤В ╨┐╨╛╨┤╤Е╨╛╨┤╨╕╤В',
+-      scholarship: '╨б╤В╨╕╨┐╨╡╨╜╨┤╨╕╤П ╨┤╨╛╤Б╤В╤Г╨┐╨╜╨░',
+-      language: '╨п╨╖╤Л╨║ ╨╛╨▒╤Г╤З╨╡╨╜╨╕╤П',
+-      back: '╨Э╨░╨╖╨░╨┤',
+-      toRoadmap: '╨Ъ ╨┤╨╛╤А╨╛╨╢╨╜╨╛╨╣ ╨║╨░╤А╤В╨╡'
++      fitScore: '╨Ю╤Ж╨╡╨╜╨║╨░ ╤Б╨╛╨╛╤В╨▓╨╡╤В╤Б╤В╨▓╨╕╤П',
++      netTuition: '╨Ю╨▒╤Г╤З╨╡╨╜╨╕╨╡ / ╨│╨╛╨┤',
++      livingCost: '╨Я╤А╨╛╨╢╨╕╨▓╨░╨╜╨╕╨╡ / ╨│╨╛╨┤',
++      totalCost: '╨Ш╤В╨╛╨│╨╛ / ╨│╨╛╨┤',
++      examRequirements: '╨н╨║╨╖╨░╨╝╨╡╨╜╤Л',
++      noneListed: '╨Э╨╡ ╤Г╨║╨░╨╖╨░╨╜╨╛',
++      minGpa: '╨Ь╨╕╨╜. GPA',
++      teachingLanguage: '╨п╨╖╤Л╨║ ╨╛╨▒╤Г╤З╨╡╨╜╨╕╤П',
++      duration: '╨Ф╨╗╨╕╤В╨╡╨╗╤М╨╜╨╛╤Б╤В╤М',
++      years: '╨╗╨╡╤В',
++      deadlines: '╨Ф╨╡╨┤╨╗╨░╨╣╨╜╤Л',
++      demo: '╨┤╨╡╨╝╨╛',
++      notRecorded: '╨Э╨╡╤В ╨┤╨░╨╜╨╜╤Л╤Е',
++      mainConstraint: '╨Ъ╨╗╤О╤З╨╡╨▓╨╛╨╡ ╨╛╨│╤А╨░╨╜╨╕╤З╨╡╨╜╨╕╨╡',
++      noneFlagged: '╨С╨╡╨╖ ╨║╤А╨╕╤В╨╕╤З╨╜╤Л╤Е ╨╛╨│╤А╨░╨╜╨╕╤З╨╡╨╜╨╕╨╣',
++      buildRoadmap: '╨Я╨╛╤Б╤В╤А╨╛╨╕╤В╤М ╨┤╨╛╤А╨╛╨╢╨╜╤Г╤О ╨║╨░╤А╤В╤Г',
++      addOrRemove: '╨Ф╨╛╨▒╨░╨▓╨╕╤В╤М ╨╕╨╗╨╕ ╤Г╨▒╤А╨░╤В╤М ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╤Л'
+     },
+ 
+     // Roadmap Screen
+     roadmap: {
+-      title: '╨Ф╨╛╤А╨╛╨╢╨╜╨░╤П ╨║╨░╤А╤В╨░ ╨┐╨╛╤Б╤В╤Г╨┐╨╗╨╡╨╜╨╕╤П',
++      step: '╨Ф╨╛╤А╨╛╨╢╨╜╨░╤П ╨║╨░╤А╤В╨░',
++      title: '╨Т╨░╤И╨░ ╨┤╨╛╤А╨╛╨╢╨╜╨░╤П ╨║╨░╤А╤В╨░ ╨┐╨╛╤Б╤В╤Г╨┐╨╗╨╡╨╜╨╕╤П',
++      subtitle: '╨Я╤П╤В╤М ╤Д╨░╨╖, ╤Б╨╛╨▒╤А╨░╨╜╨╜╤Л╤Е ╨╕╨╖ ╨▓╨░╤И╨╡╨│╨╛ ╤И╨╛╤А╤В╨╗╨╕╤Б╤В╨░ ╨╕ ╨┐╤А╨╛╨▒╨╡╨╗╨╛╨▓ ╨┤╨╕╨░╨│╨╜╨╛╤Б╤В╨╕╨║╨╕. ╨Ю╤В╨╝╨╡╤В╤М╤В╨╡ ╤И╨░╨│ тАФ ╨╕ ╤Б╨╗╨╡╨┤╤Г╤О╤Й╨╡╨╡ ╨┤╨╡╨╣╤Б╤В╨▓╨╕╨╡ ╨╛╨▒╨╜╨╛╨▓╨╕╤В╤Б╤П ╤Б╤А╨░╨╖╤Г.',
++      noRoadmapTitle: '╨Ф╨╛╤А╨╛╨╢╨╜╨░╤П ╨║╨░╤А╤В╨░ ╨╡╤Й╨╡ ╨╜╨╡ ╨┐╨╛╤Б╤В╤А╨╛╨╡╨╜╨░',
++      noRoadmapText: '╨б╨╜╨░╤З╨░╨╗╨░ ╨┐╨╛╨╗╤Г╤З╨╕╤В╨╡ ╤А╨╡╨║╨╛╨╝╨╡╨╜╨┤╨░╤Ж╨╕╨╕, ╨╖╨░╤В╨╡╨╝ Pathly ╤Б╨╛╨▒╨╡╤А╨╡╤В ╨┐╨╛╤Н╤В╨░╨┐╨╜╤Л╨╣ ╨┐╨╗╨░╨╜.',
++      getRecommendations: '╨Я╨╛╨╗╤Г╤З╨╕╤В╤М ╤А╨╡╨║╨╛╨╝╨╡╨╜╨┤╨░╤Ж╨╕╨╕',
+       nextAction: '╨б╨╗╨╡╨┤╤Г╤О╤Й╨╡╨╡ ╨┤╨╡╨╣╤Б╤В╨▓╨╕╨╡',
++      priority: '╨┐╤А╨╕╨╛╤А╨╕╤В╨╡╤В',
++      due: '╤Б╤А╨╛╨║',
++      demoDate: '╨┤╨╡╨╝╨╛-╨┤╨░╤В╨░',
+       progress: '╨Я╤А╨╛╨│╤А╨╡╤Б╤Б',
++      roadmapComplete: '╨Ф╨╛╤А╨╛╨╢╨╜╨░╤П ╨║╨░╤А╤В╨░ ╨╖╨░╨▓╨╡╤А╤И╨╡╨╜╨░',
++      stepsDone: '╨и╨░╨│╨╛╨▓ ╨▓╤Л╨┐╨╛╨╗╨╜╨╡╨╜╨╛',
++      programsInPlan: '╨Я╤А╨╛╨│╤А╨░╨╝╨╝ ╨▓ ╨┐╨╗╨░╨╜╨╡',
++      deadlineSteps: '╨и╨░╨│╨╛╨▓ ╤Б ╨┤╨╡╨┤╨╗╨░╨╣╨╜╨╛╨╝',
+       readiness: '╨У╨╛╤В╨╛╨▓╨╜╨╛╤Б╤В╤М',
+       completed: '╨Ч╨░╨▓╨╡╤А╤И╨╡╨╜╨╛',
+       inProgress: '╨Т ╨┐╤А╨╛╤Ж╨╡╤Б╤Б╨╡',
+       todo: '╨Ъ ╨▓╤Л╨┐╨╛╨╗╨╜╨╡╨╜╨╕╤О',
+       markAsDone: '╨Ю╤В╨╝╨╡╤В╨╕╤В╤М ╨║╨░╨║ ╨▓╤Л╨┐╨╛╨╗╨╜╨╡╨╜╨╛',
++      admissionPhases: '╨д╨░╨╖╤Л ╤В╤А╨░╨╡╨║╤В╨╛╤А╨╕╨╕ ╨┐╨╛╤Б╤В╤Г╨┐╨╗╨╡╨╜╨╕╤П',
++      cycleHint: '╨╜╨░╨╢╨╝╨╕╤В╨╡ ╨╜╨░ ╤Г╨╖╨╡╨╗, ╤З╤В╨╛╨▒╤Л ╤Б╨╝╨╡╨╜╨╕╤В╤М ╤Б╤В╨░╤В╤Г╤Б',
++      cycleTitle: '╨б╨╝╨╡╨╜╨╕╤В╤М ╤Б╤В╨░╤В╤Г╤Б: ╨║ ╨▓╤Л╨┐╨╛╨╗╨╜╨╡╨╜╨╕╤О тЖТ ╨▓ ╨┐╤А╨╛╤Ж╨╡╤Б╤Б╨╡ тЖТ ╨╖╨░╨▓╨╡╤А╤И╨╡╨╜╨╛',
++      source: '╨╕╤Б╤В╨╛╤З╨╜╨╕╨║',
++      warningDemo: '╨Ф╨░╤В╤Л ╤Б ╨┐╨╛╨╝╨╡╤В╨║╨╛╨╣ demo data ╤П╨▓╨╗╤П╤О╤В╤Б╤П ╨┤╨╡╨╝╨╛╨╜╤Б╤В╤А╨░╤Ж╨╕╨╛╨╜╨╜╤Л╨╝╨╕ ╨╕ ╨┤╨╛╨╗╨╢╨╜╤Л ╨▒╤Л╤В╤М ╨┐╤А╨╛╨▓╨╡╤А╨╡╨╜╤Л ╨╜╨░ ╨╛╤Д╨╕╤Ж╨╕╨░╨╗╤М╨╜╤Л╤Е ╤Б╤В╤А╨░╨╜╨╕╤Ж╨░╤Е ╨▓╤Г╨╖╨╛╨▓ ╨┐╨╡╤А╨╡╨┤ ╨┐╨╛╨┤╨░╤З╨╡╨╣.',
++      backToComparison: '╨Э╨░╨╖╨░╨┤ ╨║ ╤Б╤А╨░╨▓╨╜╨╡╨╜╨╕╤О',
++      printPdf: '╨Я╨╡╤З╨░╤В╤М / ╤Б╨╛╤Е╤А╨░╨╜╨╕╤В╤М ╨▓ PDF',
++      adjustRecommendations: '╨Ш╨╖╨╝╨╡╨╜╨╕╤В╤М ╤А╨╡╨║╨╛╨╝╨╡╨╜╨┤╨░╤Ж╨╕╨╕',
++      done: '╨╖╨░╨▓╨╡╤А╤И╨╡╨╜╨╛',
++      demoData: '╨┤╨╡╨╝╨╛-╨┤╨░╨╜╨╜╤Л╨╡',
+       phases: {
+-        exams: '╨н╨║╨╖╨░╨╝╨╡╨╜╤Л',
++        exams: '╨н╨║╨╖╨░╨╝╨╡╨╜╤Л ╨╕ ╤В╨╡╤Б╤В╤Л',
+         documents: '╨Ф╨╛╨║╤Г╨╝╨╡╨╜╤В╤Л',
+         deadlines: '╨Ф╨╡╨┤╨╗╨░╨╣╨╜╤Л',
+         academic: '╨г╤З╨╡╨▒╨╜╤Л╨╡ ╨┤╨╛╤Б╤В╨╕╨╢╨╡╨╜╨╕╤П',
+@@ -139,8 +251,23 @@ const translations = {
+ 
+     // Sources Screen
+     sources: {
++      step: '╨Я╤А╨╛╨╖╤А╨░╤З╨╜╨╛╤Б╤В╤М',
+       title: '╨Ш╤Б╤В╨╛╤З╨╜╨╕╨║╨╕ ╨┤╨░╨╜╨╜╤Л╤Е',
+       description: '╨Т╤Б╨╡ ╨┤╨░╨╜╨╜╤Л╨╡ ╨╛ ╨▓╤Г╨╖╨░╤Е ╨╕ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╨░╤Е ╨▓╨╖╤П╤В╤Л ╨╕╨╖ ╨╛╤Д╨╕╤Ж╨╕╨░╨╗╤М╨╜╤Л╤Е ╨╕╤Б╤В╨╛╤З╨╜╨╕╨║╨╛╨▓. ╨Ф╨╡╨╝╨╛╨╜╤Б╤В╤А╨░╤Ж╨╕╨╛╨╜╨╜╤Л╨╡ ╨┤╨░╨╜╨╜╤Л╨╡ ╨┐╨╛╨╝╨╡╤З╨╡╨╜╤Л ╤Б╨╕╨╜╨╕╨╝ ╨▒╨╡╨╣╨┤╨╢╨╡╨╝.',
++      universitiesInDataset: '╨г╨╜╨╕╨▓╨╡╤А╤Б╨╕╤В╨╡╤В╨╛╨▓ ╨▓ ╨┤╨░╤В╨░╤Б╨╡╤В╨╡',
++      programsInDataset: '╨Я╤А╨╛╨│╤А╨░╨╝╨╝',
++      officialLinks: '╨Ю╤Д╨╕╤Ж╨╕╨░╨╗╤М╨╜╤Л╤Е ╤Б╤Б╤Л╨╗╨╛╨║',
++      demoEntries: '╨Ф╨╡╨╝╨╛╨╜╤Б╤В╤А╨░╤Ж╨╕╨╛╨╜╨╜╤Л╤Е ╨╖╨░╨┐╨╕╤Б╨╡╨╣',
++      valuesDemoNotice: '╨з╨╕╤Б╨╗╨╛╨▓╤Л╨╡ ╨╖╨╜╨░╤З╨╡╨╜╨╕╤П ╨▓ MVP (╤Б╤В╨╛╨╕╨╝╨╛╤Б╤В╤М, ╨┐╨╛╤А╨╛╨│╨╕ ╤Н╨║╨╖╨░╨╝╨╡╨╜╨╛╨▓, ╨┤╨╡╨┤╨╗╨░╨╣╨╜╤Л) ╨┤╨╡╨╝╨╛╨╜╤Б╤В╤А╨░╤Ж╨╕╨╛╨╜╨╜╤Л╨╡. ╨Я╨╡╤А╨╡╨┤ ╨┐╨╛╨┤╨░╤З╨╡╨╣ ╤Б╨▓╨╡╤А╤П╨╣╤В╨╡ ╨║╨░╨╢╨┤╨╛╨╡ ╨╖╨╜╨░╤З╨╡╨╜╨╕╨╡ ╨┐╨╛ ╨╛╤Д╨╕╤Ж╨╕╨░╨╗╤М╨╜╤Л╨╝ ╤А╨░╨╖╨┤╨╡╨╗╨░╨╝ admissions.',
++      officialSourcesTitle: '╨Ю╤Д╨╕╤Ж╨╕╨░╨╗╤М╨╜╤Л╨╡ ╨╕╤Б╤В╨╛╤З╨╜╨╕╨║╨╕',
++      verifiedLinks: '╨┐╤А╨╛╨▓╨╡╤А╨╡╨╜╨╜╤Л╨╡ ╤Б╤Б╤Л╨╗╨║╨╕',
++      notAvailable: '╨╜/╨┤',
++      demoEntriesTitle: '╨Ф╨╡╨╝╨╛╨╜╤Б╤В╤А╨░╤Ж╨╕╨╛╨╜╨╜╤Л╨╡ ╨╖╨░╨┐╨╕╤Б╨╕',
++      methodology: '╨Ь╨╡╤В╨╛╨┤╨╛╨╗╨╛╨│╨╕╤П',
++      methodology1: '╨Ъ╨░╨╢╨┤╨░╤П ╤А╨╡╨║╨╛╨╝╨╡╨╜╨┤╨░╤Ж╨╕╤П ╤Б╤В╤А╨╛╨╕╤В╤Б╤П ╨┤╨╡╤В╨╡╤А╨╝╨╕╨╜╨╕╤А╨╛╨▓╨░╨╜╨╜╨╛╨╣ 7-╤Д╨░╨║╤В╨╛╤А╨╜╨╛╨╣ ╨╝╨╛╨┤╨╡╨╗╤М╤О, ╨░ ╨╜╨╡ ╤П╨╖╤Л╨║╨╛╨▓╨╛╨╣ ╨╝╨╛╨┤╨╡╨╗╤М╤О.',
++      methodology2: '╨Ь╨╛╨┤╨╡╨╗╤М ╤В╨╛╨╗╤М╨║╨╛ ╨┐╨╡╤А╨╡╤Д╤А╨░╨╖╨╕╤А╤Г╨╡╤В ╤Г╨╢╨╡ ╨▓╤Л╤З╨╕╤Б╨╗╨╡╨╜╨╜╤Л╨╡ ╤Д╨░╨║╤В╤Л ╨╕ ╨▓╤Б╨╡╨│╨┤╨░ ╨╕╨╝╨╡╨╡╤В ╤И╨░╨▒╨╗╨╛╨╜╨╜╤Л╨╣ fallback.',
++      methodology3: '╨Ц╨╡╤Б╤В╨║╨╕╨╡ ╤Д╨╕╨╗╤М╤В╤А╤Л ╤Г╨▒╨╕╤А╨░╤О╤В ╤В╨╛╨╗╤М╨║╨╛ ╤П╨▓╨╜╨╛ ╨╜╨╡╨▓╨╛╨╖╨╝╨╛╨╢╨╜╤Л╨╡ ╨▓╨░╤А╨╕╨░╨╜╤В╤Л; ╤Б╤В╤А╨░╨╜╨░, ╨╜╨░╨┐╤А╨░╨▓╨╗╨╡╨╜╨╕╨╡ ╨╕ ╤Ж╨╡╨╜╨░ ╨╛╤Б╤В╨░╤О╤В╤Б╤П ╨▓╨╖╨▓╨╡╤И╨╡╨╜╨╜╤Л╨╝╨╕ ╤Д╨░╨║╤В╨╛╤А╨░╨╝╨╕.',
++      methodology4: '╨Я╤А╨╕ ╨╜╨╡╤Е╨▓╨░╤В╨║╨╡ ╨┤╨░╨╜╨╜╤Л╤Е ╤Б╨╜╨╕╨╢╨░╨╡╤В╤Б╤П ╨▒╨╡╨╣╨┤╨╢ ╤Г╨▓╨╡╤А╨╡╨╜╨╜╨╛╤Б╤В╨╕, ╨░ ╨╜╨╡ ╨▓╤Л╨┤╤Г╨╝╤Л╨▓╨░╤О╤В╤Б╤П ╨╖╨╜╨░╤З╨╡╨╜╨╕╤П.',
+       official: '╨Ю╤Д╨╕╤Ж╨╕╨░╨╗╤М╨╜╤Л╨╣ ╨╕╤Б╤В╨╛╤З╨╜╨╕╨║',
+       demo: '╨Ф╨╡╨╝╨╛╨╜╤Б╤В╤А╨░╤Ж╨╕╨╛╨╜╨╜╤Л╨╡ ╨┤╨░╨╜╨╜╤Л╨╡',
+       demoNote: '╨н╤В╨╕ ╨╖╨╜╨░╤З╨╡╨╜╨╕╤П ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╤О╤В╤Б╤П ╨▓ ╨┤╨╡╨╝╨╛. ╨Я╤А╨╛╨▓╨╡╤А╤М╤В╨╡ ╨╛╤Д╨╕╤Ж╨╕╨░╨╗╤М╨╜╤Л╨╡ ╤Б╨░╨╣╤В╤Л ╨▓╤Г╨╖╨╛╨▓ ╨┐╨╡╤А╨╡╨┤ ╨┐╨╛╨┤╨░╤З╨╡╨╣ ╨╖╨░╤П╨▓╨╗╨╡╨╜╨╕╤П.',
+@@ -165,7 +292,9 @@ const translations = {
+       allData: '╨Т╤Б╨╡ ╨┤╨░╨╜╨╜╤Л╨╡ ╤Б╨╛╤Е╤А╨░╨╜╨╡╨╜╤Л ╨╗╨╛╨║╨░╨╗╤М╨╜╨╛ ╨▓ ╨▓╨░╤И╨╡╨╝ ╨▒╤А╨░╤Г╨╖╨╡╤А╨╡',
+       noInternet: '╨а╨░╨▒╨╛╤В╨░╨╡╤В ╨▒╨╡╨╖ ╨╕╨╜╤В╨╡╤А╨╜╨╡╤В╨░',
+       aiPowered: '╨Э╨░ ╨╛╤Б╨╜╨╛╨▓╨╡ ╨Ш╨Ш',
+-      template: '╨и╨░╨▒╨╗╨╛╨╜╨╜╤Л╨╣ ╤В╨╡╨║╤Б╤В'
++      template: '╨и╨░╨▒╨╗╨╛╨╜╨╜╤Л╨╣ ╤В╨╡╨║╤Б╤В',
++      noData: '╨╜╨╡╤В ╨┤╨░╨╜╨╜╤Л╤Е',
++      freeGrant: '╨С╨╡╤Б╨┐╨╗╨░╤В╨╜╨╛ / ╨│╤А╨░╨╜╤В'
+     },
+ 
+     // Scoring factors
+@@ -201,6 +330,203 @@ const translations = {
+       medicine: '╨Э╨░╤Г╨║╨╕ ╨╛ ╨╢╨╕╨╖╨╜╨╕ ╨╕ ╨Ь╨╡╨┤╨╕╤Ж╨╕╨╜╨░',
+       humanities: '╨У╤Г╨╝╨░╨╜╨╕╤В╨░╤А╨╜╤Л╨╡ ╨╜╨░╤Г╨║╨╕',
+       design: '╨Ф╨╕╨╖╨░╨╣╨╜'
++    },
++
++    // Landing тАФ ╨┤╨╛╨▒╨╛╤А ╤Е╨░╤А╨┤╨║╨╛╨┤╨╜╤Л╤Е ╤Б╤В╤А╨╛╨║
++    landingExtra: {
++      heroHighlight: 'тАФ ╨┐╨╡╤А╤Б╨╛╨╜╨░╨╗╤М╨╜╤Л╨╣ ╨┐╤Г╤В╤М ╨┐╨╛╤Б╤В╤Г╨┐╨╗╨╡╨╜╨╕╤П',
++      step1Title: '╨Я╤А╨╛╤Д╨╕╨╗╤М',
++      step1Sub: '╨г╤З╨╡╨▒╨░ ╨╕ ╨▒╤О╨┤╨╢╨╡╤В',
++      step2Title: '╨Я╨╛╨┤╨▒╨╛╤А',
++      step2Sub: '╨Ф╨╕╨░╨│╨╜╨╛╤Б╤В╨╕╨║╨░',
++      step3Title: '╨б╤А╨░╨▓╨╜╨╡╨╜╨╕╨╡',
++      step3Sub: '╨б╤В╨╛╨╕╨╝╨╛╤Б╤В╤М ╨╕ ╤В╤А╨╡╨▒╨╛╨▓╨░╨╜╨╕╤П',
++      step4Title: '╨Я╨╗╨░╨╜',
++      step4Sub: '╨Ф╨╛╤А╨╛╨╢╨╜╨░╤П ╨║╨░╤А╤В╨░',
++      panelTitle: '╨Ь╨╛╨╣ ╨┐╤А╨╛╤Д╨╕╨╗╤М ╨┐╨╛╤Б╤В╤Г╨┐╨╗╨╡╨╜╨╕╤П',
++      panelReady: '╨У╨╛╤В╨╛╨▓╨╜╨╛╤Б╤В╤М ╨║ ╨┐╨╛╤Б╤В╤Г╨┐╨╗╨╡╨╜╨╕╤О',
++      panelLevel: '╨г╤А╨╛╨▓╨╡╨╜╤М: ╨┐╤А╨╛╨┤╨▓╨╕╨╜╤Г╤В╤Л╨╣',
++      panelRegion: '╨а╨╡╨│╨╕╨╛╨╜: ╨┐╨╡╤А╨▓╤Л╨╣ ╤Г╤А╨╛╨▓╨╡╨╜╤М',
++      deterministicTitle: '╨Ф╨╡╤В╨╡╤А╨╝╨╕╨╜╨╕╤А╨╛╨▓╨░╨╜╨╜╤Л╨╣ ╤Б╨║╨╛╤А╨╕╨╜╨│',
++      deterministicDesc: '╨Ъ╨░╨╢╨┤╨░╤П ╤А╨╡╨║╨╛╨╝╨╡╨╜╨┤╨░╤Ж╨╕╤П ╨▓╨╛╤Б╨┐╤А╨╛╨╕╨╖╨▓╨╛╨┤╨╕╨╝╨░ ╨╕ ╨┐╤А╨╛╨▓╨╡╤А╤П╨╡╨╝╨░.',
++      featuresTitle: '╨з╤В╨╛ ╨┤╨╡╨╗╨░╨╡╤В Pathly ╨╛╤Б╨╛╨▒╨╡╨╜╨╜╤Л╨╝',
++      feature1Title: '╨Я╤А╨╛╨╖╤А╨░╤З╨╜╤Л╨╡ ╤Д╨░╨║╤В╨╛╤А╤Л ╨╛╤Ж╨╡╨╜╨║╨╕',
++      feature1Desc: '╨Ъ╨░╨╢╨┤╤Л╨╣ ╨▓╨░╤А╨╕╨░╨╜╤В ╨┐╨╛╨║╨░╨╖╤Л╨▓╨░╨╡╤В ╤Б╨▓╨╛╨╕ ╨▓╨╡╤Б╨░: ╨▒╤О╨┤╨╢╨╡╤В, ╤Б╨┐╨╡╤Ж╨╕╨░╨╗╤М╨╜╨╛╤Б╤В╤М, ╤Б╤В╤А╨░╨╜╨░, ╤Г╤Б╨┐╨╡╨▓╨░╨╡╨╝╨╛╤Б╤В╤М, ╤П╨╖╤Л╨║, ╤Б╤А╨╛╨║╨╕ ╨╕ ╤Д╨╕╨╜╨░╨╜╤Б╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡.',
++      feature2Title: '╨С╨╡╨╖ ╨╗╨╕╤И╨╜╨╕╤Е ╨╛╨▒╨╡╤Й╨░╨╜╨╕╨╣',
++      feature2Desc: '╨Э╨╡╤В ╨║╨╗╨╕╨║╨▒╨╡╨╣╤В╨░ ╤Б ╨┐╤А╨╛╤Ж╨╡╨╜╤В╨░╨╝╨╕ ╨┐╤А╨╕╨╜╤П╤В╨╕╤П. ╨в╨╛╨╗╤М╨║╨╛ ╨╛╤Ж╨╡╨╜╨║╨░ ╤Б╨╛╨╛╤В╨▓╨╡╤В╤Б╤В╨▓╨╕╤П, ╨║╨╛╤В╨╛╤А╤Г╤О ╨╝╨╛╨╢╨╜╨╛ ╨╛╨▒╤К╤П╤Б╨╜╨╕╤В╤М ╤Б╤В╤А╨╛╨║╨░ ╨╖╨░ ╤Б╤В╤А╨╛╨║╨╛╨╣.',
++      feature3Title: '╨Я╤А╨╛╨▓╨╡╤А╨╡╨╜╨╜╤Л╨╡ ╨╕╤Б╤В╨╛╤З╨╜╨╕╨║╨╕',
++      feature3Desc: '╨д╨░╨║╤В╤Л ╨╕╨╝╨╡╤О╤В ╤Б╤Б╤Л╨╗╨║╨╕ ╨╜╨░ ╨╕╤Б╤В╨╛╤З╨╜╨╕╨║╨╕; ╨▓╤Б╨╡ ╨╜╨╡╨┐╤А╨╛╨▓╨╡╤А╨╡╨╜╨╜╨╛╨╡ ╨┐╨╛╨╝╨╡╤З╨╡╨╜╨╛ ╨║╨░╨║ ╨┤╨╡╨╝╨╛╨╜╤Б╤В╤А╨░╤Ж╨╕╨╛╨╜╨╜╤Л╨╡ ╨┤╨░╨╜╨╜╤Л╨╡.',
++      audienceLabel: '╨Ф╨╗╤П ╤Б╤В╤Г╨┤╨╡╨╜╤В╨╛╨▓ ╨╕ ╤А╨╛╨┤╨╕╤В╨╡╨╗╨╡╨╣',
++      closingTitle: '╨б╨╛╨╖╨┤╨░╨╜╨╛ ╨┤╨╗╤П ╤И╨║╨╛╨╗╤М╨╜╨╕╨║╨╛╨▓, ╨║╨╛╤В╨╛╤А╤Л╨╡ ╤Ж╨╡╨╜╤П╤В ╤П╤Б╨╜╨╛╤Б╤В╤М ╨╕╨╜╤Д╨╛╤А╨╝╨░╤Ж╨╕╨╕.',
++      closingText: '╨Э╨░╤З╨╜╨╕╤В╨╡ ╤А╨░╨╜╨╛, ╤Б╨╛╤Е╤А╨░╨╜╤П╨╣╤В╨╡ ╨╖╨┤╤А╨░╨▓╨╛╨╝╤Л╤Б╨╗╨╕╨╡ ╨╕ ╨╛╤А╨│╨░╨╜╨╕╨╖╤Г╨╣╤В╨╡ ╨▓╤Б╨╡ ╤В╤А╨╡╨▒╨╛╨▓╨░╨╜╨╕╤П ╨▓ ╨╛╨┤╨╜╨╛╨╝ ╨╝╨╡╤Б╤В╨╡.',
++      footerNote: 'Pathly ╨╜╨░ ╨▒╨░╨╖╨╡ ╨┤╨╡╤В╨╡╤А╨╝╨╕╨╜╨╕╤А╨╛╨▓╨░╨╜╨╜╨╛╨│╨╛ ╤Б╨║╨╛╤А╨╕╨╜╨│╨░ ┬╖ ╨┤╨╡╨╝╨╛╨╜╤Б╤В╤А╨░╤Ж╨╕╨╛╨╜╨╜╤Л╨╣ ╨┤╨░╤В╨░╤Б╨╡╤В'
++    },
++
++    // Profile тАФ ╤Б╨╛╨╛╨▒╤Й╨╡╨╜╨╕╤П ╨▓╨░╨╗╨╕╨┤╨░╤Ж╨╕╨╕
++    profileErrors: {
++      grade: '╨Т╤Л╨▒╨╡╤А╨╕╤В╨╡ ╨║╨╗╨░╤Б╤Б',
++      graduationYear: '╨Т╨▓╨╡╨┤╨╕╤В╨╡ ╨║╨╛╤А╤А╨╡╨║╤В╨╜╤Л╨╣ ╨│╨╛╨┤',
++      field: '╨Т╤Л╨▒╨╡╤А╨╕╤В╨╡ ╤Б╨┐╨╡╤Ж╨╕╨░╨╗╤М╨╜╨╛╤Б╤В╤М',
++      gpa: '╨Т╨▓╨╡╨┤╨╕╤В╨╡ GPA ╨╛╤В 0 ╨┤╨╛ 5',
++      targetCountries: '╨Т╤Л╨▒╨╡╤А╨╕╤В╨╡ ╤Е╨╛╤В╤П ╨▒╤Л ╨╛╨┤╨╜╤Г ╤Б╤В╤А╨░╨╜╤Г',
++      budgetUsdPerYear: '╨Т╨▓╨╡╨┤╨╕╤В╨╡ ╨▒╤О╨┤╨╢╨╡╤В (0 ╨┤╨╗╤П ╤В╨╛╨╗╤М╨║╨╛ ╨│╤А╨░╨╜╤В)'
++    },
++
++    // Diagnosis тАФ ╨▓╨╛╨┐╤А╨╛╤Б╤Л ╨┤╨╕╨░╨│╨╜╨╛╤Б╤В╨╕╨║╨╕ (JSON ╤Е╤А╨░╨╜╨╕╤В ╤В╨╛╨╗╤М╨║╨╛ ╨║╨╗╤О╤З╨╕)
++    questions: {
++      'q-routine': {
++        prompt: '╨Э╨░╤Б╨║╨╛╨╗╤М╨║╨╛ ╤Б╤В╨░╨▒╨╕╨╗╤М╨╜╨╛ ╨▓╤Л ╨╖╨░╨╜╨╕╨╝╨░╨╡╤В╨╡╤Б╤М ╨▓ ╨╛╨▒╤Л╤З╨╜╨╛╨╣ ╨╜╨╡╨┤╨╡╨╗╨╡?',
++        helper: '╨Т╤Б╨┐╨╛╨╝╨╜╨╕╤В╨╡ ╨┐╨╛╤Б╨╗╨╡╨┤╨╜╨╕╨╣ ╨╝╨╡╤Б╤П╤Ж, ╨░ ╨╜╨╡ ╨╕╨┤╨╡╨░╨╗╤М╨╜╤Г╤О ╨╜╨╡╨┤╨╡╨╗╤О.',
++        high: '╨Ю╤З╨╡╨╜╤М ╤Б╤В╨░╨▒╨╕╨╗╤М╨╜╨╛ тАФ ╨┐╨╗╨░╨╜╨╕╤А╤Г╤О ╨╕ ╤Б╨╗╨╡╨┤╤Г╤О ╨┐╨╗╨░╨╜╤Г',
++        mid: '╨Т ╨╛╤Б╨╜╨╛╨▓╨╜╨╛╨╝ ╤Б╤В╨░╨▒╨╕╨╗╤М╨╜╨╛, ╨▒╤Л╨▓╨░╤О╤В ╤Б╤А╤Л╨▓╤Л',
++        low: '╨Ч╨░╨╜╨╕╨╝╨░╤О╤Б╤М ╨▓ ╨╛╤Б╨╜╨╛╨▓╨╜╨╛╨╝ ╨┐╨╡╤А╨╡╨┤ ╨┤╨╡╨┤╨╗╨░╨╣╨╜╨░╨╝╨╕'
++      },
++      'q-math': {
++        prompt: '╨Э╨░╤Б╨║╨╛╨╗╤М╨║╨╛ ╨▓╨░╨╝ ╨║╨╛╨╝╤Д╨╛╤А╤В╨╜╨╛ ╤Б ╨┐╤А╨╛╨┤╨▓╨╕╨╜╤Г╤В╨╛╨╣ ╨╝╨░╤В╨╡╨╝╨░╤В╨╕╨║╨╛╨╣?',
++        strong: '╨б╨╕╨╗╤М╨╜╨╛ тАФ ╨╜╤А╨░╨▓╨╕╤В╤Б╤П ╨╕ ╨┐╨╛╨╗╤Г╤З╨░╤О ╨▓╤Л╤Б╨╛╨║╨╕╨╡ ╨▒╨░╨╗╨╗╤Л',
++        ok: '╨Э╨╛╤А╨╝╨░╨╗╤М╨╜╨╛ тАФ ╤Б╨┐╤А╨░╨▓╨╗╤П╤О╤Б╤М ╤Б ╤Г╤Б╨╕╨╗╨╕╨╡╨╝',
++        weak: '╨н╤В╨╛ ╨╝╨╛╨╣ ╤Б╨░╨╝╤Л╨╣ ╤Б╨╗╨╛╨╢╨╜╤Л╨╣ ╨┐╤А╨╡╨┤╨╝╨╡╤В'
++      },
++      'q-english': {
++        prompt: '╨Э╨░╤Б╨║╨╛╨╗╤М╨║╨╛ ╨▓╤Л ╤Г╨▓╨╡╤А╨╡╨╜╤Л ╨▓ ╤Г╤Б╤В╨╜╨╛╨╝ ╨╕ ╨┐╨╕╤Б╤М╨╝╨╡╨╜╨╜╨╛╨╝ ╨░╨╜╨│╨╗╨╕╨╣╤Б╨║╨╛╨╝?',
++        b2: '╨г╨▓╨╡╤А╨╡╨╜(╨░) тАФ ╨╝╨╛╨│╤Г ╤Г╤З╨╕╤В╤М╤Б╤П ╨┐╨╛╨╗╨╜╨╛╤Б╤В╤М╤О ╨╜╨░ ╨░╨╜╨│╨╗╨╕╨╣╤Б╨║╨╛╨╝',
++        b1: '╨б╨┐╤А╨░╨▓╨╗╤П╤О╤Б╤М ╤Б ╨┐╨╛╨▓╤Б╨╡╨┤╨╜╨╡╨▓╨╜╤Л╨╝╨╕ ╤В╨╡╨╝╨░╨╝╨╕',
++        a2: '╨Х╤Й╨╡ ╤Г╨║╤А╨╡╨┐╨╗╤П╤О ╨▒╨░╨╖╤Г'
++      },
++      'q-exam-ready': {
++        prompt: '╨г╨╢╨╡ ╤Б╨┤╨░╨▓╨░╨╗╨╕ ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╕╨╖╨╕╤А╨╛╨▓╨░╨╜╨╜╤Л╨╣ ╤Н╨║╨╖╨░╨╝╨╡╨╜ (IELTS / SAT / ENT)?',
++        yes: '╨Ф╨░, ╨▒╨░╨╗╨╗ ╤Г╨╢╨╡ ╨╡╤Б╤В╤М',
++        planned: '╨Х╤Й╨╡ ╨╜╨╡╤В, ╨╜╨╛ ╨┤╨░╤В╨░ ╨╜╨░╨╖╨╜╨░╤З╨╡╨╜╨░',
++        no: '╨Х╤Й╨╡ ╨╜╨╡╤В ╨╕ ╨┐╨╗╨░╨╜╨░ ╨╜╨╡╤В'
++      },
++      'q-project': {
++        prompt: '╨Х╤Б╤В╤М ╨╗╨╕ ╤Г ╨▓╨░╤Б ╨┐╤А╨╛╨╡╨║╤В, ╨┐╨╛╤А╤В╤Д╨╛╨╗╨╕╨╛ ╨╕╨╗╨╕ ╤А╨╡╨╖╤Г╨╗╤М╤В╨░╤В ╤Б╨╛╤А╨╡╨▓╨╜╨╛╨▓╨░╨╜╨╕╤П?',
++        helper: '╨з╤В╨╛-╤В╨╛, ╤З╤В╨╛ ╨╝╨╛╨╢╨╜╨╛ ╨┐╨╛╨║╨░╨╖╨░╤В╤М ╨▓ ╨╖╨░╤П╨▓╨║╨╡.',
++        yes: '╨Ф╨░, ╤Б╨╕╨╗╤М╨╜╤Л╨╣ ╤А╨╡╨╖╤Г╨╗╤М╤В╨░╤В',
++        small: '╨з╤В╨╛-╤В╨╛ ╨╜╨╡╨▒╨╛╨╗╤М╤И╨╛╨╡',
++        no: '╨Я╨╛╨║╨░ ╨╜╨╕╤З╨╡╨│╨╛'
++      },
++      'q-mobility': {
++        prompt: '╨Э╨░╤Б╨║╨╛╨╗╤М╨║╨╛ ╨▓╤Л ╨│╨╛╤В╨╛╨▓╤Л ╤Г╤З╨╕╤В╤М╤Б╤П ╨╖╨░ ╨│╤А╨░╨╜╨╕╤Ж╨╡╨╣, ╨▓╨┤╨░╨╗╨╕ ╨╛╤В ╨┤╨╛╨╝╨░?',
++        ready: '╨Ю╤З╨╡╨╜╤М ╨│╨╛╤В╨╛╨▓(╨░) тАФ ╤Н╤В╨╛ ╨╝╨╛╤П ╤Ж╨╡╨╗╤М',
++        mixed: '╨Ю╤В╨║╤А╤Л╤В(╨░) ╨║ ╤Н╤В╨╛╨╝╤Г, ╨╜╨╛ ╤Б ╨╛╤Б╤В╨╛╤А╨╛╨╢╨╜╨╛╤Б╤В╤М╤О',
++        home: '╨Я╤А╨╡╨┤╨┐╨╛╤З╨╡╨╗(╨░) ╨▒╤Л ╨╛╤Б╤В╨░╤В╤М╤Б╤П ╨▓ ╤Б╨▓╨╛╨╡╨╣ ╤Б╤В╤А╨░╨╜╨╡'
++      }
++    },
++
++    // Roadmap тАФ ╤И╨░╨▒╨╗╨╛╨╜╤Л ╤И╨░╨│╨╛╨▓ (JSON ╤Е╤А╨░╨╜╨╕╤В ╤В╨╛╨╗╤М╨║╨╛ ╨║╨╗╤О╤З╨╕)
++    templates: {
++      'doc-transcript': {
++        title: '╨Я╨╛╨┤╨│╨╛╤В╨╛╨▓╤М╤В╨╡ ╨░╨║╨░╨┤╨╡╨╝╨╕╤З╨╡╤Б╨║╤Г╤О ╤Б╨┐╤А╨░╨▓╨║╤Г ╨╕ ╨╛╤В╤З╨╡╤В ╨╛ GPA',
++        description: '╨Ч╨░╨┐╤А╨╛╤Б╨╕╤В╨╡ ╨╛╤Д╨╕╤Ж╨╕╨░╨╗╤М╨╜╤Г╤О ╤Б╨┐╤А╨░╨▓╨║╤Г ╨▓ ╤И╨║╨╛╨╗╨╡ ╨╕ ╨┐╨╛╨┤╤В╨▓╨╡╤А╨┤╨╕╤В╨╡ GPA ╨┐╨╛ ╤В╤А╨╡╨▒╤Г╨╡╨╝╨╛╨╣ ╤И╨║╨░╨╗╨╡.'
++      },
++      'doc-motivation': {
++        title: '╨Э╨░╨┐╨╕╤И╨╕╤В╨╡ ╨╝╨╛╤В╨╕╨▓╨░╤Ж╨╕╨╛╨╜╨╜╨╛╨╡ ╨┐╨╕╤Б╤М╨╝╨╛',
++        description: '╨з╨╡╤А╨╜╨╛╨▓╨╕╨║ ╨╜╨░ ╨╛╨┤╨╜╤Г ╤Б╤В╤А╨░╨╜╨╕╤Ж╤Г, ╤Б╨▓╤П╨╖╤Л╨▓╨░╤О╤Й╨╕╨╣ ╨▓╨░╤И ╨╕╨╜╤В╨╡╤А╨╡╤Б ╨║ ╨╜╨░╨┐╤А╨░╨▓╨╗╨╡╨╜╨╕╤О ╤Б ╨║╨╛╨╜╨║╤А╨╡╤В╨╜╨╛╨╣ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╨╛╨╣.'
++      },
++      'doc-recommendations': {
++        title: '╨Ч╨░╨┐╤А╨╛╤Б╨╕╤В╨╡ ╨┤╨▓╨░ ╤А╨╡╨║╨╛╨╝╨╡╨╜╨┤╨░╤В╨╡╨╗╤М╨╜╤Л╤Е ╨┐╨╕╤Б╤М╨╝╨░',
++        description: '╨Я╨╛╨┐╤А╨╛╤Б╨╕╤В╨╡ ╨┤╨▓╤Г╤Е ╨┐╤А╨╡╨┐╨╛╨┤╨░╨▓╨░╤В╨╡╨╗╨╡╨╣, ╨║╨╛╤В╨╛╤А╤Л╨╡ ╨╖╨╜╨░╤О╤В ╨▓╨░╤И╤Г ╤Г╤З╨╡╨▒╤Г ╨┐╨╛ ╨┐╤А╨╛╤Д╨╕╨╗╤О, ╨╝╨╕╨╜╨╕╨╝╤Г╨╝ ╨╖╨░ ╤В╤А╨╕ ╨╜╨╡╨┤╨╡╨╗╨╕ ╨┤╨╛ ╨┤╨╡╨┤╨╗╨░╨╣╨╜╨░.'
++      },
++      'doc-passport': {
++        title: '╨Я╨╛╨┤╨│╨╛╤В╨╛╨▓╤М╤В╨╡ ╨┐╨░╤Б╨┐╨╛╤А╤В ╨╕ ╨┤╨╛╨║╤Г╨╝╨╡╨╜╤В╤Л, ╤Г╨┤╨╛╤Б╤В╨╛╨▓╨╡╤А╤П╤О╤Й╨╕╨╡ ╨╗╨╕╤З╨╜╨╛╤Б╤В╤М',
++        description: '╨Я╤А╨╛╨▓╨╡╤А╤М╤В╨╡ ╤Б╤А╨╛╨║╨╕ ╨┤╨╡╨╣╤Б╤В╨▓╨╕╤П тАФ ╨┤╨╡╨╣╤Б╤В╨▓╤Г╤О╤Й╨╕╨╣ ╨┐╨░╤Б╨┐╨╛╤А╤В ╨╜╤Г╨╢╨╡╨╜ ╨┤╨╗╤П ╨║╨░╨╢╨┤╨╛╨╣ ╨╝╨╡╨╢╨┤╤Г╨╜╨░╤А╨╛╨┤╨╜╨╛╨╣ ╨╖╨░╤П╨▓╨║╨╕.'
++      },
++      'exams-gap': {
++        title: '╨Ч╨░╨║╤А╨╛╨╣╤В╨╡ ╤Н╨║╨╖╨░╨╝╨╡╨╜╨░╤Ж╨╕╨╛╨╜╨╜╤Л╨╣ ╤А╨░╨╖╤А╤Л╨▓',
++        description: '╨Т╤Л ╨╜╨╕╨╢╨╡ ╤В╤А╨╡╨▒╤Г╨╡╨╝╨╛╨│╨╛ ╨▒╨░╨╗╨╗╨░ ╤Е╨╛╤В╤П ╨▒╤Л ╨┐╨╛ ╨╛╨┤╨╜╨╛╨╝╤Г ╤Н╨║╨╖╨░╨╝╨╡╨╜╤Г, ╨║╨╛╤В╨╛╤А╤Л╨╣ ╨╜╤Г╨╢╨╡╨╜ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╨░╨╝ ╨╕╨╖ ╤И╨╛╤А╤В╨╗╨╕╤Б╤В╨░. ╨б╨╛╤Б╤В╨░╨▓╤М╤В╨╡ ╨┐╨╗╨░╨╜ ╨┐╨╛╨┤╨│╨╛╤В╨╛╨▓╨║╨╕ ╨╕ ╨╖╨░╨┐╨╕╤И╨╕╤В╨╡╤Б╤М ╨╜╨░ ╨▒╨╗╨╕╨╢╨░╨╣╤И╤Г╤О ╨┤╨░╤В╤Г.'
++      },
++      'exams-always': {
++        title: '╨б╨┤╨░╨╣╤В╨╡ ╤В╤А╨╡╨▒╤Г╨╡╨╝╤Л╨╣ ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╕╨╖╨╕╤А╨╛╨▓╨░╨╜╨╜╤Л╨╣ ╤Н╨║╨╖╨░╨╝╨╡╨╜',
++        description: '╨б╨┤╨░╨╣╤В╨╡ ╤Н╨║╨╖╨░╨╝╨╡╨╜, ╤З╤В╨╛╨▒╤Л ╨▒╨░╨╗╨╗ ╨┐╨╛╤П╨▓╨╕╨╗╤Б╤П ╨┤╨╛ ╨╖╨░╨║╤А╤Л╤В╨╕╤П ╨╛╨║╨╛╨╜ ╨┐╨╛╨┤╨░╤З╨╕.'
++      },
++      'academic-gap': {
++        title: '╨Я╨╛╨┤╨╜╨╕╨╝╨╕╤В╨╡ GPA ╨┤╨╛ ╤Ж╨╡╨╗╨╡╨▓╨╛╨│╨╛ ╨┤╨╕╨░╨┐╨░╨╖╨╛╨╜╨░',
++        description: '╨б╤Д╨╛╨║╤Г╤Б╨╕╤А╤Г╨╣╤В╨╡╤Б╤М ╨╜╨░ ╨┐╤А╨╡╨┤╨╝╨╡╤В╨░╤Е, ╨║╨╛╤В╨╛╤А╤Л╨╡ ╨▒╨╛╨╗╤М╤И╨╡ ╨▓╤Б╨╡╨│╨╛ ╨▓╨╡╤Б╤П╤В ╨┤╨╗╤П ╨▓╤Л╨▒╤А╨░╨╜╨╜╤Л╤Е ╨┐╤А╨╛╨│╤А╨░╨╝╨╝.'
++      },
++      'academic-always': {
++        title: '╨г╨│╨╗╤Г╨▒╨╗╤П╨╣╤В╨╡ ╨╖╨╜╨░╨╜╨╕╤П ╨┐╨╛ ╨┐╤А╨╛╤Д╨╕╨╗╤М╨╜╨╛╨╝╤Г ╨┐╤А╨╡╨┤╨╝╨╡╤В╤Г',
++        description: '╨Т╤Л╤Е╨╛╨┤╨╕╤В╨╡ ╨╖╨░ ╤А╨░╨╝╨║╨╕ ╤И╨║╨╛╨╗╤М╨╜╨╛╨╣ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╤Л ╨┐╨╛ ╨▓╤Л╨▒╤А╨░╨╜╨╜╨╛╨╝╤Г ╨╜╨░╨┐╤А╨░╨▓╨╗╨╡╨╜╨╕╤О тАФ ╤В╨░╨║ ╨▒╤Г╨┤╨╡╤В ╨╗╨╡╨│╤З╨╡ ╤Б ╤Н╤Б╤Б╨╡ ╨╕ ╨╕╨╜╤В╨╡╤А╨▓╤М╤О.'
++      },
++      'act-project': {
++        title: '╨б╨┤╨╡╨╗╨░╨╣╤В╨╡ ╨╛╨┤╨╕╨╜ ╨┐╤А╨╛╨╡╨║╤В ╨┤╨╗╤П ╨┐╨╛╤А╤В╤Д╨╛╨╗╨╕╨╛',
++        description: '╨Ч╨░╨▓╨╡╤А╤И╨╕╤В╨╡ ╨╜╨╡╨▒╨╛╨╗╤М╤И╨╛╨╣ ╨┐╤А╨╡╨╖╨╡╨╜╤В╨░╨▒╨╡╨╗╤М╨╜╤Л╨╣ ╨┐╤А╨╛╨╡╨║╤В ╨┐╨╛ ╨▓╨░╤И╨╡╨╝╤Г ╨╜╨░╨┐╤А╨░╨▓╨╗╨╡╨╜╨╕╤О ╨╕ ╨╖╨░╨┤╨╛╨║╤Г╨╝╨╡╨╜╤В╨╕╤А╤Г╨╣╤В╨╡ ╤А╨╡╨╖╤Г╨╗╤М╤В╨░╤В.'
++      },
++      'act-competition': {
++        title: '╨г╤З╨░╤Б╤В╨▓╤Г╨╣╤В╨╡ ╨▓ ╤Б╨╛╤А╨╡╨▓╨╜╨╛╨▓╨░╨╜╨╕╨╕ ╨╕╨╗╨╕ ╨╛╨╗╨╕╨╝╨┐╨╕╨░╨┤╨╡',
++        description: '╨а╨╡╨│╨╕╨╛╨╜╨░╨╗╤М╨╜╤Л╨╣ ╨╕╨╗╨╕ ╨╜╨░╤Ж╨╕╨╛╨╜╨░╨╗╤М╨╜╤Л╨╣ ╤А╨╡╨╖╤Г╨╗╤М╤В╨░╤В ╤Г╤Б╨╕╨╗╨╕╤В ╨░╨║╨░╨┤╨╡╨╝╨╕╤З╨╡╤Б╨║╤Г╤О ╤З╨░╤Б╤В╤М ╨╖╨░╤П╨▓╨║╨╕.'
++      },
++      'act-volunteering': {
++        title: '╨Я╤А╨╛╨┤╨╛╨╗╨╢╨░╨╣╤В╨╡ ╨▓╨╛╨╗╨╛╨╜╤В╨╡╤А╤Б╤В╨▓╨╛ ╨╕╨╗╨╕ ╤А╨╛╨╗╤М ╨▓ ╨║╨╗╤Г╨▒╨╡',
++        description: '╨Я╨╛╤Б╤В╨╛╤П╨╜╤Б╤В╨▓╨╛ ╨▓ ╤В╨╡╤З╨╡╨╜╨╕╨╡ ╨╝╨╡╤Б╤П╤Ж╨╡╨▓ ╨▓╨░╨╢╨╜╨╡╨╡ ╤А╨░╨╖╨╛╨▓╤Л╤Е ╨░╨║╤В╨╕╨▓╨╜╨╛╤Б╤В╨╡╨╣.'
++      },
++      'deadlines-scholarship': {
++        title: '╨а╨░╤Б╤Б╨╝╨╛╤В╤А╨╕╤В╨╡ ╨╖╨░╤П╨▓╨║╤Г ╨╜╨░ ╤Б╤В╨╕╨┐╨╡╨╜╨┤╨╕╤О',
++        description: '╨Т╨░╤И ╨▒╤О╨┤╨╢╨╡╤В ╨╜╨╕╨╢╨╡ ╤Б╤В╨╛╨╕╨╝╨╛╤Б╤В╨╕ ╨╛╨▒╤Г╤З╨╡╨╜╨╕╤П ╨▓ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╨╡ ╨╕╨╖ ╤И╨╛╤А╤В╨╗╨╕╤Б╤В╨░, ╨┐╨╛╤Н╤В╨╛╨╝╤Г ╨▒╨╡╨╖ ╤Д╨╕╨╜╨░╨╜╤Б╨╕╤А╨╛╨▓╨░╨╜╨╕╤П ╨╜╨╡ ╨╛╨▒╨╛╨╣╤В╨╕╤Б╤М.'
++      }
++    },
++
++    // ╨Ф╨╡╨┤╨╗╨░╨╣╨╜╤Л ╨┐╤А╨╛╨│╤А╨░╨╝╨╝
++    deadlines: {
++      'application-deadline': '╨б╤А╨╛╨║ ╨┐╨╛╨┤╨░╤З╨╕ ╨╖╨░╤П╨▓╨╗╨╡╨╜╨╕╨╣',
++      'documents-submission': '╨б╨┤╨░╤З╨░ ╨┤╨╛╨║╤Г╨╝╨╡╨╜╤В╨╛╨▓',
++      'application-window-closes': '╨Ю╨║╨╜╨╛ ╨┐╨╛╨┤╨░╤З╨╕ ╨╖╨░╨║╤А╤Л╨▓╨░╨╡╤В╤Б╤П',
++      'document-review': '╨Я╤А╨╛╨▓╨╡╤А╨║╨░ ╨┤╨╛╨║╤Г╨╝╨╡╨╜╤В╨╛╨▓',
++      'application-deadline-non-eu': '╨б╤А╨╛╨║ ╨┐╨╛╨┤╨░╤З╨╕ ╨╖╨░╤П╨▓╨╛╨║ (╨╜╨╡ ╨Х╨б)',
++      'priority-application-deadline': '╨Я╤А╨╕╨╛╤А╨╕╤В╨╡╤В╨╜╤Л╨╣ ╤Б╤А╨╛╨║ ╨┐╨╛╨┤╨░╤З╨╕',
++      'scholarship-consideration-deadline': '╨б╤А╨╛╨║ ╤А╨░╤Б╤Б╨╝╨╛╤В╤А╨╡╨╜╨╕╤П ╤Б╤В╨╕╨┐╨╡╨╜╨┤╨╕╨╕',
++      'ucas-equal-consideration-deadline': '╨б╤А╨╛╨║ ╤А╨░╨▓╨╜╨╛╨│╨╛ ╤А╨░╤Б╤Б╨╝╨╛╤В╤А╨╡╨╜╨╕╤П UCAS',
++      'non-eu-application-deadline': '╨б╤А╨╛╨║ ╨┐╨╛╨┤╨░╤З╨╕ ╨╖╨░╤П╨▓╨╛╨║ ╨╜╨╡ ╨╕╨╖ ╨Х╨б',
++      'holland-scholarship-deadline': '╨б╤А╨╛╨║ ╤Б╤В╨╕╨┐╨╡╨╜╨┤╨╕╨╕ Holland Scholarship'
++    },
++
++    // ╨в╨╡╨║╤Б╤В╤Л, ╨│╨╡╨╜╨╡╤А╨╕╤А╤Г╨╡╨╝╤Л╨╡ ╨┤╨▓╨╕╨╢╨║╨╛╨╝
++    engine: {
++      // scoring.ts тАФ ╨┐╤А╨╡╨┤╤Г╨┐╤А╨╡╨╢╨┤╨╡╨╜╨╕╤П
++      wConfirmExam: '╨Я╨╛╨┤╤В╨▓╨╡╤А╨┤╨╕╤В╨╡ ╨▒╨░╨╗╨╗ {exam} тАФ ╤В╤А╨╡╨▒╤Г╨╡╤В╤Б╤П {min}',
++      wExamRequired: '{exam} {min} ╤В╤А╨╡╨▒╤Г╨╡╤В╤Б╤П, ╤Г ╨▓╨░╤Б {cur}',
++      wGpaBelow: 'GPA {gpa} ╨╜╨╕╨╢╨╡ ╨╛╨╢╨╕╨┤╨░╨╡╨╝╨╛╨│╨╛ ╨╝╨╕╨╜╨╕╨╝╤Г╨╝╨░ {min}',
++      wNoEnglishTrack: '╨Я╤А╨╛╨│╤А╨░╨╝╨╝╨░ ╨▓╨╡╨┤╨╡╤В╤Б╤П ╨╜╨░ {langs} тАФ ╨▒╨╡╨╖ ╨░╨╜╨│╨╗╨╛╤П╨╖╤Л╤З╨╜╨╛╨│╨╛ ╤В╤А╨╡╨║╨░',
++      wDeadlineSoon: '╨Ю╨║╨╜╨╛ ╨┐╨╛╨┤╨░╤З╨╕ ╨╖╨░╨║╤А╤Л╨▓╨░╨╡╤В╤Б╤П ╨╝╨╡╨╜╨╡╨╡ ╤З╨╡╨╝ ╤З╨╡╤А╨╡╨╖ 3 ╨╝╨╡╤Б╤П╤Ж╨░',
++      wDeadlinePassed: '╨б╤А╨╛╨║ ╨┐╨╛╨┤╨░╤З╨╕ ╨╖╨░╤П╨▓╨╗╨╡╨╜╨╕╨╣ ╤Г╨╢╨╡ ╨┐╤А╨╛╤И╨╡╨╗',
++      wOverBudget: '╨б╤В╨╛╨╕╨╝╨╛╤Б╤В╤М ╨╜╨░ {amount} ╨▓ ╨│╨╛╨┤ ╨┐╤А╨╡╨▓╤Л╤И╨░╨╡╤В ╨▓╨░╤И ╨▒╤О╨┤╨╢╨╡╤В',
++      // diagnosisEngine тАФ ╨╛╤В╤Б╤Г╤В╤Б╤В╨▓╤Г╤О╤Й╨╕╨╡ ╨┐╨╛╨╗╤П
++      missingGrade: '╨Ъ╨╗╨░╤Б╤Б',
++      missingGraduationYear: '╨У╨╛╨┤ ╨▓╤Л╨┐╤Г╤Б╨║╨░',
++      missingCitizenship: '╨У╤А╨░╨╢╨┤╨░╨╜╤Б╤В╨▓╨╛',
++      missingField: '╨ж╨╡╨╗╨╡╨▓╨░╤П ╤Б╨┐╨╡╤Ж╨╕╨░╨╗╤М╨╜╨╛╤Б╤В╤М',
++      missingGpa: 'GPA',
++      missingTargetCountries: '╨ж╨╡╨╗╨╡╨▓╤Л╨╡ ╤Б╤В╤А╨░╨╜╤Л',
++      missingBudget: '╨С╤О╨┤╨╢╨╡╤В ╨╜╨░ ╨╛╨▒╤Г╤З╨╡╨╜╨╕╨╡',
++      missingExamScores: '╨С╨░╨╗╨╗╤Л ╤Н╨║╨╖╨░╨╝╨╡╨╜╨╛╨▓',
++      // diagnosisEngine тАФ ╤Б╨╕╨│╨╜╨░╨╗╤Л
++      sRoutineStrength: '╨б╤В╨░╨▒╨╕╨╗╤М╨╜╨░╤П ╤Г╤З╨╡╨▒╨╜╨░╤П ╤А╤Г╤В╨╕╨╜╨░ ╨▓ ╤В╨╡╤З╨╡╨╜╨╕╨╡ ╨╜╨╡╨┤╨╡╨╗╨╕',
++      sRoutineGap: '╨г╤З╨╡╨▒╨░ ╨╖╨░╨▓╨╕╤Б╨╕╤В ╨╛╤В ╨┤╨╡╨┤╨╗╨░╨╣╨╜╨╛╨▓',
++      sMathStrength: '╨б╨╕╨╗╤М╨╜╨░╤П ╨▒╨░╨╖╨░ ╨┐╨╛ ╨╝╨░╤В╨╡╨╝╨░╤В╨╕╨║╨╡',
++      sMathGap: '╨Ь╨░╤В╨╡╨╝╨░╤В╨╕╨║╨░ тАФ ╤Г╨╖╨║╨╛╨╡ ╨╝╨╡╤Б╤В╨╛, ╨╛╨╜╨░ ╨╜╤Г╨╢╨╜╨░ ╨┤╨╗╤П ╨▒╨╛╨╗╤М╤И╨╕╨╜╤Б╤В╨▓╨░ STEM-╨┐╤А╨╛╨│╤А╨░╨╝╨╝',
++      sEnglishStrength: '╨У╨╛╤В╨╛╨▓╤Л ╤Г╤З╨╕╤В╤М╤Б╤П ╨┐╨╛╨╗╨╜╨╛╤Б╤В╤М╤О ╨╜╨░ ╨░╨╜╨│╨╗╨╕╨╣╤Б╨║╨╛╨╝',
++      sEnglishGap: '╨г╤А╨╛╨▓╨╡╨╜╤М ╨░╨╜╨│╨╗╨╕╨╣╤Б╨║╨╛╨│╨╛ ╨╜╨╕╨╢╨╡ ╨╛╨▒╤Л╤З╨╜╨╛╨│╨╛ ╨┐╨╛╤А╨╛╨│╨░ ╨┐╨╛╤Б╤В╤Г╨┐╨╗╨╡╨╜╨╕╤П',
++      sExamYes: '╨С╨░╨╗╨╗ ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╕╨╖╨╕╤А╨╛╨▓╨░╨╜╨╜╨╛╨│╨╛ ╤Н╨║╨╖╨░╨╝╨╡╨╜╨░ ╤Г╨╢╨╡ ╨╡╤Б╤В╤М',
++      sExamPlanned: '╨Ф╨░╤В╨░ ╤Н╨║╨╖╨░╨╝╨╡╨╜╨░ ╨╜╨░╨╖╨╜╨░╤З╨╡╨╜╨░, ╨╜╨╛ ╨▒╨░╨╗╨╗╨░ ╨╡╤Й╨╡ ╨╜╨╡╤В',
++      sExamNo: '╨б╤В╨░╨╜╨┤╨░╤А╤В╨╕╨╖╨╕╤А╨╛╨▓╨░╨╜╨╜╤Л╨╣ ╤Н╨║╨╖╨░╨╝╨╡╨╜ ╨╡╤Й╨╡ ╨╜╨╡ ╨╖╨░╨┐╨╗╨░╨╜╨╕╤А╨╛╨▓╨░╨╜',
++      sProjectYes: '╨Х╤Б╤В╤М ╨┐╤А╨╡╨╖╨╡╨╜╤В╨░╨▒╨╡╨╗╤М╨╜╤Л╨╣ ╨┐╤А╨╛╨╡╨║╤В ╨╕╨╗╨╕ ╤А╨╡╨╖╤Г╨╗╤М╤В╨░╤В ╤Б╨╛╤А╨╡╨▓╨╜╨╛╨▓╨░╨╜╨╕╤П',
++      sProjectNo: '╨Я╨╛╨║╨░ ╨╜╨╡╤В ╤А╨░╨▒╨╛╤В╤Л ╨┤╨╗╤П ╤Г╤Б╨╕╨╗╨╡╨╜╨╕╤П ╨╖╨░╤П╨▓╨║╨╕',
++      sMobilityReady: '╨з╨╡╤В╨║╨╛╨╡ ╨╜╨░╨╝╨╡╤А╨╡╨╜╨╕╨╡ ╤Г╤З╨╕╤В╤М╤Б╤П ╨╖╨░ ╨│╤А╨░╨╜╨╕╤Ж╨╡╨╣',
++      sMobilityHome: '╨Ц╨╡╨╗╨░╨╜╨╕╨╡ ╨╛╤Б╤В╨░╤В╤М╤Б╤П ╨▓ ╤Б╤В╤А╨░╨╜╨╡ ╤Б╤Г╨╢╨░╨╡╤В ╨▓╤Л╨▒╨╛╤А',
++      // roadmapEngine тАФ ╨╖╨░╨│╨╛╨╗╨╛╨▓╨║╨╕ ╨╕ ╨╛╨┐╨╕╤Б╨░╨╜╨╕╤П ╤И╨░╨│╨╛╨▓
++      rsExamGapWithScore: '╨Ф╨╛╤Б╤В╨╕╨│╨╜╨╕╤В╨╡ {exam} {min} (╤Г ╨▓╨░╤Б {cur})',
++      rsExamGapNoScore: '╨Ф╨╛╤Б╤В╨╕╨│╨╜╨╕╤В╨╡ {exam} {min} (╨┐╨╛╨║╨░ ╨╜╨╡╤В ╨▒╨░╨╗╨╗╨░)',
++      rsExamAlways: '╨б╨┤╨░╤В╤М ╤В╤А╨╡╨▒╤Г╨╡╨╝╤Л╨╣ ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╕╨╖╨╕╤А╨╛╨▓╨░╨╜╨╜╤Л╨╣ ╤Н╨║╨╖╨░╨╝╨╡╨╜',
++      rsExamAlwaysDesc: '╨б╨┤╨░╨╣╤В╨╡ ╤Н╨║╨╖╨░╨╝╨╡╨╜, ╤З╤В╨╛╨▒╤Л ╨▒╨░╨╗╨╗ ╨┐╨╛╤П╨▓╨╕╨╗╤Б╤П ╨┤╨╛ ╨╖╨░╨║╤А╤Л╤В╨╕╤П ╨╛╨║╨╛╨╜ ╨┐╨╛╨┤╨░╤З╨╕.',
++      rsExamGapDesc: '╨Ч╨░╨║╤А╨╛╨╣╤В╨╡ ╤А╨░╨╖╤А╤Л╨▓ ╨╝╨╡╨╢╨┤╤Г ╤В╨╡╨║╤Г╤Й╨╕╨╝ ╨▒╨░╨╗╨╗╨╛╨╝ ╨╕ ╤В╤А╨╡╨▒╤Г╨╡╨╝╤Л╨╝.',
++      rsSubmitDocuments: '╨Я╨╛╨┤╨░╤В╤М ╨┤╨╛╨║╤Г╨╝╨╡╨╜╤В╤Л тАФ {uni} ({program})',
++      rsSubmitApplication: '╨Я╨╛╨┤╨░╤В╤М ╨╖╨░╤П╨▓╨╗╨╡╨╜╨╕╨╡ тАФ {uni} ({program})',
++      rsApplyFunding: '╨Я╨╛╨┤╨░╤В╤М ╨╖╨░╤П╨▓╨║╤Г ╨╜╨░ ╤Д╨╕╨╜╨░╨╜╤Б╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ тАФ {uni}',
++      rsDemoDateNote: '╨Ф╨╡╨╝╨╛╨╜╤Б╤В╤А╨░╤Ж╨╕╨╛╨╜╨╜╨░╤П ╨┤╨░╤В╨░ тАФ ╨┐╤А╨╛╨▓╨╡╤А╤М╤В╨╡ ╨╜╨░ ╨╛╤Д╨╕╤Ж╨╕╨░╨╗╤М╨╜╨╛╨╣ ╤Б╤В╤А╨░╨╜╨╕╤Ж╨╡.',
++      rsVerifiedDateNote: '╨Я╤А╨╛╨▓╨╡╤А╨╡╨╜╨╜╨░╤П ╨┤╨░╤В╨░.',
++      rsRaiseGpa: '╨Я╨╛╨▓╤Л╤И╨░╨╣╤В╨╡ GPA ╨┤╨╛ {target} (╤Б╨╡╨╣╤З╨░╤Б {current})',
++      rsScholarshipFallbackTitle: '╨Я╨╛╨┤╨░╤В╤М ╨╖╨░╤П╨▓╨║╤Г ╨╜╨░ ╤Б╤В╨╕╨┐╨╡╨╜╨┤╨╕╤О',
++      rsScholarshipFallbackDesc: '╨Т╨░╤И ╨▒╤О╨┤╨╢╨╡╤В ╨╜╨╕╨╢╨╡ ╤Б╤В╨╛╨╕╨╝╨╛╤Б╤В╨╕ ╨╛╨▒╤Г╤З╨╡╨╜╨╕╤П ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╤Л ╨╕╨╖ ╤И╨╛╤А╤В╨╗╨╕╤Б╤В╨░.'
+     }
+   },
+ 
+@@ -211,19 +537,32 @@ const translations = {
+       subtitle: 'Your personal admission route',
+       description: 'Fill in your profile, take the diagnostic, and get a personalized list of universities with a step-by-step roadmap',
+       start: 'Start',
++      continue: 'Continue',
+       demo: 'Try demo',
+       continueAsGuest: 'Continue as guest'
+     },
+ 
+     // Navigation
+     nav: {
++      home: 'Home',
+       profile: 'Profile',
+       diagnosis: 'Diagnosis',
+       recommendations: 'Recommendations',
+       comparison: 'Comparison',
+       roadmap: 'Roadmap',
+       sources: 'Sources',
+-      dataAndSources: 'Data & sources ┬╖ methodology'
++      dataAndSources: 'Data & sources ┬╖ methodology',
++      diagnose: 'Diagnose',
++      matches: 'Matches'
++    },
++
++    topbar: {
++      homeTitle: 'Home',
++      brandSub: 'Admissions dossier',
++      readinessTitle: 'Profile completeness and roadmap progress',
++      readiness: 'readiness',
++      aiTitle: 'AI explanations can be turned off тАФ the deterministic fallback always works',
++      aiLabel: 'AI'
+     },
+ 
+     // Profile Screen
+@@ -280,7 +619,21 @@ const translations = {
+       noStrengths: 'No strong signals yet тАФ that is fine at this stage.',
+       gaps: 'Gaps to close',
+       attention: 'Attention',
+-      noGaps: 'Nothing critical flagged.'
++      noGaps: 'Nothing critical flagged.',
++      pointers: 'Diagnostic pointers',
++      advisoryDiscipline: 'Advisory discipline',
++      advisoryDestinations: 'Advisory destinations',
++      profileCompleteness: 'Profile completeness',
++      open: 'Open',
++      profileChoiceStays: 'Your profile choice stays {field}.',
++      advisoryHint: 'These only nudge scoring, they do not filter.',
++      complete: 'Complete',
++      gapsCount: '{count} gaps',
++      allKeyFieldsFilled: 'All key fields filled',
++      missingPrefix: 'Missing:',
++      missingImpact: 'Recommendations still generate, but confidence is reduced for those factors.',
++      seeRecommendations: 'See my recommendations',
++      editProfile: 'Edit profile'
+     },
+ 
+     // Recommendations Screen
+@@ -288,6 +641,9 @@ const translations = {
+       step: 'Recommendations',
+       title: 'Universities that fit your profile',
+       subtitle: 'Every match is computed from your eight inputs, then explained factor by factor. Edit anything below and the shortlist recomputes live.',
++      strongFit: 'Strong fit',
++      moderateFit: 'Moderate fit',
++      stretch: 'Stretch',
+       recommended: 'recommended',
+       program: 'program',
+       programs: 'programs',
+@@ -298,36 +654,118 @@ const translations = {
+       fewerMatches: 'Fewer than three strong matches. Relaxed options and concrete remedies are shown below.',
+       noMatch: 'No strong match yet',
+       noMatchText: 'Your current constraints are too tight. Try one of the remedies below, then re-run.',
+-      resetProfile: 'Reset profile'
++      resetProfile: 'Reset profile',
++      confidence: 'confidence',
++      newEntry: 'new entry',
++      yearsShort: 'yrs',
++      perYearShort: '/yr',
++      fitScore: 'fit score',
++      whyFits: 'Why this fits',
++      template: 'template',
++      fitBreakdown: 'Fit breakdown',
++      top3Only: 'Top 3 only',
++      allFactors: 'All factors',
++      inComparison: 'In comparison',
++      addToCompare: 'Add to compare',
++      hideDetails: 'Hide details',
++      details: 'Details',
++      requirements: 'Requirements',
++      noExamRequirement: 'No exam requirement listed',
++      minGpaLanguage: 'Min GPA: {gpa} ┬╖ Language: {lang}',
++      teachingLanguage: 'Teaching language',
++      livingCostApprox: 'Living cost тЙИ {cost}/yr',
++      deadlines: 'Deadlines',
++      noDeadlineRecorded: 'No deadline recorded тАФ confirm on the official page.',
++      universitySite: 'University site',
++      sourcesCount: '{count} source(s)',
++      sensitivityTitle: 'Live sensitivity',
++      sensitivityHint: 'change a parameter -> shortlist moves',
++      destinations: 'Destinations',
++      tuitionBudget: 'Tuition budget',
++      discipline: 'Discipline',
++      grant: 'Grant',
++      unlockTitle: 'How to unlock more options',
++      deterministicRemedies: 'Deterministic remedies',
++      derivedFromData: 'derived from data',
++      relaxedPrograms: 'Other programs in the dataset you have not unlocked yet: {list}.',
++      stickySelectPrograms: 'Select programs to compare',
++      stickySelected: '{count} selected',
++      readyToCompare: 'Ready to compare side by side.',
++      pickAtLeastTwo: 'Pick at least two programs.',
++      compare: 'Compare',
++      roadmap: 'Roadmap',
++      recommendationNotesRemoved: '{count} programs were removed: net cost is far above your budget with no scholarship path.',
++      recommendationNotesFound: 'Only {count} strong matches found тАФ relaxed options are shown below.',
++      suggestionBudget: 'Raising your budget by about {gap}/year unlocks the cheapest blocked option.',
++      suggestionCountry: 'Adding {country} to your target countries would surface strong options (best local score {score}%).',
++      suggestionExam: 'Improving your exam scores would lift several programs тАФ start with {program}.'
+     },
+ 
+     // Comparison Screen
+     comparison: {
+-      title: 'Comparison',
++      step: 'Comparison',
++      title: 'Compare your options',
++      subtitle: 'Side by side on criteria that actually change a decision: cost, requirements, language and deadlines.',
++      needTwoTitle: 'Select at least two programs',
++      needTwoText: 'Go back to recommendations and tick two or three programs to compare them side by side.',
++      backToRecommendations: 'Back to recommendations',
++      criterion: 'Criterion',
++      remove: 'Remove',
+       university: 'University',
+       program: 'Program',
+-      tuition: 'Annual Tuition',
+-      requirements: 'Requirements',
+-      deadline: 'Deadline',
+-      budget: 'Budget Fit',
+-      scholarship: 'Scholarship Available',
+-      language: 'Language of Instruction',
+-      back: 'Back',
+-      toRoadmap: 'To Roadmap'
++      fitScore: 'Fit score',
++      netTuition: 'Net tuition / year',
++      livingCost: 'Living cost / year',
++      totalCost: 'Est. total / year',
++      examRequirements: 'Exam requirements',
++      noneListed: 'None listed',
++      minGpa: 'Min GPA',
++      teachingLanguage: 'Teaching language',
++      duration: 'Duration',
++      years: 'years',
++      deadlines: 'Deadlines',
++      demo: 'demo',
++      notRecorded: 'Not recorded',
++      mainConstraint: 'Main constraint',
++      noneFlagged: 'None flagged',
++      buildRoadmap: 'Build my roadmap',
++      addOrRemove: 'Add or remove programs'
+     },
+ 
+     // Roadmap Screen
+     roadmap: {
+-      title: 'Admission Roadmap',
++      step: 'Roadmap',
++      title: 'Your admission roadmap',
++      subtitle: 'Five phases built from your shortlist and the gaps your diagnosis flagged. Tick a step and the next action updates immediately.',
++      noRoadmapTitle: 'No roadmap yet',
++      noRoadmapText: 'Get your recommendations first, then Pathly builds a phased plan from your shortlist and profile gaps.',
++      getRecommendations: 'Get recommendations',
+       nextAction: 'Next Action',
++      priority: 'priority',
++      due: 'due',
++      demoDate: 'demo date',
+       progress: 'Progress',
++      roadmapComplete: 'Roadmap complete',
++      stepsDone: 'Steps done',
++      programsInPlan: 'Programs in plan',
++      deadlineSteps: 'Deadline steps',
+       readiness: 'Readiness',
+       completed: 'Completed',
+       inProgress: 'In Progress',
+       todo: 'To Do',
+       markAsDone: 'Mark as Done',
++      admissionPhases: 'Admission trajectory phases',
++      cycleHint: 'tap a node to cycle status',
++      cycleTitle: 'Cycle status: to do -> in progress -> done',
++      source: 'source',
++      warningDemo: 'Deadline dates marked demo data are demonstrative and must be verified on official university pages before submission.',
++      backToComparison: 'Back to comparison',
++      printPdf: 'Print / save as PDF',
++      adjustRecommendations: 'Adjust recommendations',
++      done: 'done',
++      demoData: 'demo data',
+       phases: {
+-        exams: 'Exams',
++        exams: 'Exams & testing',
+         documents: 'Documents',
+         deadlines: 'Deadlines',
+         academic: 'Academic',
+@@ -340,8 +778,23 @@ const translations = {
+ 
+     // Sources Screen
+     sources: {
++      step: 'Transparency',
+       title: 'Data Sources',
+       description: 'All university and program data comes from official sources. Demo data is marked with a blue badge.',
++      universitiesInDataset: 'Universities in dataset',
++      programsInDataset: 'Programs',
++      officialLinks: 'Official source links',
++      demoEntries: 'Demonstrative entries',
++      valuesDemoNotice: 'Numeric values in this MVP (tuition, exam thresholds, deadlines) are demonstrative. Verify each figure on official admissions pages before submission.',
++      officialSourcesTitle: 'Official sources',
++      verifiedLinks: 'verified links',
++      notAvailable: 'n/a',
++      demoEntriesTitle: 'Demonstrative entries',
++      methodology: 'Methodology',
++      methodology1: 'Every recommendation is produced by a deterministic 7-factor weighted score, not by a language model.',
++      methodology2: 'The model only rephrases facts the engine already computed, and always has a template fallback.',
++      methodology3: 'Hard filters remove only what is clearly impossible; country, subject and cost stay as weighted factors.',
++      methodology4: 'Missing data lowers confidence instead of inventing values.',
+       official: 'Official Source',
+       demo: 'Demo Data',
+       demoNote: 'These values are used in the demo. Check official university websites before submitting your application.',
+@@ -366,7 +819,9 @@ const translations = {
+       allData: 'All data is saved locally in your browser',
+       noInternet: 'Works offline',
+       aiPowered: 'AI-powered',
+-      template: 'Template text'
++      template: 'Template text',
++      noData: 'no data',
++      freeGrant: 'Free / grant'
+     },
+ 
+     // Scoring factors
+@@ -402,32 +857,263 @@ const translations = {
+       medicine: 'Life Sciences & Medicine',
+       humanities: 'Humanities',
+       design: 'Design'
++    },
++
++    // Landing тАФ hardcoded strings moved into the dictionary
++    landingExtra: {
++      heroHighlight: 'тАФ your personal admission route',
++      step1Title: 'Profile',
++      step1Sub: 'Studies & budget',
++      step2Title: 'Matching',
++      step2Sub: 'Diagnostic',
++      step3Title: 'Compare',
++      step3Sub: 'Cost & requirements',
++      step4Title: 'Plan',
++      step4Sub: 'Roadmap',
++      panelTitle: 'My admission profile',
++      panelReady: 'Admission readiness',
++      panelLevel: 'Level: advanced',
++      panelRegion: 'Region: first tier',
++      deterministicTitle: 'Deterministic scoring',
++      deterministicDesc: 'Every recommendation is reproducible and verifiable.',
++      featuresTitle: 'What makes Pathly different',
++      feature1Title: 'Transparent scoring factors',
++      feature1Desc: 'Every option shows its weights: budget, subject, country, academics, language, timeline and funding.',
++      feature2Title: 'No empty promises',
++      feature2Desc: 'No clickbait acceptance percentages. Just a fit score that can be explained line by line.',
++      feature3Title: 'Verified sources',
++      feature3Desc: 'Facts link to their sources; anything unverified is labelled as demonstrative data.',
++      audienceLabel: 'For students and parents',
++      closingTitle: 'Built for students who value clarity of information.',
++      closingText: 'Start early, stay sane, and keep every requirement in one place.',
++      footerNote: 'Pathly powered by deterministic scoring ┬╖ demo dataset'
++    },
++
++    // Profile тАФ validation messages
++    profileErrors: {
++      grade: 'Choose your grade',
++      graduationYear: 'Enter a valid year',
++      field: 'Choose a discipline',
++      gpa: 'Enter a GPA between 0 and 5',
++      targetCountries: 'Pick at least one destination',
++      budgetUsdPerYear: 'Enter a budget (0 for grant only)'
++    },
++
++    // Diagnosis тАФ diagnostic questions (JSON stores keys only)
++    questions: {
++      'q-routine': {
++        prompt: 'How consistent are your study habits across a normal week?',
++        helper: 'Think about the last month, not an ideal week.',
++        high: 'Very consistent тАФ I plan and follow through',
++        mid: 'Mostly consistent with some slips',
++        low: 'I study mostly before deadlines'
++      },
++      'q-math': {
++        prompt: 'How comfortable are you with advanced mathematics?',
++        strong: 'Strong тАФ I enjoy it and score high',
++        ok: 'Okay тАФ I manage with effort',
++        weak: 'It is my hardest subject'
++      },
++      'q-english': {
++        prompt: 'How confident are you speaking and writing in English?',
++        b2: 'Confident тАФ I can study fully in English',
++        b1: 'I manage everyday topics',
++        a2: 'Still building basics'
++      },
++      'q-exam-ready': {
++        prompt: 'Have you already taken a standardised exam (IELTS / SAT / ENT)?',
++        yes: 'Yes, I have a score',
++        planned: 'Not yet, but I have a date planned',
++        no: 'Not yet and no plan'
++      },
++      'q-project': {
++        prompt: 'Do you have a project, portfolio or competition result?',
++        helper: 'Anything you could show on an application.',
++        yes: 'Yes, a strong one',
++        small: 'Something small',
++        no: 'Nothing yet'
++      },
++      'q-mobility': {
++        prompt: 'How ready are you to study abroad, away from home?',
++        ready: 'Very ready тАФ that is my goal',
++        mixed: 'Open to it, but cautious',
++        home: 'I would prefer to stay in my country'
++      }
++    },
++
++    // Roadmap тАФ step templates (JSON stores keys only)
++    templates: {
++      'doc-transcript': {
++        title: 'Prepare your academic transcript and GPA report',
++        description: 'Request an official transcript from your school and confirm your GPA on the required scale.'
++      },
++      'doc-motivation': {
++        title: 'Write your motivation letter',
++        description: 'Draft a one-page statement linking your subject interest to the specific program you are applying to.'
++      },
++      'doc-recommendations': {
++        title: 'Request two recommendation letters',
++        description: 'Ask two teachers who know your subject work well, at least three weeks before the deadline.'
++      },
++      'doc-passport': {
++        title: 'Prepare your passport and ID documents',
++        description: 'Check validity dates тАФ a valid passport is required for every international application.'
++      },
++      'exams-gap': {
++        title: 'Close your exam gap',
++        description: 'You are below the required score on at least one exam your shortlisted programs ask for. Build a study plan and book the next test date.'
++      },
++      'exams-always': {
++        title: 'Take the required standardised exam',
++        description: 'Sit the exam so your score is available before the application deadlines close.'
++      },
++      'academic-gap': {
++        title: 'Raise your GPA to the target band',
++        description: 'Focus on the subjects that carry the most weight for your chosen programs.'
++      },
++      'academic-always': {
++        title: 'Deepen your core subject knowledge',
++        description: 'Go beyond the school curriculum in the discipline you are applying to, so interviews and essays are easier.'
++      },
++      'act-project': {
++        title: 'Ship one portfolio project',
++        description: 'Finish a small, presentable project in your intended field and document the outcome.'
++      },
++      'act-competition': {
++        title: 'Join a relevant competition or olympiad',
++        description: 'A regional or national result strengthens the academic part of your application.'
++      },
++      'act-volunteering': {
++        title: 'Keep a sustained volunteering or club role',
++        description: 'Consistency over months matters more than a single one-off activity.'
++      },
++      'deadlines-scholarship': {
++        title: 'Consider a scholarship application',
++        description: 'Your budget is below the tuition cost of a shortlisted program, so applying for funding is not optional.'
++      }
++    },
++
++    // Program deadlines
++    deadlines: {
++      'application-deadline': 'Application deadline',
++      'documents-submission': 'Documents submission',
++      'application-window-closes': 'Application window closes',
++      'document-review': 'Document review',
++      'application-deadline-non-eu': 'Application deadline (non-EU)',
++      'priority-application-deadline': 'Priority application deadline',
++      'scholarship-consideration-deadline': 'Scholarship consideration deadline',
++      'ucas-equal-consideration-deadline': 'UCAS equal consideration deadline',
++      'non-eu-application-deadline': 'Non-EU application deadline',
++      'holland-scholarship-deadline': 'Holland Scholarship deadline'
++    },
++
++    // Engine-generated texts
++    engine: {
++      // scoring.ts тАФ warnings
++      wConfirmExam: 'Confirm your {exam} score тАФ {min} is required',
++      wExamRequired: '{exam} {min} required, you have {cur}',
++      wGpaBelow: 'GPA {gpa} is below the {min} typically expected',
++      wNoEnglishTrack: 'This program is taught in {langs} тАФ no English track',
++      wDeadlineSoon: 'The application window closes in under 3 months',
++      wDeadlinePassed: 'The application deadline has already passed',
++      wOverBudget: 'Costs {amount} per year above your budget',
++      // diagnosisEngine тАФ missing fields
++      missingGrade: 'Grade',
++      missingGraduationYear: 'Graduation year',
++      missingCitizenship: 'Citizenship',
++      missingField: 'Target discipline',
++      missingGpa: 'GPA',
++      missingTargetCountries: 'Target countries',
++      missingBudget: 'Tuition budget',
++      missingExamScores: 'Exam scores',
++      // diagnosisEngine тАФ signals
++      sRoutineStrength: 'Consistent weekly study routine',
++      sRoutineGap: 'Study routine depends on deadlines',
++      sMathStrength: 'Strong quantitative foundation',
++      sMathGap: 'Mathematics is a bottleneck тАФ most STEM programs require it',
++      sEnglishStrength: 'Ready to study fully in English',
++      sEnglishGap: 'English level below the usual admission threshold',
++      sExamYes: 'A standardised exam score is already in hand',
++      sExamPlanned: 'Exam date planned but no score yet',
++      sExamNo: 'No standardised exam booked yet',
++      sProjectYes: 'A presentable project or competition result',
++      sProjectNo: 'No portfolio piece to strengthen the application',
++      sMobilityReady: 'Clear intent to study abroad',
++      sMobilityHome: 'Preference to stay in-country narrows the option set',
++      // roadmapEngine тАФ step titles and descriptions
++      rsExamGapWithScore: 'Reach {exam} {min} (you have {cur})',
++      rsExamGapNoScore: 'Reach {exam} {min} (no score yet)',
++      rsExamAlways: 'Take the required standardised exam',
++      rsExamAlwaysDesc: 'Sit the exam so your score is available before the application deadlines close.',
++      rsExamGapDesc: 'Close the gap between your current exam score and the requirement.',
++      rsSubmitDocuments: 'Submit documents тАФ {uni} ({program})',
++      rsSubmitApplication: 'Submit application тАФ {uni} ({program})',
++      rsApplyFunding: 'Apply for funding тАФ {uni}',
++      rsDemoDateNote: 'Demonstrative date тАФ verify on the official page.',
++      rsVerifiedDateNote: 'Verified date.',
++      rsRaiseGpa: 'Raise your GPA to {target} (now {current})',
++      rsScholarshipFallbackTitle: 'Apply for a scholarship',
++      rsScholarshipFallbackDesc: 'Your budget is below the tuition cost of a shortlisted program.'
+     }
+   }
+ } as const
+ 
+-let currentLanguage: Language = 'ru'
++const LANG_KEY = 'pathly:language'
++
++/**
++ * Resolve the active language once and cache it. `localStorage` may be
++ * unavailable (SSR, the vitest node environment) тАФ in that case we fall back
++ * to the default language instead of throwing.
++ */
++function readSavedLanguage(): Language {
++  try {
++    const saved =
++      typeof localStorage !== 'undefined' ? (localStorage.getItem(LANG_KEY) as Language | null) : null
++    if (saved === 'ru' || saved === 'en') return saved
++  } catch {
++    /* storage unavailable тАФ default language is used */
++  }
++  return 'ru'
++}
++
++let currentLanguage: Language = readSavedLanguage()
+ 
+ export function setLanguage(lang: Language) {
++  if (lang === currentLanguage) return
+   currentLanguage = lang
+-  localStorage.setItem('pathly:language', lang)
++  try {
++    localStorage.setItem(LANG_KEY, lang)
++  } catch {
++    /* ignore тАФ preference stays in memory for this session */
++  }
++  listeners.forEach((l) => l())
+ }
+ 
+-export function getLanguage(): Language {
+-  const saved = localStorage.getItem('pathly:language') as Language | null
+-  if (saved && (saved === 'ru' || saved === 'en')) {
+-    return saved
++type LangListener = () => void
++const listeners = new Set<LangListener>()
++
++/** Subscribe to language changes (used to re-render the tree without a page reload). */
++export function subscribeLanguage(listener: LangListener): () => void {
++  listeners.add(listener)
++  return () => {
++    listeners.delete(listener)
+   }
+-  return 'ru'
++}
++
++export function getLanguage(): Language {
++  return currentLanguage
+ }
+ 
+ export function t<K extends keyof typeof translations.ru>(key: K): typeof translations.ru[K] {
+-  currentLanguage = getLanguage()
+   return (translations[currentLanguage] as typeof translations.ru)[key]
+ }
+ 
++export function tr(path: string, params: Record<string, string | number> = {}, defaultValue: string = ''): string {
++  const template = tValue(path, defaultValue)
++  return template.replace(/\{(\w+)\}/g, (_, key: string) => String(params[key] ?? `{${key}}`))
++}
++
+ export function tValue(path: string, defaultValue: string = ''): string {
+-  currentLanguage = getLanguage()
+   const keys = path.split('.')
+   let obj: any = translations[currentLanguage]
+   for (const key of keys) {
+@@ -437,4 +1123,12 @@ export function tValue(path: string, defaultValue: string = ''): string {
+   return typeof obj === 'string' ? obj : defaultValue
+ }
+ 
++export function getCountryLabel(code: keyof typeof translations.ru.countries): string {
++  return tValue(`countries.${code}`, code)
++}
++
++export function getFieldLabel(code: keyof typeof translations.ru.fields): string {
++  return tValue(`fields.${code}`, code)
++}
++
+ export { translations }

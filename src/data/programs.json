@@ -7,13 +7,44 @@
     "degree": "bachelor",
     "durationYears": 4,
     "netTuitionUsdPerYear": 0,
-    "languagesOfInstruction": ["en"],
-    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.0, "languageLevel": "B2" },
-    "deadlines": [
-      { "id": "d-nu-cs-1", "kind": "application", "date": "2027-01-20", "label": "Application deadline", "programId": "nu-cs", "sourceId": "src-nu", "isDemo": true },
-      { "id": "d-nu-cs-2", "kind": "documents", "date": "2027-02-10", "label": "Documents submission", "programId": "nu-cs", "sourceId": "src-nu", "isDemo": true }
+    "languagesOfInstruction": [
+      "en"
     ],
-    "sourceIds": ["src-nu"]
+    "requirements": {
+      "exams": [
+        {
+          "exam": "IELTS",
+          "minScore": 6.5
+        }
+      ],
+      "minGpa": 4,
+      "languageLevel": "B2"
+    },
+    "deadlines": [
+      {
+        "id": "d-nu-cs-1",
+        "kind": "application",
+        "date": "2027-01-20",
+        "label": "Application deadline",
+        "programId": "nu-cs",
+        "sourceId": "src-nu",
+        "isDemo": true,
+        "labelKey": "application-deadline"
+      },
+      {
+        "id": "d-nu-cs-2",
+        "kind": "documents",
+        "date": "2027-02-10",
+        "label": "Documents submission",
+        "programId": "nu-cs",
+        "sourceId": "src-nu",
+        "isDemo": true,
+        "labelKey": "documents-submission"
+      }
+    ],
+    "sourceIds": [
+      "src-nu"
+    ]
   },
   {
     "id": "nu-econ",
@@ -23,12 +54,34 @@
     "degree": "bachelor",
     "durationYears": 4,
     "netTuitionUsdPerYear": 0,
-    "languagesOfInstruction": ["en"],
-    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.0, "languageLevel": "B2" },
-    "deadlines": [
-      { "id": "d-nu-econ-1", "kind": "application", "date": "2027-01-20", "label": "Application deadline", "programId": "nu-econ", "sourceId": "src-nu", "isDemo": true }
+    "languagesOfInstruction": [
+      "en"
     ],
-    "sourceIds": ["src-nu"]
+    "requirements": {
+      "exams": [
+        {
+          "exam": "IELTS",
+          "minScore": 6.5
+        }
+      ],
+      "minGpa": 4,
+      "languageLevel": "B2"
+    },
+    "deadlines": [
+      {
+        "id": "d-nu-econ-1",
+        "kind": "application",
+        "date": "2027-01-20",
+        "label": "Application deadline",
+        "programId": "nu-econ",
+        "sourceId": "src-nu",
+        "isDemo": true,
+        "labelKey": "application-deadline"
+      }
+    ],
+    "sourceIds": [
+      "src-nu"
+    ]
   },
   {
     "id": "kbtu-cs",
@@ -38,12 +91,34 @@
     "degree": "bachelor",
     "durationYears": 4,
     "netTuitionUsdPerYear": 4200,
-    "languagesOfInstruction": ["en"],
-    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 5.5 }], "minGpa": 3.5, "languageLevel": "B1" },
-    "deadlines": [
-      { "id": "d-kbtu-cs-1", "kind": "application", "date": "2027-02-01", "label": "Application deadline", "programId": "kbtu-cs", "sourceId": "src-kbtu", "isDemo": true }
+    "languagesOfInstruction": [
+      "en"
     ],
-    "sourceIds": ["src-kbtu"]
+    "requirements": {
+      "exams": [
+        {
+          "exam": "IELTS",
+          "minScore": 5.5
+        }
+      ],
+      "minGpa": 3.5,
+      "languageLevel": "B1"
+    },
+    "deadlines": [
+      {
+        "id": "d-kbtu-cs-1",
+        "kind": "application",
+        "date": "2027-02-01",
+        "label": "Application deadline",
+        "programId": "kbtu-cs",
+        "sourceId": "src-kbtu",
+        "isDemo": true,
+        "labelKey": "application-deadline"
+      }
+    ],
+    "sourceIds": [
+      "src-kbtu"
+    ]
   },
   {
     "id": "kbtu-fin",
@@ -53,12 +128,34 @@
     "degree": "bachelor",
     "durationYears": 4,
     "netTuitionUsdPerYear": 4200,
-    "languagesOfInstruction": ["en"],
-    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 5.5 }], "minGpa": 3.5, "languageLevel": "B1" },
-    "deadlines": [
-      { "id": "d-kbtu-fin-1", "kind": "application", "date": "2027-02-01", "label": "Application deadline", "programId": "kbtu-fin", "sourceId": "src-kbtu", "isDemo": true }
+    "languagesOfInstruction": [
+      "en"
     ],
-    "sourceIds": ["src-kbtu"]
+    "requirements": {
+      "exams": [
+        {
+          "exam": "IELTS",
+          "minScore": 5.5
+        }
+      ],
+      "minGpa": 3.5,
+      "languageLevel": "B1"
+    },
+    "deadlines": [
+      {
+        "id": "d-kbtu-fin-1",
+        "kind": "application",
+        "date": "2027-02-01",
+        "label": "Application deadline",
+        "programId": "kbtu-fin",
+        "sourceId": "src-kbtu",
+        "isDemo": true,
+        "labelKey": "application-deadline"
+      }
+    ],
+    "sourceIds": [
+      "src-kbtu"
+    ]
   },
   {
     "id": "tum-cs",
@@ -68,13 +165,45 @@
     "degree": "bachelor",
     "durationYears": 3,
     "netTuitionUsdPerYear": 400,
-    "languagesOfInstruction": ["en", "de"],
-    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.0, "languageLevel": "C1" },
-    "deadlines": [
-      { "id": "d-tum-cs-1", "kind": "application", "date": "2027-01-15", "label": "Application window closes", "programId": "tum-cs", "sourceId": "src-tum", "isDemo": true },
-      { "id": "d-tum-cs-2", "kind": "documents", "date": "2027-03-01", "label": "Document review", "programId": "tum-cs", "sourceId": "src-tum", "isDemo": true }
+    "languagesOfInstruction": [
+      "en",
+      "de"
     ],
-    "sourceIds": ["src-tum"]
+    "requirements": {
+      "exams": [
+        {
+          "exam": "IELTS",
+          "minScore": 6.5
+        }
+      ],
+      "minGpa": 4,
+      "languageLevel": "C1"
+    },
+    "deadlines": [
+      {
+        "id": "d-tum-cs-1",
+        "kind": "application",
+        "date": "2027-01-15",
+        "label": "Application window closes",
+        "programId": "tum-cs",
+        "sourceId": "src-tum",
+        "isDemo": true,
+        "labelKey": "application-window-closes"
+      },
+      {
+        "id": "d-tum-cs-2",
+        "kind": "documents",
+        "date": "2027-03-01",
+        "label": "Document review",
+        "programId": "tum-cs",
+        "sourceId": "src-tum",
+        "isDemo": true,
+        "labelKey": "document-review"
+      }
+    ],
+    "sourceIds": [
+      "src-tum"
+    ]
   },
   {
     "id": "tum-mech",
@@ -84,12 +213,34 @@
     "degree": "bachelor",
     "durationYears": 3,
     "netTuitionUsdPerYear": 400,
-    "languagesOfInstruction": ["de"],
-    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.0, "languageLevel": "C1" },
-    "deadlines": [
-      { "id": "d-tum-mech-1", "kind": "application", "date": "2027-01-15", "label": "Application window closes", "programId": "tum-mech", "sourceId": "src-tum", "isDemo": true }
+    "languagesOfInstruction": [
+      "de"
     ],
-    "sourceIds": ["src-tum"]
+    "requirements": {
+      "exams": [
+        {
+          "exam": "IELTS",
+          "minScore": 6.5
+        }
+      ],
+      "minGpa": 4,
+      "languageLevel": "C1"
+    },
+    "deadlines": [
+      {
+        "id": "d-tum-mech-1",
+        "kind": "application",
+        "date": "2027-01-15",
+        "label": "Application window closes",
+        "programId": "tum-mech",
+        "sourceId": "src-tum",
+        "isDemo": true,
+        "labelKey": "application-window-closes"
+      }
+    ],
+    "sourceIds": [
+      "src-tum"
+    ]
   },
   {
     "id": "polimi-cs",
@@ -99,12 +250,34 @@
     "degree": "bachelor",
     "durationYears": 3,
     "netTuitionUsdPerYear": 3800,
-    "languagesOfInstruction": ["en"],
-    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.0 }], "minGpa": 3.8, "languageLevel": "B2" },
-    "deadlines": [
-      { "id": "d-polimi-cs-1", "kind": "application", "date": "2027-02-15", "label": "Application deadline (non-EU)", "programId": "polimi-cs", "sourceId": "src-polimi", "isDemo": true }
+    "languagesOfInstruction": [
+      "en"
     ],
-    "sourceIds": ["src-polimi"]
+    "requirements": {
+      "exams": [
+        {
+          "exam": "IELTS",
+          "minScore": 6
+        }
+      ],
+      "minGpa": 3.8,
+      "languageLevel": "B2"
+    },
+    "deadlines": [
+      {
+        "id": "d-polimi-cs-1",
+        "kind": "application",
+        "date": "2027-02-15",
+        "label": "Application deadline (non-EU)",
+        "programId": "polimi-cs",
+        "sourceId": "src-polimi",
+        "isDemo": true,
+        "labelKey": "application-deadline-non-eu"
+      }
+    ],
+    "sourceIds": [
+      "src-polimi"
+    ]
   },
   {
     "id": "polimi-design",
@@ -114,12 +287,35 @@
     "degree": "bachelor",
     "durationYears": 3,
     "netTuitionUsdPerYear": 3800,
-    "languagesOfInstruction": ["en", "it"],
-    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.0 }], "minGpa": 3.8, "languageLevel": "B2" },
-    "deadlines": [
-      { "id": "d-polimi-design-1", "kind": "application", "date": "2027-02-15", "label": "Application deadline (non-EU)", "programId": "polimi-design", "sourceId": "src-polimi", "isDemo": true }
+    "languagesOfInstruction": [
+      "en",
+      "it"
     ],
-    "sourceIds": ["src-polimi"]
+    "requirements": {
+      "exams": [
+        {
+          "exam": "IELTS",
+          "minScore": 6
+        }
+      ],
+      "minGpa": 3.8,
+      "languageLevel": "B2"
+    },
+    "deadlines": [
+      {
+        "id": "d-polimi-design-1",
+        "kind": "application",
+        "date": "2027-02-15",
+        "label": "Application deadline (non-EU)",
+        "programId": "polimi-design",
+        "sourceId": "src-polimi",
+        "isDemo": true,
+        "labelKey": "application-deadline-non-eu"
+      }
+    ],
+    "sourceIds": [
+      "src-polimi"
+    ]
   },
   {
     "id": "asu-cs",
@@ -129,13 +325,44 @@
     "degree": "bachelor",
     "durationYears": 4,
     "netTuitionUsdPerYear": 22000,
-    "languagesOfInstruction": ["en"],
-    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.0 }], "minGpa": 3.5, "languageLevel": "B2" },
-    "deadlines": [
-      { "id": "d-asu-cs-1", "kind": "application", "date": "2027-01-05", "label": "Priority application deadline", "programId": "asu-cs", "sourceId": "src-asu", "isDemo": true },
-      { "id": "d-asu-cs-2", "kind": "scholarship", "date": "2026-12-01", "label": "Scholarship consideration deadline", "programId": "asu-cs", "sourceId": "src-asu", "isDemo": true }
+    "languagesOfInstruction": [
+      "en"
     ],
-    "sourceIds": ["src-asu"]
+    "requirements": {
+      "exams": [
+        {
+          "exam": "IELTS",
+          "minScore": 6
+        }
+      ],
+      "minGpa": 3.5,
+      "languageLevel": "B2"
+    },
+    "deadlines": [
+      {
+        "id": "d-asu-cs-1",
+        "kind": "application",
+        "date": "2027-01-05",
+        "label": "Priority application deadline",
+        "programId": "asu-cs",
+        "sourceId": "src-asu",
+        "isDemo": true,
+        "labelKey": "priority-application-deadline"
+      },
+      {
+        "id": "d-asu-cs-2",
+        "kind": "scholarship",
+        "date": "2026-12-01",
+        "label": "Scholarship consideration deadline",
+        "programId": "asu-cs",
+        "sourceId": "src-asu",
+        "isDemo": true,
+        "labelKey": "scholarship-consideration-deadline"
+      }
+    ],
+    "sourceIds": [
+      "src-asu"
+    ]
   },
   {
     "id": "asu-biz",
@@ -145,12 +372,34 @@
     "degree": "bachelor",
     "durationYears": 4,
     "netTuitionUsdPerYear": 24000,
-    "languagesOfInstruction": ["en"],
-    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.0 }], "minGpa": 3.5, "languageLevel": "B2" },
-    "deadlines": [
-      { "id": "d-asu-biz-1", "kind": "application", "date": "2027-01-05", "label": "Priority application deadline", "programId": "asu-biz", "sourceId": "src-asu", "isDemo": true }
+    "languagesOfInstruction": [
+      "en"
     ],
-    "sourceIds": ["src-asu"]
+    "requirements": {
+      "exams": [
+        {
+          "exam": "IELTS",
+          "minScore": 6
+        }
+      ],
+      "minGpa": 3.5,
+      "languageLevel": "B2"
+    },
+    "deadlines": [
+      {
+        "id": "d-asu-biz-1",
+        "kind": "application",
+        "date": "2027-01-05",
+        "label": "Priority application deadline",
+        "programId": "asu-biz",
+        "sourceId": "src-asu",
+        "isDemo": true,
+        "labelKey": "priority-application-deadline"
+      }
+    ],
+    "sourceIds": [
+      "src-asu"
+    ]
   },
   {
     "id": "uoft-cs",
@@ -160,12 +409,34 @@
     "degree": "bachelor",
     "durationYears": 4,
     "netTuitionUsdPerYear": 45000,
-    "languagesOfInstruction": ["en"],
-    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.2, "languageLevel": "C1" },
-    "deadlines": [
-      { "id": "d-uoft-cs-1", "kind": "application", "date": "2027-01-15", "label": "Application deadline", "programId": "uoft-cs", "sourceId": "src-uoft", "isDemo": true }
+    "languagesOfInstruction": [
+      "en"
     ],
-    "sourceIds": ["src-uoft"]
+    "requirements": {
+      "exams": [
+        {
+          "exam": "IELTS",
+          "minScore": 6.5
+        }
+      ],
+      "minGpa": 4.2,
+      "languageLevel": "C1"
+    },
+    "deadlines": [
+      {
+        "id": "d-uoft-cs-1",
+        "kind": "application",
+        "date": "2027-01-15",
+        "label": "Application deadline",
+        "programId": "uoft-cs",
+        "sourceId": "src-uoft",
+        "isDemo": true,
+        "labelKey": "application-deadline"
+      }
+    ],
+    "sourceIds": [
+      "src-uoft"
+    ]
   },
   {
     "id": "uoft-life",
@@ -175,12 +446,34 @@
     "degree": "bachelor",
     "durationYears": 4,
     "netTuitionUsdPerYear": 47000,
-    "languagesOfInstruction": ["en"],
-    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.2, "languageLevel": "C1" },
-    "deadlines": [
-      { "id": "d-uoft-life-1", "kind": "application", "date": "2027-01-15", "label": "Application deadline", "programId": "uoft-life", "sourceId": "src-uoft", "isDemo": true }
+    "languagesOfInstruction": [
+      "en"
     ],
-    "sourceIds": ["src-uoft"]
+    "requirements": {
+      "exams": [
+        {
+          "exam": "IELTS",
+          "minScore": 6.5
+        }
+      ],
+      "minGpa": 4.2,
+      "languageLevel": "C1"
+    },
+    "deadlines": [
+      {
+        "id": "d-uoft-life-1",
+        "kind": "application",
+        "date": "2027-01-15",
+        "label": "Application deadline",
+        "programId": "uoft-life",
+        "sourceId": "src-uoft",
+        "isDemo": true,
+        "labelKey": "application-deadline"
+      }
+    ],
+    "sourceIds": [
+      "src-uoft"
+    ]
   },
   {
     "id": "manchester-cs",
@@ -190,12 +483,34 @@
     "degree": "bachelor",
     "durationYears": 3,
     "netTuitionUsdPerYear": 30000,
-    "languagesOfInstruction": ["en"],
-    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.0, "languageLevel": "B2" },
-    "deadlines": [
-      { "id": "d-man-cs-1", "kind": "application", "date": "2027-01-14", "label": "UCAS equal consideration deadline", "programId": "manchester-cs", "sourceId": "src-manchester", "isDemo": true }
+    "languagesOfInstruction": [
+      "en"
     ],
-    "sourceIds": ["src-manchester"]
+    "requirements": {
+      "exams": [
+        {
+          "exam": "IELTS",
+          "minScore": 6.5
+        }
+      ],
+      "minGpa": 4,
+      "languageLevel": "B2"
+    },
+    "deadlines": [
+      {
+        "id": "d-man-cs-1",
+        "kind": "application",
+        "date": "2027-01-14",
+        "label": "UCAS equal consideration deadline",
+        "programId": "manchester-cs",
+        "sourceId": "src-manchester",
+        "isDemo": true,
+        "labelKey": "ucas-equal-consideration-deadline"
+      }
+    ],
+    "sourceIds": [
+      "src-manchester"
+    ]
   },
   {
     "id": "manchester-mgmt",
@@ -205,12 +520,34 @@
     "degree": "bachelor",
     "durationYears": 3,
     "netTuitionUsdPerYear": 28000,
-    "languagesOfInstruction": ["en"],
-    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.0, "languageLevel": "B2" },
-    "deadlines": [
-      { "id": "d-man-mgmt-1", "kind": "application", "date": "2027-01-14", "label": "UCAS equal consideration deadline", "programId": "manchester-mgmt", "sourceId": "src-manchester", "isDemo": true }
+    "languagesOfInstruction": [
+      "en"
     ],
-    "sourceIds": ["src-manchester"]
+    "requirements": {
+      "exams": [
+        {
+          "exam": "IELTS",
+          "minScore": 6.5
+        }
+      ],
+      "minGpa": 4,
+      "languageLevel": "B2"
+    },
+    "deadlines": [
+      {
+        "id": "d-man-mgmt-1",
+        "kind": "application",
+        "date": "2027-01-14",
+        "label": "UCAS equal consideration deadline",
+        "programId": "manchester-mgmt",
+        "sourceId": "src-manchester",
+        "isDemo": true,
+        "labelKey": "ucas-equal-consideration-deadline"
+      }
+    ],
+    "sourceIds": [
+      "src-manchester"
+    ]
   },
   {
     "id": "tue-cs",
@@ -220,13 +557,44 @@
     "degree": "bachelor",
     "durationYears": 3,
     "netTuitionUsdPerYear": 16000,
-    "languagesOfInstruction": ["en"],
-    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.0, "languageLevel": "B2" },
-    "deadlines": [
-      { "id": "d-tue-cs-1", "kind": "application", "date": "2027-01-15", "label": "Non-EU application deadline", "programId": "tue-cs", "sourceId": "src-tue", "isDemo": true },
-      { "id": "d-tue-cs-2", "kind": "scholarship", "date": "2027-02-01", "label": "Holland Scholarship deadline", "programId": "tue-cs", "sourceId": "src-tue", "isDemo": true }
+    "languagesOfInstruction": [
+      "en"
     ],
-    "sourceIds": ["src-tue"]
+    "requirements": {
+      "exams": [
+        {
+          "exam": "IELTS",
+          "minScore": 6.5
+        }
+      ],
+      "minGpa": 4,
+      "languageLevel": "B2"
+    },
+    "deadlines": [
+      {
+        "id": "d-tue-cs-1",
+        "kind": "application",
+        "date": "2027-01-15",
+        "label": "Non-EU application deadline",
+        "programId": "tue-cs",
+        "sourceId": "src-tue",
+        "isDemo": true,
+        "labelKey": "non-eu-application-deadline"
+      },
+      {
+        "id": "d-tue-cs-2",
+        "kind": "scholarship",
+        "date": "2027-02-01",
+        "label": "Holland Scholarship deadline",
+        "programId": "tue-cs",
+        "sourceId": "src-tue",
+        "isDemo": true,
+        "labelKey": "holland-scholarship-deadline"
+      }
+    ],
+    "sourceIds": [
+      "src-tue"
+    ]
   },
   {
     "id": "tue-bme",
@@ -236,11 +604,33 @@
     "degree": "bachelor",
     "durationYears": 3,
     "netTuitionUsdPerYear": 16000,
-    "languagesOfInstruction": ["en"],
-    "requirements": { "exams": [{ "exam": "IELTS", "minScore": 6.5 }], "minGpa": 4.0, "languageLevel": "B2" },
-    "deadlines": [
-      { "id": "d-tue-bme-1", "kind": "application", "date": "2027-01-15", "label": "Non-EU application deadline", "programId": "tue-bme", "sourceId": "src-tue", "isDemo": true }
+    "languagesOfInstruction": [
+      "en"
     ],
-    "sourceIds": ["src-tue"]
+    "requirements": {
+      "exams": [
+        {
+          "exam": "IELTS",
+          "minScore": 6.5
+        }
+      ],
+      "minGpa": 4,
+      "languageLevel": "B2"
+    },
+    "deadlines": [
+      {
+        "id": "d-tue-bme-1",
+        "kind": "application",
+        "date": "2027-01-15",
+        "label": "Non-EU application deadline",
+        "programId": "tue-bme",
+        "sourceId": "src-tue",
+        "isDemo": true,
+        "labelKey": "non-eu-application-deadline"
+      }
+    ],
+    "sourceIds": [
+      "src-tue"
+    ]
   }
 ]

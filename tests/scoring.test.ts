@@ -34,7 +34,8 @@ describe('scoring engine', () => {
     const local = computeScore(PROGRAM_BY_ID['nu-cs'], UNIVERSITY_BY_ID['nu'], profile, now)
     const expensive = computeScore(PROGRAM_BY_ID['uoft-cs'], UNIVERSITY_BY_ID['uoft'], profile, now)
     expect(local.score).toBeGreaterThan(expensive.score)
-    expect(expensive.warnings.join(' ')).toMatch(/above your budget/)
+    // warnings are localized — match both the English and the Russian phrasing
+    expect(expensive.warnings.join(' ')).toMatch(/above your budget|превышает ваш бюджет/)
   })
 
   it('drops confidence when exam and GPA are missing', () => {

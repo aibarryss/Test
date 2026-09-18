@@ -1,12 +1,14 @@
 import { Icon } from './primitives'
+import { LanguageSwitcher } from './LanguageSwitcher'
+import { t } from '../lib/i18n'
 
 export const NAV = [
-  { path: '/profile', label: 'Profile', short: 'Profile', num: 1 },
-  { path: '/diagnosis', label: 'Diagnosis', short: 'Diagnose', num: 2 },
-  { path: '/recommendations', label: 'Recommendations', short: 'Matches', num: 3 },
-  { path: '/comparison', label: 'Compare', short: 'Compare', num: 4 },
-  { path: '/roadmap', label: 'Roadmap', short: 'Roadmap', num: 5 }
-]
+  { path: '/profile', labelKey: 'profile', shortKey: 'profile', num: 1 },
+  { path: '/diagnosis', labelKey: 'diagnosis', shortKey: 'diagnose', num: 2 },
+  { path: '/recommendations', labelKey: 'recommendations', shortKey: 'matches', num: 3 },
+  { path: '/comparison', labelKey: 'comparison', shortKey: 'comparison', num: 4 },
+  { path: '/roadmap', labelKey: 'roadmap', shortKey: 'roadmap', num: 5 }
+] as const
 
 export function Logo({ size = 34 }: { size?: number }) {
   return (
@@ -37,14 +39,16 @@ export function TopBar({
   aiEnabled: boolean
   onToggleAI: (v: boolean) => void
 }) {
+  const nav = t('nav')
+  const topbar = t('topbar')
   return (
     <header className="topbar">
       <div className="topbar-inner">
-        <button className="brand" onClick={() => onNavigate('/')} title="Home">
+        <button className="brand" onClick={() => onNavigate('/')} title={topbar.homeTitle}>
           <Logo />
           <span className="brand-text">
             <span className="brand-name">Pathly</span>
-            <span className="brand-sub">Admissions Dossier</span>
+            <span className="brand-sub">{topbar.brandSub}</span>
           </span>
         </button>
 
@@ -57,19 +61,20 @@ export function TopBar({
               disabled={!canGo(n.path)}
               style={!canGo(n.path) ? { opacity: 0.45, cursor: 'not-allowed' } : undefined}
             >
-              {n.num}. {n.label}
+              {n.num}. {nav[n.labelKey]}
             </button>
           ))}
         </nav>
 
         <div className="topbar-right">
-          <span className="readiness" title="Profile completeness and roadmap progress">
+          <LanguageSwitcher />
+          <span className="readiness" title={topbar.readinessTitle}>
             <span className="pulse" />
-            {readiness}% readiness
+            {readiness}% {topbar.readiness}
           </span>
-          <label className="toggle" title="AI explanations can be turned off — the deterministic fallback always works">
+          <label className="toggle" title={topbar.aiTitle}>
             <input type="checkbox" checked={aiEnabled} onChange={(e) => onToggleAI(e.target.checked)} />
-            AI
+            {topbar.aiLabel}
           </label>
           <span className="avatar">A</span>
         </div>
@@ -94,11 +99,12 @@ export function BottomNav({
     '/comparison': 'balance',
     '/roadmap': 'route'
   }
+  const nav = t('nav')
   return (
     <nav className="bottom-nav">
       <button className={path === '/' ? 'active' : ''} onClick={() => onNavigate('/')}>
         <Icon name="home" size={20} />
-        Home
+        {nav.home}
       </button>
       {NAV.map((n) => (
         <button
@@ -108,7 +114,7 @@ export function BottomNav({
           disabled={!canGo(n.path)}
         >
           <Icon name={icons[n.path]} size={20} />
-          {n.short}
+          {nav[n.shortKey]}
         </button>
       ))}
     </nav>

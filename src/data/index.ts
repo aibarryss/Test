@@ -1,12 +1,16 @@
 import type {
   CountryCode,
+  Deadline,
   DiagnosisQuestion,
+  LocalizedQuestion,
+  LocalizedRoadmapTemplate,
   Program,
   RoadmapTemplate,
   Source,
   University,
   UserProfile
 } from '../lib/types'
+import { tValue } from '../lib/i18n'
 
 import universitiesRaw from './universities.json'
 import programsRaw from './programs.json'
@@ -61,6 +65,36 @@ export function countriesOfPrograms(list: Program[] = PROGRAMS): CountryCode[] {
     if (u) set.add(u.country)
   })
   return Array.from(set)
+}
+
+/**
+ * Resolve diagnosis questions into the active language. The JSON only stores
+ * i18n keys, so this is the only way to get readable prompts and option labels.
+ */
+export function localizedQuestions(): LocalizedQuestion[] {
+  return DIAGNOSIS_QUESTIONS.map((q: DiagnosisQuestion) => ({
+    id: q.id,
+    prompt: tValue(q.promptKey, q.id),
+    helper: q.helperKey ? tValue(q.helperKey, '') : undefined,
+    options: q.options.map((o) => ({ value: o.value, label: tValue(o.labelKey, o.value) }))
+  }))
+}
+
+/** Resolve roadmap templates into the active language. */
+export function localizedTemplates(): LocalizedRoadmapTemplate[] {
+  return ROADMAP_TEMPLATES.map((t: RoadmapTemplate) => ({
+    id: t.id,
+    phase: t.phase,
+    title: tValue(t.titleKey, t.id),
+    description: tValue(t.descriptionKey, ''),
+    priority: t.priority,
+    trigger: t.trigger
+  }))
+}
+
+/** Resolve a deadline label, falling back to the raw label when no key exists. */
+export function localizedDeadlineLabel(d: Deadline): string {
+  return d.labelKey ? tValue(`deadlines.${d.labelKey}`, d.label) : d.label
 }
 
 export type { UserProfile }

@@ -1,58 +1,58 @@
 [
   {
     "id": "q-routine",
-    "prompt": "How consistent are your study habits across a normal week?",
-    "helper": "Think about the last month, not an ideal week.",
+    "promptKey": "questions.q-routine.prompt",
+    "helperKey": "questions.q-routine.helper",
     "options": [
-      { "value": "high", "label": "Very consistent — I plan and follow through" },
-      { "value": "mid", "label": "Mostly consistent with some slips" },
-      { "value": "low", "label": "I study mostly before deadlines" }
+      { "value": "high", "labelKey": "questions.q-routine.high" },
+      { "value": "mid", "labelKey": "questions.q-routine.mid" },
+      { "value": "low", "labelKey": "questions.q-routine.low" }
     ]
   },
   {
     "id": "q-math",
-    "prompt": "How comfortable are you with advanced mathematics?",
+    "promptKey": "questions.q-math.prompt",
     "options": [
-      { "value": "strong", "label": "Strong — I enjoy it and score high" },
-      { "value": "ok", "label": "Okay — I manage with effort" },
-      { "value": "weak", "label": "It is my hardest subject" }
+      { "value": "strong", "labelKey": "questions.q-math.strong" },
+      { "value": "ok", "labelKey": "questions.q-math.ok" },
+      { "value": "weak", "labelKey": "questions.q-math.weak" }
     ]
   },
   {
     "id": "q-english",
-    "prompt": "How confident are you speaking and writing in English?",
+    "promptKey": "questions.q-english.prompt",
     "options": [
-      { "value": "b2", "label": "Confident — I can study fully in English" },
-      { "value": "b1", "label": "I manage everyday topics" },
-      { "value": "a2", "label": "Still building basics" }
+      { "value": "b2", "labelKey": "questions.q-english.b2" },
+      { "value": "b1", "labelKey": "questions.q-english.b1" },
+      { "value": "a2", "labelKey": "questions.q-english.a2" }
     ]
   },
   {
     "id": "q-exam-ready",
-    "prompt": "Have you already taken a standardised exam (IELTS / SAT / ENT)?",
+    "promptKey": "questions.q-exam-ready.prompt",
     "options": [
-      { "value": "yes", "label": "Yes, I have a score" },
-      { "value": "planned", "label": "Not yet, but I have a date planned" },
-      { "value": "no", "label": "Not yet and no plan" }
+      { "value": "yes", "labelKey": "questions.q-exam-ready.yes" },
+      { "value": "planned", "labelKey": "questions.q-exam-ready.planned" },
+      { "value": "no", "labelKey": "questions.q-exam-ready.no" }
     ]
   },
   {
     "id": "q-project",
-    "prompt": "Do you have a project, portfolio or competition result?",
-    "helper": "Anything you could show on an application.",
+    "promptKey": "questions.q-project.prompt",
+    "helperKey": "questions.q-project.helper",
     "options": [
-      { "value": "yes", "label": "Yes, a strong one" },
-      { "value": "small", "label": "Something small" },
-      { "value": "no", "label": "Nothing yet" }
+      { "value": "yes", "labelKey": "questions.q-project.yes" },
+      { "value": "small", "labelKey": "questions.q-project.small" },
+      { "value": "no", "labelKey": "questions.q-project.no" }
     ]
   },
   {
     "id": "q-mobility",
-    "prompt": "How ready are you to study abroad, away from home?",
+    "promptKey": "questions.q-mobility.prompt",
     "options": [
-      { "value": "ready", "label": "Very ready — that is my goal" },
-      { "value": "mixed", "label": "Open to it, but cautious" },
-      { "value": "home", "label": "I would prefer to stay in my country" }
+      { "value": "ready", "labelKey": "questions.q-mobility.ready" },
+      { "value": "mixed", "labelKey": "questions.q-mobility.mixed" },
+      { "value": "home", "labelKey": "questions.q-mobility.home" }
     ]
   }
 ]

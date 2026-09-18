@@ -1,14 +1,16 @@
 ﻿import type {
   ExamId,
+  LocalizedRoadmapTemplate,
   Program,
   Recommendation,
   Roadmap,
   RoadmapStep,
-  RoadmapTemplate,
   University,
   UserProfile
 } from '../../lib/types'
 import { addDays } from '../../lib/format'
+import { localizedDeadlineLabel } from '../../data'
+import { tr, tValue } from '../../lib/i18n'
 import { computeNextAction } from '../progress/progressStore'
 
 const PHASE_ORDER: Record<RoadmapStep['phase'], number> = {
@@ -24,12 +26,15 @@ export interface BuildRoadmapInput {
   recommendations: Recommendation[]
   programMap: Record<string, Program>
   uniMap: Record<string, University>
-  templates: RoadmapTemplate[]
+  templates: LocalizedRoadmapTemplate[]
   now?: Date
 }
 
+type ResolvedTemplate = Omit<LocalizedRoadmapTemplate, 'trigger'> & { trigger: string }
+
 export function buildRoadmap(input: BuildRoadmapInput): Roadmap {
-  const { profile, recommendations, programMap, uniMap, templates } = input
+  const { profile, recommendations, programMap, uniMap } = input
+  const templates = input.templates as ResolvedTemplate[]
   const now = input.now ?? new Date()
 
   const selected = recommendations.slice(0, 3)
@@ -71,8 +76,11 @@ export function buildRoadmap(input: BuildRoadmapInput): Roadmap {
     items.push({
       id: nextId('ex'),
       phase: 'exams',
-      title: `Reach ${examGap.exam} ${examGap.min.toFixed(1)}${cur != null ? ` (you have ${cur.toFixed(1)})` : ' (no score yet)'}`,
-      description: base?.description ?? 'Close the gap between your current exam score and the requirement.',
+      title:
+        cur != null
+          ? tr('engine.rsExamGapWithScore', { exam: examGap.exam, min: examGap.min.toFixed(1), cur: cur.toFixed(1) })
+          : tr('engine.rsExamGapNoScore', { exam: examGap.exam, min: examGap.min.toFixed(1) }),
+      description: base?.description ?? tValue('engine.rsExamGapDesc'),
       dueDate: earliest ? addDays(earliest, -75) : undefined,
       status: 'todo',
       priority: 1,
@@ -83,8 +91,8 @@ export function buildRoadmap(input: BuildRoadmapInput): Roadmap {
     items.push({
       id: nextId('ex'),
       phase: 'exams',
-      title: 'Take the required standardised exam',
-      description: base?.description ?? 'Sit the exam before the application windows close.',
+      title: tValue('engine.rsExamAlways'),
+      description: base?.description ?? tValue('engine.rsExamAlwaysDesc'),
       dueDate: earliest ? addDays(earliest, -75) : undefined,
       status: 'todo',
       priority: 1,
@@ -94,10 +102,10 @@ export function buildRoadmap(input: BuildRoadmapInput): Roadmap {
 
   // ---- documents -----------------------------------------------------------
   const docOffsets: Record<string, number> = {
-    'Prepare your academic transcript and GPA report': -60,
-    'Write your motivation letter': -50,
-    'Request two recommendation letters': -45,
-    'Prepare your passport and ID documents': -35
+    'doc-transcript': -60,
+    'doc-motivation': -50,
+    'doc-recommendations': -45,
+    'doc-passport': -35
   }
   for (const t of templates.filter((x) => x.phase === 'documents')) {
     items.push({
@@ -105,7 +113,7 @@ export function buildRoadmap(input: BuildRoadmapInput): Roadmap {
       phase: 'documents',
       title: t.title,
       description: t.description,
-      dueDate: earliest ? addDays(earliest, docOffsets[t.title] ?? -40) : undefined,
+      dueDate: earliest ? addDays(earliest, docOffsets[t.id] ?? -40) : undefined,
       status: 'todo',
       priority: t.priority,
       sourceIds: []
@@ -117,18 +125,18 @@ export function buildRoadmap(input: BuildRoadmapInput): Roadmap {
     for (const d of x.program.deadlines) {
       const isScholarship = d.kind === 'scholarship'
       const title = isScholarship
-        ? `Apply for funding — ${x.uni.name}`
+        ? tr('engine.rsApplyFunding', { uni: x.uni.name })
         : d.kind === 'documents'
-          ? `Submit documents — ${x.uni.name} (${x.program.name})`
-          : `Submit application — ${x.uni.name} (${x.program.name})`
+          ? tr('engine.rsSubmitDocuments', { uni: x.uni.name, program: x.program.name })
+          : tr('engine.rsSubmitApplication', { uni: x.uni.name, program: x.program.name })
       items.push({
         id: nextId('dl'),
         phase: 'deadlines',
         title,
-        description: `${d.label} · ${x.program.name}. ${d.isDemo ? 'Demonstrative date — verify on the official page.' : 'Verified date.'}`,
+        description: `${localizedDeadlineLabel(d)} · ${x.program.name}. ${d.isDemo ? tValue('engine.rsDemoDateNote') : tValue('engine.rsVerifiedDateNote')}`,
         dueDate: d.date,
         status: 'todo',
-        priority: isScholarship ? 1 : 1,
+        priority: 1,
         linkedProgramId: x.program.id,
         sourceIds: d.sourceId ? [d.sourceId] : x.program.sourceIds,
         isDemo: d.isDemo
@@ -152,8 +160,8 @@ export function buildRoadmap(input: BuildRoadmapInput): Roadmap {
     items.push({
       id: nextId('fund'),
       phase: 'deadlines',
-      title: base?.title ?? 'Apply for a scholarship',
-      description: base?.description ?? 'Your budget is below the tuition cost of a shortlisted program.',
+      title: base?.title ?? tValue('engine.rsScholarshipFallbackTitle'),
+      description: base?.description ?? tValue('engine.rsScholarshipFallbackDesc'),
       dueDate: scholarshipDeadline ?? earliest,
       status: 'todo',
       priority: 1,
@@ -173,7 +181,7 @@ export function buildRoadmap(input: BuildRoadmapInput): Roadmap {
       id: nextId('ac'),
       phase: 'academic',
       title: gpaGap
-        ? `Raise your GPA to ${targetGpa.toFixed(2)} (now ${profile.gpa.toFixed(2)})`
+        ? tr('engine.rsRaiseGpa', { target: targetGpa.toFixed(2), current: profile.gpa.toFixed(2) })
         : academicTpl.title,
       description: academicTpl.description,
       dueDate: undefined,

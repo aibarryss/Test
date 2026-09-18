@@ -1,5 +1,6 @@
 import React from 'react'
 import type { Fit, ScoreFactor } from '../lib/types'
+import { t } from '../lib/i18n'
 
 export function Icon({ name, size = 20 }: { name: string; size?: number }) {
   return (
@@ -73,7 +74,8 @@ export function fitTone(fit: Fit): 'fit-high' | 'fit-medium' | 'fit-low' {
 }
 
 export function fitLabel(fit: Fit): string {
-  return fit === 'high' ? 'Strong fit' : fit === 'medium' ? 'Moderate fit' : 'Stretch'
+  const rec = t('recommendations')
+  return fit === 'high' ? rec.strongFit : fit === 'medium' ? rec.moderateFit : rec.stretch
 }
 
 export function Chip({
@@ -118,7 +120,7 @@ export function FactorBar({ factor }: { factor: ScoreFactor }) {
     <div className={['factor', factor.known ? '' : 'unknown'].filter(Boolean).join(' ')}>
       <span className="factor-label">
         {factor.label}
-        {!factor.known && <span className="helper" style={{ marginLeft: 6 }}>·no data</span>}
+        {!factor.known && <span className="helper" style={{ marginLeft: 6 }}>·{t('common').noData}</span>}
       </span>
       <span className="factor-track">
         <span className={['factor-fill', tone].filter(Boolean).join(' ')} style={{ width: `${pct}%` }} />

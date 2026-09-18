@@ -7,6 +7,8 @@ import type {
 } from '../../lib/types'
 import { hardFilter } from './filter'
 import { computeScore } from './scoring'
+import { formatUsd } from '../../lib/format'
+import { tr } from '../../lib/i18n'
 
 export const MIN_SCORE = 45
 export const TOP_N = 5
@@ -68,12 +70,10 @@ export function recommend(
 function buildNotes(removedCount: number, found: number): string[] {
   const notes: string[] = []
   if (removedCount > 0) {
-    notes.push(
-      `${removedCount} program${removedCount > 1 ? 's were' : ' was'} removed: net cost is far above your budget with no scholarship path.`
-    )
+    notes.push(tr('recommendations.recommendationNotesRemoved', { count: removedCount }))
   }
   if (found < OPTIMAL_COUNT) {
-    notes.push(`Only ${found} strong match${found === 1 ? '' : 'es'} found — relaxed options are shown below.`)
+    notes.push(tr('recommendations.recommendationNotesFound', { count: found }))
   }
   return notes
 }
@@ -109,7 +109,12 @@ export function buildSuggestions(
     .map((x) => x.p.netTuitionUsdPerYear - profile.budgetUsdPerYear)
   if (moneyGap.length) {
     const gap = Math.round(Math.min(...moneyGap) / 500) * 500
-    if (gap > 0) suggestions.push({ kind: 'budget', text: `Raising your budget by about $${gap.toLocaleString('en-US')}/year unlocks the cheapest blocked option.` })
+    if (gap > 0) {
+      suggestions.push({
+        kind: 'budget',
+        text: tr('recommendations.suggestionBudget', { gap: formatUsd(gap) })
+      })
+    }
   }
 
   const countryCandidates = new Map<string, number>()
@@ -120,12 +125,18 @@ export function buildSuggestions(
   }
   if (countryCandidates.size) {
     const best = Array.from(countryCandidates.entries()).sort((a, b) => b[1] - a[1])[0]
-    suggestions.push({ kind: 'country', text: `Adding ${best[0]} to your target countries would surface strong options (best local score ${Math.round(best[1])}).` })
+    suggestions.push({
+      kind: 'country',
+      text: tr('recommendations.suggestionCountry', { country: best[0], score: Math.round(best[1]) })
+    })
   }
 
   const examGap = relaxed.find((x) => x.s.breakdown.find((f) => f.key === 'academic' && f.normalized < 0.75))
   if (examGap) {
-    suggestions.push({ kind: 'exam', text: `Improving your exam scores would lift several programs — start with ${PROGRAM_LABEL(examGap.p)}.` })
+    suggestions.push({
+      kind: 'exam',
+      text: tr('recommendations.suggestionExam', { program: PROGRAM_LABEL(examGap.p) })
+    })
   }
 
   return suggestions.slice(0, 3)

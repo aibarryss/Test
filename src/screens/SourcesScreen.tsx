@@ -1,63 +1,61 @@
 import { SOURCES, UNIVERSITIES, PROGRAMS } from '../data'
 import { Badge, Card, Notice } from '../ui/primitives'
+import { t } from '../lib/i18n'
 
 export function SourcesScreen() {
-  const official = SOURCES.filter((s) => s.kind === 'official')
-  const demo = SOURCES.filter((s) => s.kind === 'demo')
+  const s = t('sources')
+  const official = SOURCES.filter((x) => x.kind === 'official')
+  const demo = SOURCES.filter((x) => x.kind === 'demo')
 
   return (
     <div>
       <div className="hero" style={{ paddingTop: 10, paddingBottom: 6 }}>
         <span className="eyebrow">
-          <span className="dot dot-ochre" /> Transparency
+          <span className="dot dot-ochre" /> {s.step}
         </span>
-        <h1 style={{ fontSize: 30 }}>Data &amp; sources</h1>
-        <p className="lead">
-          Facts carry sources. Anything we could not verify against an official page is labelled as
-          demonstrative data — on the card, in the comparison and in the roadmap.
-        </p>
+        <h1 style={{ fontSize: 30 }}>{s.title}</h1>
+        <p className="lead">{s.description}</p>
       </div>
 
       <div className="metrics" style={{ marginBottom: 14 }}>
         <div className="metric">
           <div className="v">{UNIVERSITIES.length}</div>
-          <div className="l">Universities in dataset</div>
+          <div className="l">{s.universitiesInDataset}</div>
         </div>
         <div className="metric">
           <div className="v">{PROGRAMS.length}</div>
-          <div className="l">Programs</div>
+          <div className="l">{s.programsInDataset}</div>
         </div>
         <div className="metric">
           <div className="v">{official.length}</div>
-          <div className="l">Official source links</div>
+          <div className="l">{s.officialLinks}</div>
         </div>
         <div className="metric">
           <div className="v">{demo.length}</div>
-          <div className="l">Demonstrative entries</div>
+          <div className="l">{s.demoEntries}</div>
         </div>
       </div>
 
       <Notice tone="warn" icon="warning">
-        Numeric values in this MVP (tuition, exam thresholds, deadlines) are demonstrative. Source links point to
-        the official admissions sections so each figure can be verified before submission.
+        {s.valuesDemoNotice}
       </Notice>
 
       <Card className="card" >
         <div className="card-head">
-          <span className="card-title">Official sources</span>
-          <Badge tone="fit-high">verified links</Badge>
+          <span className="card-title">{s.officialSourcesTitle}</span>
+          <Badge tone="fit-high">{s.verifiedLinks}</Badge>
         </div>
         <div className="stack">
-          {official.map((s) => (
-            <div key={s.id} className="spread" style={{ gap: 12, alignItems: 'flex-start' }}>
+          {official.map((x) => (
+            <div key={x.id} className="spread" style={{ gap: 12, alignItems: 'flex-start' }}>
               <div style={{ minWidth: 0 }}>
-                <a href={s.url} target="_blank" rel="noreferrer" style={{ fontWeight: 700 }}>
-                  {s.title}
+                <a href={x.url} target="_blank" rel="noreferrer" style={{ fontWeight: 700 }}>
+                  {x.title}
                 </a>
-                <div className="helper">{s.url}</div>
-                {s.note && <div className="helper" style={{ marginTop: 2 }}>{s.note}</div>}
+                <div className="helper">{x.url}</div>
+                {x.note && <div className="helper" style={{ marginTop: 2 }}>{x.note}</div>}
               </div>
-              <Badge tone="neutral">{s.accessedAt ?? 'n/a'}</Badge>
+              <Badge tone="neutral">{x.accessedAt ?? s.notAvailable}</Badge>
             </div>
           ))}
         </div>
@@ -66,14 +64,14 @@ export function SourcesScreen() {
       {demo.length > 0 && (
         <Card>
           <div className="card-head">
-            <span className="card-title">Demonstrative entries</span>
-            <Badge tone="demo">demo data</Badge>
+            <span className="card-title">{s.demoEntriesTitle}</span>
+            <Badge tone="demo">{s.demo}</Badge>
           </div>
           <div className="stack">
-            {demo.map((s) => (
-              <div key={s.id}>
-                <div style={{ fontWeight: 700 }}>{s.title}</div>
-                {s.note && <div className="helper">{s.note}</div>}
+            {demo.map((x) => (
+              <div key={x.id}>
+                <div style={{ fontWeight: 700 }}>{x.title}</div>
+                {x.note && <div className="helper">{x.note}</div>}
               </div>
             ))}
           </div>
@@ -82,13 +80,13 @@ export function SourcesScreen() {
 
       <Card>
         <div className="section-title" style={{ marginTop: 0 }}>
-          Methodology
+          {s.methodology}
         </div>
         <ul style={{ margin: 0, paddingLeft: 18 }}>
-          <li>Every recommendation is produced by a deterministic 7-factor weighted score — not by a language model.</li>
-          <li>The model only rephrases facts the engine already computed, and always has a template fallback.</li>
-          <li>Hard filters remove only what is clearly impossible; country, subject and cost stay as weighted factors.</li>
-          <li>Missing data lowers the confidence badge instead of inventing a value.</li>
+          <li>{s.methodology1}</li>
+          <li>{s.methodology2}</li>
+          <li>{s.methodology3}</li>
+          <li>{s.methodology4}</li>
         </ul>
       </Card>
     </div>

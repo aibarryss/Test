@@ -1,0 +1,92 @@
+﻿git : warning: in the working copy of 
+'src/data/diagnosis-questions.json', LF will be 
+replaced by CRLF the next time Git touches it
+At line:1 char:66
++ ... Test'; $env:LC_ALL='C.UTF-8'; git --no-pager 
+diff --stat 2>&1 | Out-F ...
++                                   
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (warning: 
+    in the... Git touches it:String) [], RemoteExcep  
+  tion
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+warning: in the working copy of 'src/data/index.ts', 
+LF will be replaced by CRLF the next time Git touches 
+it
+warning: in the working copy of 
+'src/data/programs.json', LF will be replaced by CRLF 
+the next time Git touches it
+warning: in the working copy of 
+'src/data/roadmap-templates.json', LF will be 
+replaced by CRLF the next time Git touches it
+warning: in the working copy of 
+'src/features/diagnosis/diagnosisEngine.ts', LF will 
+be replaced by CRLF the next time Git touches it
+warning: in the working copy of 
+'src/features/matching/recommend.ts', LF will be 
+replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/lib/format.ts', 
+LF will be replaced by CRLF the next time Git touches 
+it
+warning: in the working copy of 'src/lib/types.ts', 
+LF will be replaced by CRLF the next time Git touches 
+it
+warning: in the working copy of 
+'src/screens/ComparisonScreen.tsx', LF will be 
+replaced by CRLF the next time Git touches it
+warning: in the working copy of 
+'src/screens/DiagnosisScreen.tsx', LF will be 
+replaced by CRLF the next time Git touches it
+warning: in the working copy of 
+'src/screens/LandingScreen.tsx', LF will be replaced 
+by CRLF the next time Git touches it
+warning: in the working copy of 
+'src/screens/RecommendationsScreen.tsx', LF will be 
+replaced by CRLF the next time Git touches it
+warning: in the working copy of 
+'src/screens/RoadmapScreen.tsx', LF will be replaced 
+by CRLF the next time Git touches it
+warning: in the working copy of 
+'src/screens/SourcesScreen.tsx', LF will be replaced 
+by CRLF the next time Git touches it
+warning: in the working copy of 
+'src/state/AppState.tsx', LF will be replaced by CRLF 
+the next time Git touches it
+warning: in the working copy of 'src/ui/layout.tsx', 
+LF will be replaced by CRLF the next time Git touches 
+it
+warning: in the working copy of 
+'src/ui/primitives.tsx', LF will be replaced by CRLF 
+the next time Git touches it
+warning: in the working copy of 
+'tests/roadmap.test.ts', LF will be replaced by CRLF 
+the next time Git touches it
+warning: in the working copy of 
+'tests/scoring.test.ts', LF will be replaced by CRLF 
+the next time Git touches it
+ src/App.tsx                               |   7 +-
+ src/data/diagnosis-questions.json         |  52 +-
+ src/data/index.ts                         |  34 ++
+ src/data/programs.json                    | 526 +++++++++++++++++---
+ src/data/roadmap-templates.json           |  60 ++-
+ src/features/diagnosis/diagnosisEngine.ts |  69 +--
+ src/features/matching/recommend.ts        |  25 +-
+ src/features/matching/scoring.ts          |  28 +-
+ src/features/roadmap/roadmapEngine.ts     |  48 +-
+ src/lib/format.ts                         |  17 +-
+ src/lib/i18n.ts                           | 772 ++++++++++++++++++++++++++++--
+ src/lib/types.ts                          |  29 +-
+ src/screens/ComparisonScreen.tsx          |  68 +--
+ src/screens/DiagnosisScreen.tsx           |  16 +-
+ src/screens/LandingScreen.tsx             |  45 +-
+ src/screens/RecommendationsScreen.tsx     |  51 +-
+ src/screens/RoadmapScreen.tsx             |  73 ++-
+ src/screens/SourcesScreen.tsx             |  66 ++-
+ src/state/AppState.tsx                    |   4 +-
+ src/ui/LanguageSwitcher.tsx               |  19 +-
+ src/ui/layout.tsx                         |  36 +-
+ src/ui/primitives.tsx                     |   6 +-
+ tests/roadmap.test.ts                     |   7 +-
+ tests/scoring.test.ts                     |   3 +-
+ 24 files changed, 1637 insertions(+), 424 deletions(-)

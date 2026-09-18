@@ -1,0 +1,336 @@
+﻿git : warning: in the working copy of 
+'src/screens/RoadmapScreen.tsx', LF will be replaced 
+by CRLF the next time Git touches it
+At line:1 char:43
++ ... tHub\Test'; git --no-pager diff -- 
+src/features/roadmap/roadmapEngine ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (warning: 
+    in the... Git touches it:String) [], RemoteExcep  
+  tion
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+diff --git a/src/features/roadmap/roadmapEngine.ts b/src/features/roadmap/roadmapEngine.ts
+index 4d2f825..a4739c3 100644
+--- a/src/features/roadmap/roadmapEngine.ts
++++ b/src/features/roadmap/roadmapEngine.ts
+@@ -1,14 +1,16 @@
+ я╗┐import type {
+   ExamId,
++  LocalizedRoadmapTemplate,
+   Program,
+   Recommendation,
+   Roadmap,
+   RoadmapStep,
+-  RoadmapTemplate,
+   University,
+   UserProfile
+ } from '../../lib/types'
+ import { addDays } from '../../lib/format'
++import { localizedDeadlineLabel } from '../../data'
++import { tr, tValue } from '../../lib/i18n'
+ import { computeNextAction } from '../progress/progressStore'
+ 
+ const PHASE_ORDER: Record<RoadmapStep['phase'], number> = {
+@@ -24,12 +26,15 @@ export interface BuildRoadmapInput {
+   recommendations: Recommendation[]
+   programMap: Record<string, Program>
+   uniMap: Record<string, University>
+-  templates: RoadmapTemplate[]
++  templates: LocalizedRoadmapTemplate[]
+   now?: Date
+ }
+ 
++type ResolvedTemplate = Omit<LocalizedRoadmapTemplate, 'trigger'> & { trigger: string }
++
+ export function buildRoadmap(input: BuildRoadmapInput): Roadmap {
+-  const { profile, recommendations, programMap, uniMap, templates } = input
++  const { profile, recommendations, programMap, uniMap } = input
++  const templates = input.templates as ResolvedTemplate[]
+   const now = input.now ?? new Date()
+ 
+   const selected = recommendations.slice(0, 3)
+@@ -71,8 +76,11 @@ export function buildRoadmap(input: BuildRoadmapInput): Roadmap {
+     items.push({
+       id: nextId('ex'),
+       phase: 'exams',
+-      title: `Reach ${examGap.exam} ${examGap.min.toFixed(1)}${cur != null ? ` (you have ${cur.toFixed(1)})` : ' (no score yet)'}`,
+-      description: base?.description ?? 'Close the gap between your current exam score and the requirement.',
++      title:
++        cur != null
++          ? tr('engine.rsExamGapWithScore', { exam: examGap.exam, min: examGap.min.toFixed(1), cur: cur.toFixed(1) })
++          : tr('engine.rsExamGapNoScore', { exam: examGap.exam, min: examGap.min.toFixed(1) }),
++      description: base?.description ?? tValue('engine.rsExamGapDesc'),
+       dueDate: earliest ? addDays(earliest, -75) : undefined,
+       status: 'todo',
+       priority: 1,
+@@ -83,8 +91,8 @@ export function buildRoadmap(input: BuildRoadmapInput): Roadmap {
+     items.push({
+       id: nextId('ex'),
+       phase: 'exams',
+-      title: 'Take the required standardised exam',
+-      description: base?.description ?? 'Sit the exam before the application windows close.',
++      title: tValue('engine.rsExamAlways'),
++      description: base?.description ?? tValue('engine.rsExamAlwaysDesc'),
+       dueDate: earliest ? addDays(earliest, -75) : undefined,
+       status: 'todo',
+       priority: 1,
+@@ -94,10 +102,10 @@ export function buildRoadmap(input: BuildRoadmapInput): Roadmap {
+ 
+   // ---- documents -----------------------------------------------------------
+   const docOffsets: Record<string, number> = {
+-    'Prepare your academic transcript and GPA report': -60,
+-    'Write your motivation letter': -50,
+-    'Request two recommendation letters': -45,
+-    'Prepare your passport and ID documents': -35
++    'doc-transcript': -60,
++    'doc-motivation': -50,
++    'doc-recommendations': -45,
++    'doc-passport': -35
+   }
+   for (const t of templates.filter((x) => x.phase === 'documents')) {
+     items.push({
+@@ -105,7 +113,7 @@ export function buildRoadmap(input: BuildRoadmapInput): Roadmap {
+       phase: 'documents',
+       title: t.title,
+       description: t.description,
+-      dueDate: earliest ? addDays(earliest, docOffsets[t.title] ?? -40) : undefined,
++      dueDate: earliest ? addDays(earliest, docOffsets[t.id] ?? -40) : undefined,
+       status: 'todo',
+       priority: t.priority,
+       sourceIds: []
+@@ -117,18 +125,18 @@ export function buildRoadmap(input: BuildRoadmapInput): Roadmap {
+     for (const d of x.program.deadlines) {
+       const isScholarship = d.kind === 'scholarship'
+       const title = isScholarship
+-        ? `Apply for funding тАФ ${x.uni.name}`
++        ? tr('engine.rsApplyFunding', { uni: x.uni.name })
+         : d.kind === 'documents'
+-          ? `Submit documents тАФ ${x.uni.name} (${x.program.name})`
+-          : `Submit application тАФ ${x.uni.name} (${x.program.name})`
++          ? tr('engine.rsSubmitDocuments', { uni: x.uni.name, program: x.program.name })
++          : tr('engine.rsSubmitApplication', { uni: x.uni.name, program: x.program.name })
+       items.push({
+         id: nextId('dl'),
+         phase: 'deadlines',
+         title,
+-        description: `${d.label} ┬╖ ${x.program.name}. ${d.isDemo ? 'Demonstrative date тАФ verify on the official page.' : 'Verified date.'}`,
++        description: `${localizedDeadlineLabel(d)} ┬╖ ${x.program.name}. ${d.isDemo ? tValue('engine.rsDemoDateNote') : tValue('engine.rsVerifiedDateNote')}`,
+         dueDate: d.date,
+         status: 'todo',
+-        priority: isScholarship ? 1 : 1,
++        priority: 1,
+         linkedProgramId: x.program.id,
+         sourceIds: d.sourceId ? [d.sourceId] : x.program.sourceIds,
+         isDemo: d.isDemo
+@@ -152,8 +160,8 @@ export function buildRoadmap(input: BuildRoadmapInput): Roadmap {
+     items.push({
+       id: nextId('fund'),
+       phase: 'deadlines',
+-      title: base?.title ?? 'Apply for a scholarship',
+-      description: base?.description ?? 'Your budget is below the tuition cost of a shortlisted program.',
++      title: base?.title ?? tValue('engine.rsScholarshipFallbackTitle'),
++      description: base?.description ?? tValue('engine.rsScholarshipFallbackDesc'),
+       dueDate: scholarshipDeadline ?? earliest,
+       status: 'todo',
+       priority: 1,
+@@ -173,7 +181,7 @@ export function buildRoadmap(input: BuildRoadmapInput): Roadmap {
+       id: nextId('ac'),
+       phase: 'academic',
+       title: gpaGap
+-        ? `Raise your GPA to ${targetGpa.toFixed(2)} (now ${profile.gpa.toFixed(2)})`
++        ? tr('engine.rsRaiseGpa', { target: targetGpa.toFixed(2), current: profile.gpa.toFixed(2) })
+         : academicTpl.title,
+       description: academicTpl.description,
+       dueDate: undefined,
+diff --git a/src/screens/RoadmapScreen.tsx b/src/screens/RoadmapScreen.tsx
+index 6b6b482..bfd1939 100644
+--- a/src/screens/RoadmapScreen.tsx
++++ b/src/screens/RoadmapScreen.tsx
+@@ -4,14 +4,8 @@ import { Badge, Button, Card, EmptyState, Icon, Notice, ProgressBar } from '../u
+ import { useApp } from '../state/AppState'
+ import { SOURCE_BY_ID } from '../data'
+ import { formatDate } from '../lib/format'
++import { t } from '../lib/i18n'
+ 
+-const PHASE_LABELS: Record<StepPhase, string> = {
+-  exams: 'Exams & testing',
+-  documents: 'Documents',
+-  deadlines: 'Deadlines',
+-  academic: 'Academic',
+-  activities: 'Activities'
+-}
+ const PHASE_ICONS: Record<StepPhase, string> = {
+   exams: 'quiz',
+   documents: 'description',
+@@ -22,6 +16,7 @@ const PHASE_ICONS: Record<StepPhase, string> = {
+ 
+ export function RoadmapScreen({ onBack, onRecommendations }: { onBack: () => void; onRecommendations: () => void }) {
+   const { state, dispatch, roadmap, progress, nextAction } = useApp()
++  const r = t('roadmap')
+ 
+   const grouped = useMemo(() => {
+     const map = new Map<StepPhase, RoadmapStep[]>()
+@@ -37,12 +32,12 @@ export function RoadmapScreen({ onBack, onRecommendations }: { onBack: () => voi
+       <div className="lane">
+         <div className="hero" style={{ paddingTop: 10, paddingBottom: 6 }}>
+           <span className="eyebrow">
+-            <span className="dot dot-indigo" /> Step 5 ┬╖ Roadmap
++            <span className="dot dot-indigo" /> {r.step}
+           </span>
+-          <h1 style={{ fontSize: 28 }}>Your admission roadmap</h1>
++          <h1 style={{ fontSize: 28 }}>{r.title}</h1>
+         </div>
+-        <EmptyState title="No roadmap yet" text="Get your recommendations first, then Pathly builds a phased plan from your shortlist and profile gaps.">
+-          <Button onClick={onRecommendations}>Get recommendations</Button>
++        <EmptyState title={r.noRoadmapTitle} text={r.noRoadmapText}>
++          <Button onClick={onRecommendations}>{r.getRecommendations}</Button>
+         </EmptyState>
+       </div>
+     )
+@@ -62,57 +57,54 @@ export function RoadmapScreen({ onBack, onRecommendations }: { onBack: () => voi
+     <div>
+       <div className="hero" style={{ paddingTop: 10, paddingBottom: 6 }}>
+         <span className="eyebrow">
+-          <span className="dot dot-indigo" /> Step 5 ┬╖ Roadmap
++          <span className="dot dot-indigo" /> {r.step}
+         </span>
+-        <h1 style={{ fontSize: 30 }}>Your admission roadmap</h1>
+-        <p className="lead">
+-          Five phases built from your shortlist and the gaps your diagnosis flagged. Tick a step and the next
+-          action updates immediately.
+-        </p>
++        <h1 style={{ fontSize: 30 }}>{r.title}</h1>
++        <p className="lead">{r.subtitle}</p>
+       </div>
+ 
+       <div className="metrics" style={{ marginBottom: 14 }}>
+         <div className="metric">
+           <div className="v">{progress.percent}%</div>
+-          <div className="l">Roadmap complete</div>
++          <div className="l">{r.roadmapComplete}</div>
+         </div>
+         <div className="metric">
+           <div className="v">
+             {progress.done}/{progress.total}
+           </div>
+-          <div className="l">Steps done</div>
++          <div className="l">{r.stepsDone}</div>
+         </div>
+         <div className="metric">
+           <div className="v">{roadmap.programIds.length}</div>
+-          <div className="l">Programs in plan</div>
++          <div className="l">{r.programsInPlan}</div>
+         </div>
+         <div className="metric">
+           <div className="v">{roadmap.items.filter((s) => s.phase === 'deadlines').length}</div>
+-          <div className="l">Deadline steps</div>
++          <div className="l">{r.deadlineSteps}</div>
+         </div>
+       </div>
+ 
+       {nextStep && (
+         <div className="next-action" style={{ marginBottom: 16 }}>
+           <div className="spread" style={{ marginBottom: 8 }}>
+-            <span className="kicker">Your next action</span>
+-            <Badge tone="primary">priority {nextStep.priority}</Badge>
++            <span className="kicker">{r.nextAction}</span>
++            <Badge tone="primary">{r.priority} {nextStep.priority}</Badge>
+           </div>
+           <h3 style={{ fontSize: 19, marginBottom: 6 }}>{nextStep.title}</h3>
+           <p className="card-sub" style={{ marginBottom: 12 }}>
+             {nextStep.description}
+           </p>
+           <div className="row" style={{ gap: 8, marginBottom: 12 }}>
+-            <Badge tone="neutral">{PHASE_LABELS[nextStep.phase]}</Badge>
+-            {nextStep.dueDate && <Badge tone="demo">due {formatDate(nextStep.dueDate)}</Badge>}
+-            {nextStep.isDemo && <Badge tone="demo">demo date</Badge>}
++            <Badge tone="neutral">{r.phases[nextStep.phase]}</Badge>
++            {nextStep.dueDate && <Badge tone="demo">{r.due} {formatDate(nextStep.dueDate)}</Badge>}
++            {nextStep.isDemo && <Badge tone="demo">{r.demoDate}</Badge>}
+           </div>
+           <div className="btn-row">
+             <Button icon="check" onClick={() => dispatch({ type: 'status/set', id: nextStep.id, status: 'done' })}>
+-              Mark as done
++              {r.markAsDone}
+             </Button>
+             <Button variant="secondary" icon="play_arrow" onClick={() => dispatch({ type: 'status/set', id: nextStep.id, status: 'in_progress' })}>
+-              In progress
++              {r.inProgress}
+             </Button>
+           </div>
+         </div>
+@@ -120,9 +112,9 @@ export function RoadmapScreen({ onBack, onRecommendations }: { onBack: () => voi
+ 
+       <div className="spread" style={{ marginBottom: 4 }}>
+         <div className="section-title" style={{ margin: 0 }}>
+-          Admission trajectory phases
++          {r.admissionPhases}
+         </div>
+-        <span className="stamp">tap a node to cycle status</span>
++        <span className="stamp">{r.cycleHint}</span>
+       </div>
+ 
+       <div style={{ marginBottom: 16 }}>
+@@ -135,7 +127,7 @@ export function RoadmapScreen({ onBack, onRecommendations }: { onBack: () => voi
+             <div className="card-head">
+               <div className="row" style={{ gap: 8 }}>
+                 <Icon name={PHASE_ICONS[phase]} size={18} />
+-                <span className="card-title">{PHASE_LABELS[phase]}</span>
++                <span className="card-title">{r.phases[phase]}</span>
+               </div>
+               <Badge tone="neutral">
+                 {steps.filter((s) => (state.statuses[s.id] ?? s.status) === 'done').length}/{steps.length}
+@@ -151,7 +143,7 @@ export function RoadmapScreen({ onBack, onRecommendations }: { onBack: () => voi
+                       className={['tl-node', status === 'done' ? 'done' : '', status === 'in_progress' ? 'active' : ''].filter(Boolean).join(' ')}
+                       onClick={() => cycle(s)}
+                       role="button"
+-                      title="Cycle status: to do тЖТ in progress тЖТ done"
++                      title={r.cycleTitle}
+                     >
+                       {status === 'done' ? <Icon name="check" size={16} /> : status === 'in_progress' ? 'тАв' : ''}
+                     </div>
+@@ -160,13 +152,13 @@ export function RoadmapScreen({ onBack, onRecommendations }: { onBack: () => voi
+                       <div className="tl-desc">{s.description}</div>
+                       <div className="tl-meta">
+                         <Badge tone={status === 'done' ? 'fit-high' : status === 'in_progress' ? 'primary' : 'neutral'}>
+-                          {status === 'done' ? 'done' : status === 'in_progress' ? 'in progress' : 'to do'}
++                          {status === 'done' ? r.done : status === 'in_progress' ? r.inProgress : r.todo}
+                         </Badge>
+-                        {s.dueDate && <Badge tone="demo">due {formatDate(s.dueDate)}</Badge>}
+-                        {s.isDemo && <Badge tone="demo">demo data</Badge>}
++                        {s.dueDate && <Badge tone="demo">{r.due} {formatDate(s.dueDate)}</Badge>}
++                        {s.isDemo && <Badge tone="demo">{r.demoData}</Badge>}
+                         {s.sourceIds[0] && SOURCE_BY_ID[s.sourceIds[0]] && (
+                           <a href={SOURCE_BY_ID[s.sourceIds[0]].url} target="_blank" rel="noreferrer" className="helper">
+-                            source
++                            {r.source}
+                           </a>
+                         )}
+                       </div>
+@@ -181,20 +173,19 @@ export function RoadmapScreen({ onBack, onRecommendations }: { onBack: () => voi
+ 
+       <div style={{ marginTop: 14 }}>
+         <Notice tone="warn" icon="info">
+-          Deadline dates marked <strong>demo data</strong> are demonstrative and must be verified on the official
+-          university pages before submission.
++          {r.warningDemo}
+         </Notice>
+       </div>
+ 
+       <div className="btn-row" style={{ marginTop: 16 }}>
+         <Button variant="secondary" icon="arrow_back" onClick={onBack}>
+-          Back to comparison
++          {r.backToComparison}
+         </Button>
+         <Button variant="secondary" icon="print" onClick={() => window.print()}>
+-          Print / save as PDF
++          {r.printPdf}
+         </Button>
+         <Button variant="ghost" icon="school" onClick={onRecommendations}>
+-          Adjust recommendations
++          {r.adjustRecommendations}
+         </Button>
+       </div>
+     </div>

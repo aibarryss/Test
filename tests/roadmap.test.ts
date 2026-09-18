@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { buildRoadmap } from '../src/features/roadmap/roadmapEngine'
 import { computeNextAction, computeProgress } from '../src/features/progress/progressStore'
-import { PROGRAM_BY_ID, PROGRAMS, ROADMAP_TEMPLATES, UNIVERSITY_BY_ID } from '../src/data'
+import { PROGRAM_BY_ID, PROGRAMS, UNIVERSITY_BY_ID, localizedTemplates } from '../src/data'
 import { recommend } from '../src/features/matching/recommend'
 import { TEST_PROFILES } from '../src/lib/demoProfile'
 import type { CountryCode } from '../src/lib/types'
@@ -15,7 +15,7 @@ function build(profile = TEST_PROFILES.A) {
     recommendations: recs,
     programMap: PROGRAM_BY_ID,
     uniMap: UNIVERSITY_BY_ID,
-    templates: ROADMAP_TEMPLATES,
+    templates: localizedTemplates(),
     now
   })
 }
@@ -65,6 +65,7 @@ describe('roadmap engine', () => {
       needsScholarship: true
     }
     const roadmap = build(profile)
-    expect(roadmap.items.some((s) => /scholarship|funding/i.test(s.title))).toBe(true)
+    // step titles are localized — match both languages
+    expect(roadmap.items.some((s) => /scholarship|funding|стипенди/i.test(s.title))).toBe(true)
   })
 })

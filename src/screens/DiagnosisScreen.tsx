@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import type { Diagnosis, UserProfile } from '../lib/types'
-import { COUNTRY_LABELS, DIAGNOSIS_QUESTIONS, FIELD_LABELS } from '../data'
+import { COUNTRY_LABELS, FIELD_LABELS, localizedQuestions } from '../data'
 import { Badge, Button, Card, Icon, Notice, ProgressBar } from '../ui/primitives'
 import { isDiagnosisComplete, runDiagnosis, type AnswerMap } from '../features/diagnosis/diagnosisEngine'
 import { t } from '../lib/i18n'
@@ -22,14 +22,16 @@ export function DiagnosisScreen({
   const [answers, setAnswers] = useState<AnswerMap>(savedAnswers)
   const [index, setIndex] = useState(0)
 
+  const questions = useMemo(() => localizedQuestions(), [])
+
   const complete = isDiagnosisComplete(answers)
   const diagnosis = useMemo(() => (complete ? runDiagnosis(answers, profile) : null), [complete, answers, profile])
-  const q = DIAGNOSIS_QUESTIONS[index]
+  const q = questions[index]
 
   function pick(value: string) {
     const next = { ...answers, [q.id]: value }
     setAnswers(next)
-    if (index < DIAGNOSIS_QUESTIONS.length - 1) {
+    if (index < questions.length - 1) {
       setTimeout(() => setIndex((i) => i + 1), 120)
     }
   }
@@ -55,16 +57,16 @@ export function DiagnosisScreen({
 
       <div className="row" style={{ margin: '4px 0 6px', gap: 10 }}>
         <div style={{ flex: 1 }}>
-          <ProgressBar percent={Math.round((answered / DIAGNOSIS_QUESTIONS.length) * 100)} />
+          <ProgressBar percent={Math.round((answered / questions.length) * 100)} />
         </div>
         <span className="stamp">
-          {answered}/{DIAGNOSIS_QUESTIONS.length}
+          {answered}/{questions.length}
         </span>
       </div>
 
       <Card>
         <div className="card-sub" style={{ marginBottom: 6 }}>
-          {diagnosis_t.questionOf} {index + 1} {diagnosis_t.of} {DIAGNOSIS_QUESTIONS.length}
+          {diagnosis_t.questionOf} {index + 1} {diagnosis_t.of} {questions.length}
         </div>
         <h3 className="card-title" style={{ fontSize: 18, marginBottom: 4 }}>
           {q.prompt}
@@ -95,7 +97,7 @@ export function DiagnosisScreen({
           <Button variant="secondary" icon="arrow_back" onClick={() => (index === 0 ? onBack() : setIndex((i) => i - 1))} disabled={index === 0 && false}>
             {diagnosis_t.back}
           </Button>
-          {index < DIAGNOSIS_QUESTIONS.length - 1 && (
+          {index < questions.length - 1 && (
             <Button variant="ghost" onClick={() => setIndex((i) => i + 1)} disabled={!answers[q.id]}>
               {diagnosis_t.nextQuestion}
             </Button>

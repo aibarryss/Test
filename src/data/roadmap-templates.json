@@ -1,85 +1,97 @@
 [
   {
+    "id": "exams-gap",
     "phase": "exams",
-    "title": "Close your exam gap",
-    "description": "You are below the required score on at least one exam your shortlisted programs ask for. Build a study plan and book the next test date.",
+    "titleKey": "templates.exams-gap.title",
+    "descriptionKey": "templates.exams-gap.description",
     "priority": 1,
     "trigger": "gap"
   },
   {
+    "id": "exams-always",
     "phase": "exams",
-    "title": "Take the required standardised exam",
-    "description": "Sit the exam so your score is available before the application deadlines close.",
+    "titleKey": "templates.exams-always.title",
+    "descriptionKey": "templates.exams-always.description",
     "priority": 1,
     "trigger": "always"
   },
   {
+    "id": "doc-transcript",
     "phase": "documents",
-    "title": "Prepare your academic transcript and GPA report",
-    "description": "Request an official transcript from your school and confirm your GPA on the required scale.",
+    "titleKey": "templates.doc-transcript.title",
+    "descriptionKey": "templates.doc-transcript.description",
     "priority": 2,
     "trigger": "always"
   },
   {
+    "id": "doc-motivation",
     "phase": "documents",
-    "title": "Write your motivation letter",
-    "description": "Draft a one-page statement linking your subject interest to the specific program you are applying to.",
+    "titleKey": "templates.doc-motivation.title",
+    "descriptionKey": "templates.doc-motivation.description",
     "priority": 2,
     "trigger": "always"
   },
   {
+    "id": "doc-recommendations",
     "phase": "documents",
-    "title": "Request two recommendation letters",
-    "description": "Ask two teachers who know your subject work well, at least three weeks before the deadline.",
+    "titleKey": "templates.doc-recommendations.title",
+    "descriptionKey": "templates.doc-recommendations.description",
     "priority": 3,
     "trigger": "always"
   },
   {
+    "id": "doc-passport",
     "phase": "documents",
-    "title": "Prepare your passport and ID documents",
-    "description": "Check validity dates — a valid passport is required for every international application.",
+    "titleKey": "templates.doc-passport.title",
+    "descriptionKey": "templates.doc-passport.description",
     "priority": 3,
     "trigger": "always"
   },
   {
+    "id": "academic-gap",
     "phase": "academic",
-    "title": "Raise your GPA to the target band",
-    "description": "Focus on the subjects that carry the most weight for your chosen programs.",
+    "titleKey": "templates.academic-gap.title",
+    "descriptionKey": "templates.academic-gap.description",
     "priority": 2,
     "trigger": "gap"
   },
   {
+    "id": "academic-always",
     "phase": "academic",
-    "title": "Deepen your core subject knowledge",
-    "description": "Go beyond the school curriculum in the discipline you are applying to, so interviews and essays are easier.",
+    "titleKey": "templates.academic-always.title",
+    "descriptionKey": "templates.academic-always.description",
     "priority": 3,
     "trigger": "always"
   },
   {
+    "id": "act-project",
     "phase": "activities",
-    "title": "Ship one portfolio project",
-    "description": "Finish a small, presentable project in your intended field and document the outcome.",
+    "titleKey": "templates.act-project.title",
+    "descriptionKey": "templates.act-project.description",
     "priority": 3,
     "trigger": "always"
   },
   {
+    "id": "act-competition",
     "phase": "activities",
-    "title": "Join a relevant competition or olympiad",
-    "description": "A regional or national result strengthens the academic part of your application.",
+    "titleKey": "templates.act-competition.title",
+    "descriptionKey": "templates.act-competition.description",
     "priority": 3,
     "trigger": "always"
   },
   {
+    "id": "act-volunteering",
     "phase": "activities",
-    "title": "Keep a sustained volunteering or club role",
-    "description": "Consistency over months matters more than a single one-off activity.",
+    "titleKey": "templates.act-volunteering.title",
+    "descriptionKey": "templates.act-volunteering.description",
     "priority": 3,
     "trigger": "always"
   },
   {
+    "id": "deadlines-scholarship",
     "phase": "deadlines",
-    "title": "Consider a scholarship application",
-    "description": "Your budget is below the tuition cost of a shortlisted program, so applying for funding is not optional.",
+    "titleKey": "templates.deadlines-scholarship.title",
+    "descriptionKey": "templates.deadlines-scholarship.description",
     "priority": 1,
     "trigger": "scholarship"
   }

@@ -13,13 +13,14 @@ export function LandingScreen({
   hasProfile: boolean
 }) {
   const landing = t('landing')
-  
+  const lx = t('landingExtra')
+
   return (
     <div>
       <section className="hero">
         <span className="glow glow-a" />
         <span className="glow glow-b" />
-        
+
         <div style={{ position: 'absolute', top: 20, right: 20 }}>
           <LanguageSwitcher />
         </div>
@@ -30,14 +31,14 @@ export function LandingScreen({
               <span className="dot dot-emerald" /> {landing.subtitle}
             </span>
             <h1>
-              Pathly <span style={{ color: 'var(--primary-container)' }}>— персональный путь поступления</span>
+              Pathly <span style={{ color: 'var(--primary-container)' }}>{lx.heroHighlight}</span>
             </h1>
             <p className="lead">
               {landing.description}
             </p>
             <div className="btn-row" style={{ marginTop: 20 }}>
               <Button icon="arrow_forward" onClick={onStart}>
-                {hasProfile ? 'Продолжить' : landing.start}
+                {hasProfile ? landing.continue : landing.start}
               </Button>
               <Button variant="secondary" icon="bolt" onClick={onDemo}>
                 {landing.demo}
@@ -45,16 +46,16 @@ export function LandingScreen({
             </div>
             <div className="steps-strip">
               <div className="active">
-                01 Профиль <span>Учеба и бюджет</span>
+                01 {lx.step1Title} <span>{lx.step1Sub}</span>
               </div>
               <div>
-                02 Подбор <span>Диагностика</span>
+                02 {lx.step2Title} <span>{lx.step2Sub}</span>
               </div>
               <div>
-                03 Сравнение <span>Стоимость и требования</span>
+                03 {lx.step3Title} <span>{lx.step3Sub}</span>
               </div>
               <div>
-                04 План <span>Дорожная карта</span>
+                04 {lx.step4Title} <span>{lx.step4Sub}</span>
               </div>
             </div>
           </div>
@@ -63,39 +64,39 @@ export function LandingScreen({
             <div className="spread" style={{ marginBottom: 12 }}>
               <div className="row" style={{ gap: 8 }}>
                 <span className="dot dot-emerald" />
-                <strong style={{ fontSize: 15 }}>Мой профиль поступления</strong>
+                <strong style={{ fontSize: 15 }}>{lx.panelTitle}</strong>
               </div>
               <Badge tone="neutral">2027</Badge>
             </div>
             <div className="ai-memo">
               <div className="spread">
-                <span style={{ fontWeight: 700 }}>Готовность к поступлению</span>
+                <span style={{ fontWeight: 700 }}>{lx.panelReady}</span>
               </div>
               <div className="progress-track" style={{ marginTop: 10 }}>
                 <div className="progress-fill" style={{ width: '86%' }} />
               </div>
               <div className="spread helper" style={{ marginTop: 8 }}>
-                <span>Уровень: продвинутый</span>
-                <span>Регион: первый уровень</span>
+                <span>{lx.panelLevel}</span>
+                <span>{lx.panelRegion}</span>
               </div>
             </div>
             <div className="panel" style={{ marginTop: 12, display: 'flex', gap: 12, alignItems: 'center' }}>
               <span className="dot dot-indigo" style={{ width: 34, height: 34, borderRadius: 10, display: 'inline-flex' }} />
               <div>
-                <div style={{ fontWeight: 700 }}>Детерминированный скоринг</div>
-                <div className="helper">Каждая рекомендация воспроизводима и проверяема.</div>
+                <div style={{ fontWeight: 700 }}>{lx.deterministicTitle}</div>
+                <div className="helper">{lx.deterministicDesc}</div>
               </div>
             </div>
           </Card>
         </div>
       </section>
 
-      <div className="section-title">Что делает Pathly особенным</div>
+      <div className="section-title">{lx.featuresTitle}</div>
       <div className="grid g3">
         {[
-          { i: 'tune', t: 'Прозрачные факторы оценки', d: 'Каждый вариант показывает свои веса: бюджет, специальность, страна, успеваемость, язык, сроки и финансирование.' },
-          { i: 'balance', t: 'Без лишних обещаний', d: 'Нет кликбейта с процентами принятия. Только оценка соответствия, которую можно объяснить строка за строкой.' },
-          { i: 'fact_check', t: 'Проверенные источники', d: 'Факты имеют ссылки на источники; все непроверенное помечено как демонстрационные данные.' }
+          { i: 'tune', t: lx.feature1Title, d: lx.feature1Desc },
+          { i: 'balance', t: lx.feature2Title, d: lx.feature2Desc },
+          { i: 'fact_check', t: lx.feature3Title, d: lx.feature3Desc }
         ].map((f) => (
           <Card key={f.t}>
             <span
@@ -124,13 +125,13 @@ export function LandingScreen({
       <div className="panel" style={{ marginTop: 24, display: 'flex', gap: 18, justifyContent: 'space-between', flexWrap: 'wrap', alignItems: 'center' }}>
         <div style={{ maxWidth: 520 }}>
           <div className="label" style={{ color: 'var(--primary-container)' }}>
-            Для студентов и родителей
+            {lx.audienceLabel}
           </div>
           <h3 className="card-title" style={{ margin: '6px 0' }}>
-            Создано для школьников, которые ценят ясность информации.
+            {lx.closingTitle}
           </h3>
           <p className="card-sub">
-            Начните рано, сохраняйте здравомыслие и организуйте все требования в одном месте.
+            {lx.closingText}
           </p>
         </div>
         <div className="btn-row">
@@ -155,7 +156,7 @@ export function LandingScreen({
         }}
       >
         <Logo size={26} />
-        <span>Pathly на базе детерминированного скоринга · демонстрационный датасет</span>
+        <span>{lx.footerNote}</span>
       </div>
     </div>
   )

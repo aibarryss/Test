@@ -1,18 +1,25 @@
+import { getLanguage, t } from './i18n'
+
 export function formatUsd(value: number): string {
   if (!Number.isFinite(value)) return '—'
-  if (value === 0) return 'Free / grant'
-  return '$' + Math.round(value).toLocaleString('en-US')
+  const lang = getLanguage()
+  const locale = lang === 'ru' ? 'ru-RU' : 'en-US'
+  if (value === 0) return t('common').freeGrant
+  return '$' + Math.round(value).toLocaleString(locale)
 }
 
 export function formatUsdCompact(value: number): string {
-  if (value >= 1000) return '$' + Math.round(value / 1000) + 'k'
-  return '$' + Math.round(value)
+  const lang = getLanguage()
+  const locale = lang === 'ru' ? 'ru-RU' : 'en-US'
+  const suffix = lang === 'ru' ? ' тыс.' : 'k'
+  if (value >= 1000) return '$' + Math.round(value / 1000).toLocaleString(locale) + suffix
+  return '$' + Math.round(value).toLocaleString(locale)
 }
 
 export function formatDate(iso: string): string {
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return iso
-  return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+  return d.toLocaleDateString(getLanguage() === 'ru' ? 'ru-RU' : 'en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 }
 
 export function monthsUntil(iso: string, now: Date = new Date()): number {

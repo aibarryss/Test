@@ -1,0 +1,61 @@
+﻿git : warning: in the working copy of 
+'tests/roadmap.test.ts', LF will be replaced by CRLF 
+the next time Git touches it
+At line:1 char:299
++ ... d5.txt -Encoding utf8; git --no-pager diff -- 
+docs tests 2>&1 | Out-F ...
++                            
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (warning: 
+    in the... Git touches it:String) [], RemoteExcep  
+  tion
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+warning: in the working copy of 
+'tests/scoring.test.ts', LF will be replaced by CRLF 
+the next time Git touches it
+diff --git a/tests/roadmap.test.ts b/tests/roadmap.test.ts
+index e3266bc..4a27038 100644
+--- a/tests/roadmap.test.ts
++++ b/tests/roadmap.test.ts
+@@ -1,7 +1,7 @@
+ import { describe, expect, it } from 'vitest'
+ import { buildRoadmap } from '../src/features/roadmap/roadmapEngine'
+ import { computeNextAction, computeProgress } from '../src/features/progress/progressStore'
+-import { PROGRAM_BY_ID, PROGRAMS, ROADMAP_TEMPLATES, UNIVERSITY_BY_ID } from '../src/data'
++import { PROGRAM_BY_ID, PROGRAMS, UNIVERSITY_BY_ID, localizedTemplates } from '../src/data'
+ import { recommend } from '../src/features/matching/recommend'
+ import { TEST_PROFILES } from '../src/lib/demoProfile'
+ import type { CountryCode } from '../src/lib/types'
+@@ -15,7 +15,7 @@ function build(profile = TEST_PROFILES.A) {
+     recommendations: recs,
+     programMap: PROGRAM_BY_ID,
+     uniMap: UNIVERSITY_BY_ID,
+-    templates: ROADMAP_TEMPLATES,
++    templates: localizedTemplates(),
+     now
+   })
+ }
+@@ -65,6 +65,7 @@ describe('roadmap engine', () => {
+       needsScholarship: true
+     }
+     const roadmap = build(profile)
+-    expect(roadmap.items.some((s) => /scholarship|funding/i.test(s.title))).toBe(true)
++    // step titles are localized тАФ match both languages
++    expect(roadmap.items.some((s) => /scholarship|funding|╤Б╤В╨╕╨┐╨╡╨╜╨┤╨╕/i.test(s.title))).toBe(true)
+   })
+ })
+diff --git a/tests/scoring.test.ts b/tests/scoring.test.ts
+index 74d716b..82011cb 100644
+--- a/tests/scoring.test.ts
++++ b/tests/scoring.test.ts
+@@ -34,7 +34,8 @@ describe('scoring engine', () => {
+     const local = computeScore(PROGRAM_BY_ID['nu-cs'], UNIVERSITY_BY_ID['nu'], profile, now)
+     const expensive = computeScore(PROGRAM_BY_ID['uoft-cs'], UNIVERSITY_BY_ID['uoft'], profile, now)
+     expect(local.score).toBeGreaterThan(expensive.score)
+-    expect(expensive.warnings.join(' ')).toMatch(/above your budget/)
++    // warnings are localized тАФ match both the English and the Russian phrasing
++    expect(expensive.warnings.join(' ')).toMatch(/above your budget|╨┐╤А╨╡╨▓╤Л╤И╨░╨╡╤В ╨▓╨░╤И ╨▒╤О╨┤╨╢╨╡╤В/)
+   })
+ 
+   it('drops confidence when exam and GPA are missing', () => {

@@ -8,7 +8,8 @@
   University,
   UserProfile
 } from '../../lib/types'
-import { clamp01, monthsUntil } from '../../lib/format'
+import { clamp01, formatUsd, monthsUntil } from '../../lib/format'
+import { tValue, tr } from '../../lib/i18n'
 
 export const WEIGHTS: Record<ScoreFactorKey, number> = {
   budget: 0.25,
@@ -28,6 +29,11 @@ export const FACTOR_LABELS: Record<ScoreFactorKey, string> = {
   language: 'Language readiness',
   deadline: 'Timeline feasibility',
   scholarship: 'Funding available'
+}
+
+/** Localized factor label (falls back to the English label if a key is missing). */
+function factorLabel(key: ScoreFactorKey): string {
+  return tValue(`factors.${key}`, FACTOR_LABELS[key])
 }
 
 /**
@@ -161,12 +167,14 @@ export function computeScore(
     const cur = profile.examScores[req.exam]
     const fit = examFit(cur, req.minScore)
     if (fit == null) {
-      warnings.push(`Confirm your ${req.exam} score — ${req.minScore.toFixed(1)} is required`)
+      warnings.push(tr('engine.wConfirmExam', { exam: req.exam, min: req.minScore.toFixed(1) }))
       continue
     }
     examFits.push(fit)
     if (cur! < req.minScore) {
-      warnings.push(`${req.exam} ${req.minScore.toFixed(1)} required, you have ${cur!.toFixed(1)}`)
+      warnings.push(
+        tr('engine.wExamRequired', { exam: req.exam, min: req.minScore.toFixed(1), cur: cur!.toFixed(1) })
+      )
     }
   }
   const examAverage = examFits.length > 0 ? examFits.reduce((a, b) => a + b, 0) / examFits.length : null
@@ -183,27 +191,29 @@ export function computeScore(
     academicKnown = true
   }
   if (minGpa && gpaProvided && profile.gpa < minGpa) {
-    warnings.push(`GPA ${profile.gpa.toFixed(2)} is below the ${minGpa.toFixed(2)} typically expected`)
+    warnings.push(tr('engine.wGpaBelow', { gpa: profile.gpa.toFixed(2), min: minGpa.toFixed(2) }))
   }
 
   const lang = normalizeLanguage(program.languagesOfInstruction, ielts)
   if (!program.languagesOfInstruction.includes('en')) {
-    warnings.push(`This program is taught in ${program.languagesOfInstruction.join('/')} — no English track`)
+    warnings.push(tr('engine.wNoEnglishTrack', { langs: program.languagesOfInstruction.join('/') }))
   }
 
   const dl = normalizeDeadline(program, now)
   if (dl.known && dl.months < 3 && dl.months >= 0) {
-    warnings.push('The application window closes in under 3 months')
+    warnings.push(tValue('engine.wDeadlineSoon'))
   }
   if (dl.known && dl.months < 0) {
-    warnings.push('The application deadline has already passed')
+    warnings.push(tValue('engine.wDeadlinePassed'))
   }
 
   const budgetNorm = normalizeBudget(program.netTuitionUsdPerYear, profile.budgetUsdPerYear)
   const need = program.netTuitionUsdPerYear > profile.budgetUsdPerYear
   if (need) {
     warnings.push(
-      `Costs ${Math.round(program.netTuitionUsdPerYear - profile.budgetUsdPerYear).toLocaleString('en-US')} USD/year above your budget`
+      tr('engine.wOverBudget', {
+        amount: formatUsd(program.netTuitionUsdPerYear - profile.budgetUsdPerYear)
+      })
     )
   }
 
@@ -224,7 +234,7 @@ export function computeScore(
     const effectiveWeight = r.known && availableWeight > 0 ? WEIGHTS[r.key] / availableWeight : 0
     return {
       key: r.key,
-      label: FACTOR_LABELS[r.key],
+      label: factorLabel(r.key),
       weight: WEIGHTS[r.key],
       effectiveWeight,
       normalized: clamp01(r.value),

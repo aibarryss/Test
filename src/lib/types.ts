@@ -55,6 +55,8 @@ export interface Deadline {
   kind: 'application' | 'documents' | 'exam' | 'scholarship' | 'visa'
   date: string
   label: string
+  /** i18n key fragment: resolved as `deadlines.<labelKey>` (falls back to `label`) */
+  labelKey?: string
   programId?: string
   sourceId?: string
   isDemo: boolean
@@ -159,17 +161,38 @@ export interface Roadmap {
 
 export interface DiagnosisQuestion {
   id: string
-  prompt: string
-  helper?: string
-  options: { value: string; label: string }[]
+  /** i18n key fragment: resolved as `questions.<id>.prompt` */
+  promptKey: string
+  helperKey?: string
+  options: { value: string; labelKey: string }[]
 }
 
 export interface RoadmapTemplate {
+  id: string
+  phase: StepPhase
+  /** i18n key fragment: resolved as `templates.<id>.title` */
+  titleKey: string
+  descriptionKey: string
+  priority: 1 | 2 | 3
+  trigger?: 'always' | 'gap' | 'scholarship' | 'gradeYear'
+}
+
+/** A roadmap template with its texts resolved for the active language. */
+export interface LocalizedRoadmapTemplate {
+  id: string
   phase: StepPhase
   title: string
   description: string
   priority: 1 | 2 | 3
   trigger?: 'always' | 'gap' | 'scholarship' | 'gradeYear'
+}
+
+/** A diagnosis question with its texts resolved for the active language. */
+export interface LocalizedQuestion {
+  id: string
+  prompt: string
+  helper?: string
+  options: { value: string; label: string }[]
 }
 
 export interface MatchResult {

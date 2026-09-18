@@ -11,12 +11,15 @@ import { RoadmapScreen } from './screens/RoadmapScreen'
 import { SourcesScreen } from './screens/SourcesScreen'
 import { DEMO_ANSWERS, demoProfile } from './lib/demoProfile'
 import { runDiagnosis } from './features/diagnosis/diagnosisEngine'
+import { t } from './lib/i18n'
+import { useLanguage } from './lib/useLanguage'
 
 function Shell() {
   const { state, dispatch, readiness, canGo } = useApp()
   const navigate = useNavigate()
   const location = useLocation()
   const path = location.pathname
+  const lang = useLanguage()
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -37,7 +40,7 @@ function Shell() {
     state.profile && canGo('/recommendations') ? node : <Navigate to={state.profile ? '/diagnosis' : '/profile'} replace />
 
   return (
-    <div className="app">
+    <div className="app" key={lang}>
       <TopBar
         path={path}
         onNavigate={go}
@@ -92,7 +95,7 @@ function Shell() {
               <span className="material-symbols-outlined" style={{ fontSize: 16 }}>
                 verified
               </span>
-              Data &amp; sources · methodology
+              {t('nav').dataAndSources}
             </button>
           </div>
         )}
